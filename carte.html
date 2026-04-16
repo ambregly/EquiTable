@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carte EquiTable — Ressources alimentaires locales</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
+  <style>
+    .carte-layout { display: grid; grid-template-columns: 320px 1fr; height: calc(100vh - 65px); }
+    .carte-sidebar { overflow-y: auto; border-right: 1px solid var(--bordure); background: var(--fond); }
+    .sidebar-header { padding: 1.25rem; border-bottom: 1px solid var(--bordure); position: sticky; top: 0; background: var(--fond); z-index: 10; }
+    .sidebar-header h1 { font-size: 1.2rem; font-weight: 500; margin-bottom: 8px; }
+    .region-select { width: 100%; padding: 8px 10px; border: 1px solid var(--bordure); border-radius: var(--rayon-sm); font-size: 13px; font-family: inherit; background: white; color: var(--texte); margin-bottom: 10px; }
+    .filter-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+    .filter-chip { padding: 4px 10px; border-radius: 20px; border: 1px solid var(--bordure); font-size: 11px; cursor: pointer; background: white; color: var(--texte-sec); transition: all 0.15s; }
+    .filter-chip:hover, .filter-chip.active { background: var(--vert-clair); border-color: var(--vert); color: var(--vert-fonce); }
+    .liste-lieux { padding: 0.75rem; }
+    .lieu-item { background: white; border: 1px solid var(--bordure); border-radius: var(--rayon-sm); padding: 10px 12px; margin-bottom: 6px; cursor: pointer; transition: all 0.15s; }
+    .lieu-item:hover, .lieu-item.actif { border-color: var(--vert); background: var(--vert-clair); }
+    .lieu-nom { font-size: 13px; font-weight: 500; color: var(--texte); margin-bottom: 2px; }
+    .lieu-type { font-size: 11px; color: var(--texte-ter); margin-bottom: 4px; }
+    .lieu-adresse { font-size: 11px; color: var(--texte-sec); }
+    .lieu-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 5px; }
+    .lieu-tag { font-size: 10px; padding: 1px 6px; border-radius: 8px; background: var(--fond-sec); color: var(--texte-ter); }
+    .lieu-culture { background: var(--vert-clair); color: var(--vert-fonce); }
+    #map { width: 100%; height: 100%; }
+    .ajouter-lieu { display: block; margin: 0.75rem; padding: 10px; background: var(--fond-sec); border: 1px dashed var(--bordure); border-radius: var(--rayon-sm); text-align: center; font-size: 12px; color: var(--texte-ter); cursor: pointer; transition: all 0.15s; text-decoration: none; }
+    .ajouter-lieu:hover { border-color: var(--vert); color: var(--vert-fonce); background: var(--vert-clair); }
+    .empty-liste { padding: 2rem 1rem; text-align: center; color: var(--texte-ter); font-size: 13px; }
+    @media (max-width: 768px) {
+      .carte-layout { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+      .carte-sidebar { max-height: 40vh; }
+      #map { min-height: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">Equi<span>Table</span></a>
+      <div class="nav-links">
+        <a href="dashboard.html">Mon tableau de bord</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="carte-layout">
+
+    <div class="carte-sidebar">
+      <div class="sidebar-header">
+        <h1>🗺️ Ressources locales</h1>
+        <select class="region-select" id="region-select" onchange="filtrerRegion()">
+          <option value="">Toutes les régions</option>
+          <option value="Occitanie">Occitanie</option>
+          <option value="Île-de-France">Île-de-France</option>
+          <option value="PACA">PACA</option>
+          <option value="Nouvelle-Aquitaine">Nouvelle-Aquitaine</option>
+          <option value="Auvergne-Rhône-Alpes">Auvergne-Rhône-Alpes</option>
+          <option value="Hauts-de-France">Hauts-de-France</option>
+          <option value="Bretagne">Bretagne</option>
+        </select>
+        <div class="filter-chips" id="filter-chips">
+          <div class="filter-chip active" onclick="filtrerType('tous', this)">Tous</div>
+          <div class="filter-chip" onclick="filtrerType('marche', this)">🛒 Marchés</div>
+          <div class="filter-chip" onclick="filtrerType('epicerie_maghrebine', this)">🫕 Maghreb</div>
+          <div class="filter-chip" onclick="filtrerType('epicerie_asiatique', this)">🥢 Asie</div>
+          <div class="filter-chip" onclick="filtrerType('epicerie_africaine', this)">🌍 Afrique</div>
+          <div class="filter-chip" onclick="filtrerType('epicerie_sociale', this)">❤️ Social</div>
+          <div class="filter-chip" onclick="filtrerType('amap', this)">🌱 AMAP</div>
+          <div class="filter-chip" onclick="filtrerType('bio', this)">🍃 Bio</div>
+        </div>
+      </div>
+
+      <div class="liste-lieux" id="liste-lieux"></div>
+      <a href="mailto:contact@equitable.fr?subject=Suggestion de lieu" class="ajouter-lieu">
+        + Suggérer un lieu à ajouter
+      </a>
+    </div>
+
+    <div id="map"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    let locations = [];
+    let markers = {};
+    let filtreType = 'tous';
+    let filtreRegion = '';
+    let map;
+    let lieuActif = null;
+
+    const TYPE_LABELS = {
+      marche: '🛒 Marché',
+      epicerie_maghrebine: '🫕 Épicerie maghrébine',
+      epicerie_asiatique: '🥢 Épicerie asiatique',
+      epicerie_africaine: '🌍 Épicerie africaine',
+      epicerie_antillaise: '🌴 Épicerie antillaise',
+      epicerie_sociale: '❤️ Épicerie sociale',
+      amap: '🌱 AMAP',
+      bio: '🍃 Magasin bio',
+      too_good_to_go: '🟢 Too Good To Go'
+    };
+
+    const TYPE_COLORS = {
+      marche: '#1D9E75',
+      epicerie_maghrebine: '#D85A30',
+      epicerie_asiatique: '#378ADD',
+      epicerie_africaine: '#BA7517',
+      epicerie_sociale: '#D4537E',
+      amap: '#3B6D11',
+      bio: '#1D9E75',
+      too_good_to_go: '#1D9E75'
+    };
+
+    function initMap() {
+      // Centrer sur la France par défaut
+      const profil = JSON.parse(localStorage.getItem('equitable_profil') || 'null');
+      const centre = [46.603354, 1.888334];
+      const zoom = 6;
+
+      map = L.map('map').setView(centre, zoom);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19
+      }).addTo(map);
+
+      // Si profil avec région, centrer dessus
+      if (profil?.region) {
+        document.getElementById('region-select').value = profil.region;
+        filtreRegion = profil.region;
+      }
+    }
+
+    function creerMarker(loc) {
+      const couleur = TYPE_COLORS[loc.type] || '#1D9E75';
+      const icon = L.divIcon({
+        html: `<div style="width:30px;height:30px;border-radius:50%;background:${couleur};border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;font-size:13px">${getEmoji(loc.type)}</div>`,
+        className: '',
+        iconSize: [30, 30],
+        iconAnchor: [15, 15]
+      });
+
+      const marker = L.marker([loc.lat, loc.lng], { icon })
+        .addTo(map)
+        .bindPopup(`
+          <div style="min-width:200px">
+            <div style="font-weight:500;font-size:14px;margin-bottom:4px">${loc.nom}</div>
+            <div style="font-size:12px;color:#666;margin-bottom:4px">${TYPE_LABELS[loc.type] || loc.type}</div>
+            <div style="font-size:12px;margin-bottom:4px">${loc.adresse}</div>
+            ${loc.horaires ? `<div style="font-size:11px;color:#888">${loc.horaires}</div>` : ''}
+            ${loc.description ? `<div style="font-size:12px;margin-top:6px;color:#555">${loc.description}</div>` : ''}
+          </div>
+        `, { maxWidth: 280 });
+
+      marker.on('click', () => {
+        surlignerItem(loc.id);
+      });
+
+      return marker;
+    }
+
+    function getEmoji(type) {
+      const emojis = { marche:'🛒', epicerie_maghrebine:'🫕', epicerie_asiatique:'🥢', epicerie_africaine:'🌍', epicerie_sociale:'❤️', amap:'🌱', bio:'🍃', too_good_to_go:'🟢' };
+      return emojis[type] || '📍';
+    }
+
+    function afficherLocations() {
+      // Supprimer les anciens marqueurs
+      Object.values(markers).forEach(m => map.removeLayer(m));
+      markers = {};
+
+      const filtrees = locations.filter(loc => {
+        if (filtreType !== 'tous' && loc.type !== filtreType) return false;
+        if (filtreRegion && loc.region !== filtreRegion) return false;
+        return true;
+      });
+
+      filtrees.forEach(loc => {
+        markers[loc.id] = creerMarker(loc);
+      });
+
+      // Liste
+      const liste = document.getElementById('liste-lieux');
+      if (filtrees.length === 0) {
+        liste.innerHTML = '<div class="empty-liste">Aucun lieu pour ces filtres.<br>Soyez le premier à en suggérer un !</div>';
+        return;
+      }
+
+      liste.innerHTML = filtrees.map(loc => `
+        <div class="lieu-item" id="item-${loc.id}" onclick="allerA('${loc.id}')">
+          <div class="lieu-nom">${loc.nom}</div>
+          <div class="lieu-type">${TYPE_LABELS[loc.type] || loc.type}</div>
+          <div class="lieu-adresse">📍 ${loc.adresse}</div>
+          ${loc.horaires ? `<div class="lieu-adresse">⏰ ${loc.horaires}</div>` : ''}
+          <div class="lieu-tags">
+            ${(loc.cultures||[]).map(c => `<span class="lieu-tag lieu-culture">${c}</span>`).join('')}
+            ${(loc.tags||[]).filter(t => !loc.cultures?.includes(t)).slice(0,3).map(t => `<span class="lieu-tag">${t.replace(/_/g,' ')}</span>`).join('')}
+          </div>
+        </div>
+      `).join('');
+
+      // Ajuster la vue si des lieux sont affichés
+      if (filtrees.length > 0) {
+        const bounds = L.latLngBounds(filtrees.map(l => [l.lat, l.lng]));
+        map.fitBounds(bounds, { padding: [40, 40], maxZoom: 14 });
+      }
+    }
+
+    function allerA(id) {
+      surlignerItem(id);
+      const loc = locations.find(l => l.id === id);
+      if (loc && markers[id]) {
+        map.setView([loc.lat, loc.lng], 15);
+        markers[id].openPopup();
+      }
+    }
+
+    function surlignerItem(id) {
+      if (lieuActif) {
+        document.getElementById(`item-${lieuActif}`)?.classList.remove('actif');
+      }
+      lieuActif = id;
+      const el = document.getElementById(`item-${id}`);
+      if (el) {
+        el.classList.add('actif');
+        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function filtrerType(type, el) {
+      filtreType = type;
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      afficherLocations();
+    }
+
+    function filtrerRegion() {
+      filtreRegion = document.getElementById('region-select').value;
+      afficherLocations();
+    }
+
+    async function chargerLocations() {
+      try {
+        const res = await fetch('data/locations.json');
+        locations = await res.json();
+      } catch(e) {
+        locations = [];
+      }
+      afficherLocations();
+    }
+
+    initMap();
+    chargerLocations();
+  </script>
+</body>
+</html>
