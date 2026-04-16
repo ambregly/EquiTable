@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diabète type 2 et alimentation — EquiTable</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
+  <style>
+    .rubrique-hero { padding: 4rem 0 3rem; border-bottom: 1px solid var(--bordure); }
+    .rubrique-tag { display: inline-block; font-size: 12px; font-weight: 500; color: #7a2e14; background: var(--coral-clair); padding: 4px 12px; border-radius: 20px; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .rubrique-hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; letter-spacing: -0.02em; }
+    .rubrique-hero p { font-size: 16px; color: var(--texte-sec); max-width: 600px; line-height: 1.7; }
+    .content-grid { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; padding: 3rem 0; align-items: start; }
+    .main-content h2 { font-size: 1.6rem; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
+    .main-content h2:first-child { margin-top: 0; }
+    .main-content p { font-size: 15px; color: var(--texte-sec); line-height: 1.8; margin-bottom: 1rem; }
+    .main-content strong { color: var(--texte); font-weight: 500; }
+    .source-tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 6px; background: var(--fond-sec); color: var(--texte-ter); margin-left: 6px; font-style: italic; vertical-align: middle; }
+    .chiffre-card { background: white; border: 1px solid var(--bordure); border-radius: var(--rayon); padding: 1.5rem; margin: 1.5rem 0; display: flex; gap: 1.25rem; align-items: flex-start; }
+    .chiffre-num { font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 600; line-height: 1; min-width: 80px; text-align: center; }
+    .chiffre-num.rouge { color: var(--coral); }
+    .chiffre-num.vert { color: var(--vert-fonce); }
+    .chiffre-text { font-size: 14px; color: var(--texte-sec); line-height: 1.6; }
+    .chiffre-source { font-size: 11px; color: var(--texte-ter); margin-top: 6px; font-style: italic; }
+    .conseil-list { list-style: none; margin: 1rem 0 1.5rem; }
+    .conseil-list li { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--bordure); font-size: 14px; color: var(--texte-sec); line-height: 1.6; }
+    .conseil-list li:last-child { border-bottom: none; }
+    .conseil-list li::before { content: '→'; color: var(--vert); font-weight: 500; flex-shrink: 0; margin-top: 1px; }
+    .aliment-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin: 1rem 0 1.5rem; }
+    .aliment-pill { background: var(--fond-sec); border-radius: var(--rayon-sm); padding: 8px 12px; font-size: 13px; color: var(--texte-sec); text-align: center; line-height: 1.4; }
+    .aliment-pill strong { display: block; color: var(--texte); font-weight: 500; font-size: 12px; }
+    .aliment-pill.eviter { background: #FAECE7; color: #7a2e14; border: 1px solid #F0997B; }
+    .aliment-pill.eviter strong { color: #7a2e14; }
+    .myth-card { border-radius: var(--rayon); padding: 1.25rem; margin: 1rem 0; }
+    .myth-faux { background: #FAECE7; border-left: 3px solid var(--coral); border-radius: 0 var(--rayon) var(--rayon) 0; }
+    .myth-vrai { background: var(--vert-clair); border-left: 3px solid var(--vert); border-radius: 0 var(--rayon) var(--rayon) 0; }
+    .myth-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+    .myth-faux .myth-label { color: #7a2e14; }
+    .myth-vrai .myth-label { color: var(--vert-tres-fonce); }
+    .myth-text { font-size: 14px; line-height: 1.6; }
+    .myth-faux .myth-text { color: #5a2010; }
+    .myth-vrai .myth-text { color: var(--vert-tres-fonce); }
+    .section-divider { height: 1px; background: var(--bordure); margin: 2.5rem 0; }
+    .sidebar { position: sticky; top: 80px; }
+    .sidebar-card { background: white; border: 1px solid var(--bordure); border-radius: var(--rayon); padding: 1.25rem; margin-bottom: 1rem; }
+    .sidebar-title { font-size: 13px; font-weight: 500; color: var(--texte); margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--bordure); }
+    .sidebar-link { display: block; font-size: 13px; color: var(--texte-sec); padding: 5px 0; cursor: pointer; transition: color 0.15s; text-decoration: none; }
+    .sidebar-link:hover { color: var(--vert); }
+    .sources-list { font-size: 12px; color: var(--texte-ter); line-height: 1.8; }
+    .sources-list a { color: var(--vert-fonce); text-decoration: underline; }
+    .lien-rubrique { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: white; border: 1px solid var(--bordure); border-radius: var(--rayon-sm); margin-bottom: 6px; font-size: 13px; text-decoration: none; color: var(--texte-sec); transition: all 0.15s; }
+    .lien-rubrique:hover { border-color: var(--vert); color: var(--texte); }
+    .lien-rubrique-icon { font-size: 18px; flex-shrink: 0; }
+    .warning-box { background: #FAECE7; border: 1px solid #F0997B; border-radius: var(--rayon); padding: 1.25rem; margin: 1.5rem 0; }
+    .warning-box p { font-size: 14px; color: #5a2010; line-height: 1.6; margin: 0; }
+    .warning-box strong { color: #7a2e14; }
+    @media (max-width: 768px) { .content-grid { grid-template-columns: 1fr; } .sidebar { position: static; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="../../index.html" class="logo">Equi<span>Table</span></a>
+      <div class="nav-links">
+        <a href="index.html">← Pathologies</a>
+        <a href="../../questionnaire.html" class="btn-nav">Mon profil</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="rubrique-hero">
+    <div class="container">
+      <div class="rubrique-tag">🩺 Pathologie · Diabète type 2</div>
+      <h1>Diabète type 2<br>et alimentation</h1>
+      <p>Ce que dit la science sur le rôle de l'alimentation dans la prise en charge du diabète de type 2 — recommandations officielles de la HAS et de l'ANSES, sans jargon médical.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="content-grid">
+
+      <main class="main-content">
+
+        <!-- CHIFFRES CLÉS -->
+        <div class="chiffre-card">
+          <div class="chiffre-num rouge">5,6%</div>
+          <div>
+            <div class="chiffre-text">de la population française était traitée pour un diabète en 2022, soit près de 3,8 millions de personnes. Dans plus de 90 % des cas chez l'adulte, il s'agit d'un diabète de type 2.</div>
+            <div class="chiffre-source">HAS · 2024</div>
+          </div>
+        </div>
+
+        <div class="chiffre-card">
+          <div class="chiffre-num rouge" style="font-size:1.8rem">+100%</div>
+          <div>
+            <div class="chiffre-text">La prévalence mondiale du diabète a doublé entre 1990 et 2022, passant de 7 % à 14 % chez les adultes. L'OMS qualifie la maladie d'"épidémie mondiale".</div>
+            <div class="chiffre-source">OMS · 2022</div>
+          </div>
+        </div>
+
+        <!-- CHANGEMENT MAJEUR 2024 -->
+        <h2>🔄 Ce qui a changé en 2024</h2>
+
+        <p>C'est une information importante que beaucoup ignorent. <span class="source-tag">HAS · juin 2024</span></p>
+
+        <p><strong>Avant 2024</strong>, les recommandations françaises mettaient le traitement médicamenteux au premier plan. <strong>Depuis juin 2024</strong>, la Haute Autorité de Santé a changé de paradigme : modifier les habitudes de vie en changeant son alimentation et en pratiquant une activité physique est devenu la première étape, avant même de suivre un traitement médicamenteux.</p>
+
+        <p>En clair : <strong>l'alimentation est aujourd'hui un traitement à part entière du diabète de type 2</strong>, reconnu officiellement par la médecine française.</p>
+
+        <div class="warning-box">
+          <p><strong>Important :</strong> cette page présente les recommandations officielles à titre informatif. Elle ne remplace pas le suivi de votre médecin ou diététicien. Si vous êtes sous traitement antidiabétique, tout changement alimentaire doit être discuté avec votre professionnel de santé car certains médicaments peuvent provoquer des hypoglycémies.</p>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- COMPRENDRE LE DT2 -->
+        <h2>🔬 Comprendre le diabète de type 2</h2>
+
+        <p>Le diabète de type 2 est une maladie métabolique chronique. <strong>Ce n'est pas une question de volonté</strong> — c'est une combinaison de facteurs génétiques, environnementaux et alimentaires.</p>
+
+        <ul class="conseil-list">
+          <li>Le pancréas produit de l'insuline, mais les cellules du corps n'y répondent plus correctement — c'est l'insulinorésistance</li>
+          <li>Le glucose s'accumule dans le sang car il ne peut plus entrer dans les cellules normalement</li>
+          <li>Sur le long terme sans prise en charge, cela endommage les vaisseaux sanguins, les reins, les nerfs, la rétine</li>
+          <li>La bonne nouvelle : <strong>l'alimentation agit directement sur la glycémie</strong> et peut freiner significativement l'évolution de la maladie</li>
+        </ul>
+
+        <div class="section-divider"></div>
+
+        <!-- LES GLUCIDES ET L'INDEX GLYCÉMIQUE -->
+        <h2>🌾 Glucides et index glycémique</h2>
+
+        <p>Tous les glucides n'ont pas le même effet sur la glycémie. <strong>L'index glycémique (IG)</strong> mesure la vitesse à laquelle un aliment fait monter le sucre dans le sang.</p>
+
+        <p><strong>Aliments à IG bas à privilégier</strong> <span class="source-tag">ANSES · PNNS</span></p>
+        <div class="aliment-grid">
+          <div class="aliment-pill"><strong>Lentilles</strong>IG 25</div>
+          <div class="aliment-pill"><strong>Pois chiches</strong>IG 28</div>
+          <div class="aliment-pill"><strong>Haricots rouges</strong>IG 24</div>
+          <div class="aliment-pill"><strong>Flocons d'avoine</strong>IG 40</div>
+          <div class="aliment-pill"><strong>Pain complet</strong>IG 50</div>
+          <div class="aliment-pill"><strong>Riz basmati</strong>IG 50</div>
+          <div class="aliment-pill"><strong>Pomme</strong>IG 35</div>
+          <div class="aliment-pill"><strong>Yaourt nature</strong>IG 35</div>
+        </div>
+
+        <p><strong>Aliments à IG élevé à limiter</strong></p>
+        <div class="aliment-grid">
+          <div class="aliment-pill eviter"><strong>Pain blanc</strong>IG 75</div>
+          <div class="aliment-pill eviter"><strong>Riz blanc cuit</strong>IG 72</div>
+          <div class="aliment-pill eviter"><strong>Sodas</strong>IG 63</div>
+          <div class="aliment-pill eviter"><strong>Corn flakes</strong>IG 81</div>
+          <div class="aliment-pill eviter"><strong>Pomme de terre cuite</strong>IG 85</div>
+          <div class="aliment-pill eviter"><strong>Jus de fruit</strong>IG 50-70</div>
+        </div>
+
+        <p><strong>Astuce pratique :</strong> la façon de cuire et de préparer les aliments change leur IG. Les pâtes al dente ont un IG plus bas que les pâtes très cuites. Une pomme de terre froide a un IG plus bas que chaude. Le vinaigre et le citron ajoutés aux repas réduisent l'IG global du repas.</p>
+
+        <div class="section-divider"></div>
+
+        <!-- LES FIBRES -->
+        <h2>🌿 Les fibres — alliées indispensables</h2>
+
+        <p>Les fibres alimentaires sont particulièrement importantes dans le cadre du diabète de type 2. Elles ralentissent l'absorption des glucides, ce qui évite les pics glycémiques.</p>
+
+        <div class="chiffre-card">
+          <div class="chiffre-num vert">41%</div>
+          <div>
+            <div class="chiffre-text">de réduction du risque de diabète de type 2 pour les apports les plus élevés en fibres, selon l'étude NutriNet-Santé portant sur plus de 100 000 participants.</div>
+            <div class="chiffre-source">NutriNet-Santé · INSERM</div>
+          </div>
+        </div>
+
+        <ul class="conseil-list">
+          <li>Objectif : 25 à 30 g de fibres par jour — la plupart des Français n'en consomment que 18 g</li>
+          <li>Légumineuses 2 à 3 fois par semaine (lentilles, pois chiches, haricots) — IG bas et riches en fibres</li>
+          <li>Légumes à chaque repas — remplir la moitié de l'assiette</li>
+          <li>Céréales complètes plutôt que raffinées — pain complet, riz complet, pâtes complètes</li>
+          <li>Fruits frais entiers (pas en jus) — la fibre des fruits entiers ralentit l'absorption du sucre</li>
+        </ul>
+
+        <div class="section-divider"></div>
+
+        <!-- CE QU'IL FAUT LIMITER -->
+        <h2>⚠️ Ce qu'il faut limiter</h2>
+
+        <p><span class="source-tag">HAS · ANSES · 2024</span></p>
+
+        <ul class="conseil-list">
+          <li><strong>Sucres ajoutés</strong> — objectif moins de 100 g de sucres totaux par jour selon l'ANSES. Attention aux sucres cachés dans les sauces, condiments, plats préparés</li>
+          <li><strong>Boissons sucrées</strong> — sodas, jus de fruits industriels, thés sucrés. En France, 9 % des nouveaux cas de diabète sont attribuables aux boissons sucrées</li>
+          <li><strong>Produits ultra-transformés</strong> — riches en sucres raffinés, graisses saturées et additifs. Consultez l'étiquette NOVA</li>
+          <li><strong>Alcool</strong> — peut provoquer des hypoglycémies si vous prenez certains médicaments antidiabétiques. Toujours en discuter avec votre médecin</li>
+          <li><strong>Graisses saturées</strong> — charcuterie, viande rouge en excès. Privilégiez les poissons gras (sardine, maquereau) 2 fois par semaine</li>
+        </ul>
+
+        <div class="section-divider"></div>
+
+        <!-- ALIMENTATION MÉDITERRANÉENNE -->
+        <h2>🫒 L'alimentation méditerranéenne recommandée</h2>
+
+        <p>Parmi tous les modèles alimentaires étudiés, <strong>le régime méditerranéen est celui qui a le plus de preuves scientifiques</strong> dans la prise en charge du diabète de type 2. <span class="source-tag">HAS · méta-analyses</span></p>
+
+        <ul class="conseil-list">
+          <li>Beaucoup de légumes et légumineuses à chaque repas</li>
+          <li>Fruits frais en dessert plutôt que sucreries</li>
+          <li>Huile d'olive comme matière grasse principale — riche en oméga-9 et anti-inflammatoire</li>
+          <li>Poissons 2 fois par semaine, dont un poisson gras</li>
+          <li>Viande rouge limitée à moins de 500 g par semaine (hors volaille)</li>
+          <li>Noix et amandes en collation — IG très bas, riches en bons acides gras</li>
+          <li>Herbes et épices pour assaisonner plutôt que sel et sucre</li>
+        </ul>
+
+        <p><strong>Bonne nouvelle pour les budgets serrés :</strong> le modèle méditerranéen est économique. Les légumineuses (lentilles, pois chiches) coûtent moins de 1,50€/kg sec et sont bien plus nutritives que beaucoup de produits transformés.</p>
+
+        <div class="section-divider"></div>
+
+        <!-- IDÉES REÇUES -->
+        <h2>🚫 Idées reçues sur le diabète et l'alimentation</h2>
+
+        <div class="myth-card myth-faux">
+          <div class="myth-label">❌ Idée reçue</div>
+          <div class="myth-text">"Un diabétique ne peut plus manger de sucre du tout"</div>
+        </div>
+        <div class="myth-card myth-vrai">
+          <div class="myth-label">✓ Ce que dit la science</div>
+          <div class="myth-text">Il n'y a pas d'interdiction absolue. L'alimentation standard prescrite au patient diabétique ne doit pas exclure les produits et desserts contenant du sucre, selon les recommandations françaises. C'est la quantité totale de glucides et leur qualité (IG) qui comptent, pas l'élimination totale du sucre. <span class="source-tag">AFDN · recommandations 2024</span></div>
+        </div>
+
+        <div class="myth-card myth-faux" style="margin-top:1.25rem">
+          <div class="myth-label">❌ Idée reçue</div>
+          <div class="myth-text">"Les produits 'sans sucre' ou 'light' sont meilleurs pour les diabétiques"</div>
+        </div>
+        <div class="myth-card myth-vrai">
+          <div class="myth-label">✓ Ce que dit la science</div>
+          <div class="myth-text">Les édulcorants de synthèse (aspartame, sucralose) restent controversés. Certaines études suggèrent qu'ils peuvent modifier le microbiote intestinal et la réponse glycémique. De plus, les produits "light" sont souvent ultra-transformés. Les fruits frais entiers restent préférables aux desserts "sans sucre" industriels. <span class="source-tag">ANSES · 2024</span></div>
+        </div>
+
+        <div class="myth-card myth-faux" style="margin-top:1.25rem">
+          <div class="myth-label">❌ Idée reçue</div>
+          <div class="myth-text">"Le diabète, c'est à cause du sucre — donc il faut éviter tous les fruits"</div>
+        </div>
+        <div class="myth-card myth-vrai">
+          <div class="myth-label">✓ Ce que dit la science</div>
+          <div class="myth-text">Les fruits entiers contiennent des fibres qui ralentissent l'absorption de leurs sucres naturels. Leur IG réel dans le corps est bien plus bas que leur teneur en sucre le laisserait supposer. Les études montrent que les consommateurs réguliers de fruits frais entiers ont un risque réduit de diabète. C'est le jus de fruit (sans fibres) qui est à limiter, pas le fruit entier. <span class="source-tag">NutriNet-Santé · INSERM</span></div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- SOURCES -->
+        <h2>📚 Sources scientifiques</h2>
+        <div class="sources-list">
+          <p>• <a href="https://www.has-sante.fr/jcms/p_3191108/fr/strategie-therapeutique-du-patient-vivant-avec-un-diabete-de-type-2" target="_blank">HAS — Stratégie thérapeutique du patient vivant avec un diabète de type 2 (mai 2024)</a></p>
+          <p>• <a href="https://www.has-sante.fr/jcms/p_3520515/fr/diabete-de-type-2-les-therapies-non-medicamenteuses-d-abord" target="_blank">HAS — Diabète de type 2 : les thérapies non médicamenteuses d'abord (2024)</a></p>
+          <p>• ANSES — Repères de consommation alimentaire du PNNS pour la population française adulte</p>
+          <p>• NutriNet-Santé (INSERM/INRAE/CNAM) — Étude de cohorte française, 100 000+ participants</p>
+          <p>• OMS — Rapport mondial sur le diabète 2022</p>
+          <p>• AFDN (Association Française des Diététiciens Nutritionnistes) — Recommandations alimentations thérapeutiques 2024</p>
+        </div>
+
+      </main>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-card" style="background:#FAECE7; border-color:#F0997B">
+          <div class="sidebar-title" style="color:#7a2e14; border-color:#F0997B">⚡ L'essentiel</div>
+          <p style="font-size:13px; color:#5a2010; line-height:1.6; margin-bottom:8px">1. Depuis 2024, l'alimentation est le <strong>premier traitement</strong> du DT2 selon la HAS</p>
+          <p style="font-size:13px; color:#5a2010; line-height:1.6; margin-bottom:8px">2. Privilégier les aliments à <strong>IG bas</strong> et riches en fibres</p>
+          <p style="font-size:13px; color:#5a2010; line-height:1.6; margin-bottom:8px">3. Limiter les sucres ajoutés et les produits ultra-transformés</p>
+          <p style="font-size:13px; color:#5a2010; line-height:1.6">4. Le modèle <strong>méditerranéen</strong> est le plus étudié et recommandé</p>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-title">Dans cette rubrique</div>
+          <a href="#" class="sidebar-link">🔄 Ce qui a changé en 2024</a>
+          <a href="#" class="sidebar-link">🌾 Glucides et index glycémique</a>
+          <a href="#" class="sidebar-link">🌿 Les fibres</a>
+          <a href="#" class="sidebar-link">⚠️ Ce qu'il faut limiter</a>
+          <a href="#" class="sidebar-link">🫒 Alimentation méditerranéenne</a>
+          <a href="#" class="sidebar-link">🚫 Idées reçues</a>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-title">Rubriques liées</div>
+          <a href="../bases-essentielles.html" class="lien-rubrique">
+            <span class="lien-rubrique-icon">🔬</span>
+            <span>Les bases : fibres et microbiote</span>
+          </a>
+          <a href="../budget/index.html" class="lien-rubrique">
+            <span class="lien-rubrique-icon">💶</span>
+            <span>Petit budget — recettes IG bas</span>
+          </a>
+          <a href="../fake-news/index.html" class="lien-rubrique">
+            <span class="lien-rubrique-icon">🚫</span>
+            <span>Idées reçues sur le sucre</span>
+          </a>
+          <a href="../../carte.html" class="lien-rubrique">
+            <span class="lien-rubrique-icon">🗺️</span>
+            <span>Carte — marchés et épiceries</span>
+          </a>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-title" style="color:var(--coral)">⚠️ Cette page ne remplace pas un avis médical</div>
+          <p style="font-size:12px; color:var(--texte-sec); line-height:1.6">Si vous êtes diabétique ou sous traitement, discutez de tout changement alimentaire avec votre médecin ou diététicien. Des hypoglycémies peuvent survenir avec certains médicaments.</p>
+        </div>
+
+        <div class="sidebar-card" style="background:var(--fond-sec); border:none">
+          <div class="sidebar-title">Autres pathologies</div>
+          <a href="hypertension.html" class="sidebar-link">🫀 Hypertension</a>
+          <a href="cholesterol.html" class="sidebar-link">🩸 Cholestérol</a>
+          <a href="cancer-chimio.html" class="sidebar-link">🎗️ Cancer / chimio</a>
+          <a href="depression-anxiete.html" class="sidebar-link">🧠 Dépression / anxiété</a>
+          <a href="index.html" class="sidebar-link">→ Voir toutes les pathologies</a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section style="background:var(--fond-sec); padding:3rem 0; margin-top:2rem; border-top:1px solid var(--bordure)">
+    <div class="container-sm" style="text-align:center">
+      <h2 style="font-size:1.75rem; margin-bottom:0.75rem">Des recommandations adaptées à votre profil</h2>
+      <p style="font-size:15px; color:var(--texte-sec); margin-bottom:1.5rem">Créez votre profil pour obtenir des conseils personnalisés selon votre budget, vos habitudes alimentaires et vos objectifs.</p>
+      <a href="../../questionnaire.html" class="btn-primary">Créer mon profil gratuit</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">Equi<span>Table</span></div>
+          <p class="footer-desc">Le savoir nutritionnel appartient à tout le monde.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../../index.html">Accueil</a>
+          <a href="index.html">Pathologies</a>
+          <a href="../../questionnaire.html">Mon profil</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 EquiTable</span>
+        <span>Sources : HAS · ANSES · INSERM · NutriNet-Santé</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

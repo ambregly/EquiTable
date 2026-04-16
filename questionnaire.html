@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Créer mon profil — EquiTable</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
+  <style>
+    .questionnaire-wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .questionnaire-body {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+    }
+    .questionnaire-card {
+      background: white;
+      border: 1px solid var(--bordure);
+      border-radius: 20px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 580px;
+    }
+    .progress-bar {
+      height: 4px;
+      background: var(--fond-sec);
+      border-radius: 2px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--vert);
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+    .step-num {
+      font-size: 12px;
+      color: var(--texte-ter);
+      margin-bottom: 6px;
+    }
+    .step-title {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--texte);
+      margin-bottom: 6px;
+    }
+    .optional-badge {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      background: var(--fond-sec);
+      color: var(--texte-ter);
+      margin-left: 8px;
+      vertical-align: middle;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .step-sub {
+      font-size: 14px;
+      color: var(--texte-sec);
+      margin-bottom: 1.75rem;
+      line-height: 1.6;
+    }
+    .field { margin-bottom: 1.25rem; }
+    .field label {
+      display: block;
+      font-size: 13px;
+      color: var(--texte-sec);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .field input, .field select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--bordure);
+      border-radius: var(--rayon-sm);
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--texte);
+      background: var(--fond);
+      transition: border-color 0.2s;
+    }
+    .field input:focus, .field select:focus {
+      outline: none;
+      border-color: var(--vert);
+      background: white;
+    }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.25rem; }
+    .chip {
+      padding: 7px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--bordure);
+      font-size: 13px;
+      cursor: pointer;
+      background: var(--fond);
+      color: var(--texte-sec);
+      transition: all 0.15s;
+      user-select: none;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .chip:hover { border-color: var(--vert); color: var(--vert-fonce); }
+    .chip.selected {
+      background: var(--vert-clair);
+      border-color: var(--vert);
+      color: var(--vert-fonce);
+      font-weight: 500;
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--texte-sec);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      margin-top: 1rem;
+      display: block;
+    }
+    .range-row { display: flex; align-items: center; gap: 12px; margin-bottom: 1.25rem; }
+    .range-row input[type=range] { flex: 1; accent-color: var(--vert); }
+    .range-val { font-size: 15px; font-weight: 500; min-width: 80px; text-align: right; }
+    .member-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: var(--fond-sec);
+      border-radius: var(--rayon-sm);
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .member-item button {
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      color: var(--texte-ter);
+      padding: 0 4px;
+      line-height: 1;
+    }
+    .add-row { display: flex; gap: 8px; margin-bottom: 1rem; }
+    .add-row input, .add-row select { flex: 1; }
+    .add-row .btn-add {
+      padding: 10px 16px;
+      background: var(--fond-sec);
+      border: 1px solid var(--bordure);
+      border-radius: var(--rayon-sm);
+      font-size: 13px;
+      cursor: pointer;
+      white-space: nowrap;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--texte-sec);
+      transition: all 0.15s;
+    }
+    .add-row .btn-add:hover { border-color: var(--vert); color: var(--vert); }
+    .anon-notice {
+      background: var(--fond-sec);
+      border-radius: var(--rayon-sm);
+      padding: 12px 14px;
+      font-size: 12px;
+      color: var(--texte-sec);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .rgpd-notice {
+      background: var(--vert-clair);
+      border-radius: var(--rayon-sm);
+      padding: 12px 14px;
+      font-size: 12px;
+      color: var(--vert-tres-fonce);
+      line-height: 1.6;
+      margin-top: 1rem;
+    }
+    .btn-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--bordure);
+    }
+    .btn-back {
+      padding: 10px 20px;
+      background: transparent;
+      border: 1px solid var(--bordure);
+      border-radius: var(--rayon-pill);
+      font-size: 14px;
+      cursor: pointer;
+      color: var(--texte-sec);
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.15s;
+    }
+    .btn-back:hover { border-color: var(--texte-sec); }
+    .btn-next {
+      padding: 10px 24px;
+      background: var(--vert);
+      border: none;
+      border-radius: var(--rayon-pill);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      color: white;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.2s;
+    }
+    .btn-next:hover { background: var(--vert-fonce); transform: translateY(-1px); }
+    .btn-skip {
+      font-size: 12px;
+      color: var(--texte-ter);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: underline;
+    }
+    .note-text {
+      font-size: 11px;
+      color: var(--texte-ter);
+      line-height: 1.6;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--bordure);
+      font-style: italic;
+    }
+    .summary-box {
+      background: var(--fond-sec);
+      border-radius: var(--rayon);
+      padding: 1.25rem;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--bordure);
+      font-size: 13px;
+    }
+    .summary-row:last-child { border-bottom: none; }
+    .summary-key { color: var(--texte-sec); }
+    .summary-val { font-weight: 500; text-align: right; max-width: 60%; }
+    .done-circle {
+      width: 56px;
+      height: 56px;
+      background: var(--vert-clair);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin: 0 auto 1.25rem;
+    }
+  </style>
+</head>
+<body class="questionnaire-wrap">
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">Equi<span>Table</span></a>
+      <div class="nav-links">
+        <a href="index.html">← Retour à l'accueil</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="questionnaire-body">
+    <div class="questionnaire-card">
+      <div class="progress-bar">
+        <div class="progress-fill" id="prog"></div>
+      </div>
+      <div id="step-content"></div>
+      <div class="btn-row">
+        <button class="btn-back" id="btn-back" onclick="nav(-1)">← Retour</button>
+        <button class="btn-skip" id="btn-skip" onclick="nav(1)">Passer cette étape</button>
+        <button class="btn-next" id="btn-next" onclick="nav(1)">Continuer →</button>
+      </div>
+      <p class="note-text" id="note-text"></p>
+    </div>
+  </div>
+
+  <script>
+    const state = { members: [], chips: {} };
+    let step = 0;
+
+    const steps = [
+      {
+        skippable: false,
+        note: "Vous pouvez utiliser un pseudonyme ou rester totalement anonyme. Aucune information permettant de vous identifier n'est obligatoire.",
+        render: () => `
+          <div class="step-num">Étape 1 sur 7</div>
+          <div class="step-title">Qui êtes-vous ? <span class="optional-badge">tout facultatif</span></div>
+          <p class="step-sub">Utilisez un pseudonyme, une initiale, ou laissez vide pour rester anonyme.</p>
+          <div class="anon-notice">
+            <span>🔒</span>
+            <span>Mode anonyme disponible — laissez les champs vides. Votre profil est sauvegardé uniquement sur votre appareil.</span>
+          </div>
+          <div class="field">
+            <label>Prénom ou pseudonyme <span style="color:var(--texte-ter);font-weight:400">(facultatif)</span></label>
+            <input id="f-prenom" placeholder="ex : Sarah, S., ou laisser vide" value="${state.prenom||''}">
+          </div>
+          <div class="two-col">
+            <div class="field">
+              <label>Tranche d'âge</label>
+              <select id="f-age">
+                <option value="">Préfère ne pas dire</option>
+                <option ${state.age=='15-17'?'selected':''} value="15-17">15–17 ans</option>
+                <option ${state.age=='18-25'?'selected':''} value="18-25">18–25 ans</option>
+                <option ${state.age=='26-35'?'selected':''} value="26-35">26–35 ans</option>
+                <option ${state.age=='36-50'?'selected':''} value="36-50">36–50 ans</option>
+                <option ${state.age=='51-65'?'selected':''} value="51-65">51–65 ans</option>
+                <option ${state.age=='65+'?'selected':''} value="65+">65 ans et plus</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Genre</label>
+              <select id="f-sexe">
+                <option value="">Préfère ne pas dire</option>
+                <option ${state.sexe=='f'?'selected':''} value="f">Femme</option>
+                <option ${state.sexe=='h'?'selected':''} value="h">Homme</option>
+                <option ${state.sexe=='nb'?'selected':''} value="nb">Non-binaire</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Région <span style="color:var(--texte-ter);font-weight:400">(pour les ressources locales)</span></label>
+            <select id="f-region">
+              <option value="">Préfère ne pas dire</option>
+              <option ${state.region=='Occitanie'?'selected':''}>Occitanie</option>
+              <option ${state.region=='Île-de-France'?'selected':''}>Île-de-France</option>
+              <option ${state.region=='PACA'?'selected':''}>PACA</option>
+              <option ${state.region=='Nouvelle-Aquitaine'?'selected':''}>Nouvelle-Aquitaine</option>
+              <option ${state.region=='Auvergne-Rhône-Alpes'?'selected':''}>Auvergne-Rhône-Alpes</option>
+              <option ${state.region=='Hauts-de-France'?'selected':''}>Hauts-de-France</option>
+              <option ${state.region=='Grand Est'?'selected':''}>Grand Est</option>
+              <option ${state.region=='Bretagne'?'selected':''}>Bretagne</option>
+              <option ${state.region=='Normandie'?'selected':''}>Normandie</option>
+              <option ${state.region=='DOM-TOM'?'selected':''}>DOM-TOM</option>
+            </select>
+          </div>
+        `,
+        save: () => {
+          state.prenom = val('f-prenom');
+          state.age = val('f-age');
+          state.sexe = val('f-sexe');
+          state.region = val('f-region');
+        }
+      },
+      {
+        skippable: true,
+        note: "Les profils membres permettent des recommandations adaptées à chaque personne. Vous pouvez en ajouter ou supprimer à tout moment.",
+        render: () => {
+          const members = state.members || [];
+          return `
+          <div class="step-num">Étape 2 sur 7</div>
+          <div class="step-title">Votre foyer <span class="optional-badge">facultatif</span></div>
+          <p class="step-sub">Ajoutez les personnes pour lesquelles vous souhaitez des recommandations.</p>
+          <div id="member-list">
+            ${members.map((m,i) => `
+              <div class="member-item">
+                <span><strong>${m.nom||'Anonyme'}</strong> — ${m.type}, ${m.age} ans</span>
+                <button onclick="removeMember(${i})">×</button>
+              </div>`).join('')}
+          </div>
+          <div class="add-row">
+            <input id="m-nom" placeholder="Prénom ou initiale">
+            <select id="m-type" style="max-width:140px">
+              <option value="bébé">Bébé (0-2)</option>
+              <option value="enfant">Enfant (3-11)</option>
+              <option value="ado">Ado (12-17)</option>
+              <option value="adulte">Adulte</option>
+              <option value="senior">Senior 65+</option>
+            </select>
+            <input id="m-age" type="number" placeholder="Âge" style="max-width:70px">
+            <button class="btn-add" onclick="addMember()">+ Ajouter</button>
+          </div>
+        `},
+        save: () => {}
+      },
+      {
+        skippable: true,
+        note: "Ces informations orientent uniquement les conseils pratiques. Elles ne sont jamais utilisées à des fins commerciales.",
+        render: () => `
+          <div class="step-num">Étape 3 sur 7</div>
+          <div class="step-title">Votre situation <span class="optional-badge">facultatif</span></div>
+          <p class="step-sub">Pour adapter les conseils à votre réalité quotidienne.</p>
+          <div class="field"><label>Budget alimentaire mensuel pour votre foyer</label></div>
+          <div class="range-row">
+            <input type="range" id="f-budget" min="50" max="800" step="10" value="${state.budget||200}" oninput="document.getElementById('bval').textContent=this.value+'€/mois'">
+            <span class="range-val" id="bval">${state.budget||200}€/mois</span>
+          </div>
+          <span class="section-label">Situation de vie</span>
+          <div class="chips">${chips(['Seul(e)','En couple','Famille monoparentale','En famille','En colocation','Étudiant(e) CROUS','En résidence senior'],'logement')}</div>
+          <span class="section-label">Équipement cuisine</span>
+          <div class="chips">${chips(['Cuisine complète','Micro-ondes uniquement','Pas de four','Kitchenette'],'cuisine')}</div>
+          <span class="section-label">Accès à la nourriture</span>
+          <div class="chips">${chips(['Supermarché proche','Marché local','AMAP','Épicerie sociale','Peu de mobilité'],'acces')}</div>
+        `,
+        save: () => { state.budget = val('f-budget'); }
+      },
+      {
+        skippable: true,
+        note: "Il n'y a aucune bonne ou mauvaise réponse. Ces préférences adaptent les recettes proposées sans jamais juger vos choix.",
+        render: () => `
+          <div class="step-num">Étape 4 sur 7</div>
+          <div class="step-title">Vos préférences <span class="optional-badge">facultatif</span></div>
+          <p class="step-sub">Sélectionnez ce qui vous correspond. Modifiable à tout moment.</p>
+          <span class="section-label">Régime alimentaire</span>
+          <div class="chips">${chips(['Omnivore','Végétarien','Vegan','Flexitarien','Pescétarien','Halal','Casher','Sans porc','Sans alcool'],'regime')}</div>
+          <span class="section-label">Traditions culinaires</span>
+          <div class="chips">${chips(['Française','Méditerranéenne','Maghrébine','Africaine','Asiatique','Antillaise','Moyen-Orient','Latino','Indienne'],'culture')}</div>
+          <span class="section-label">Intolérances et allergies</span>
+          <div class="chips">${chips(['Intolérance lactose','Sans gluten','Allergie fruits à coque','Allergie arachides','Allergie œufs','Allergie crustacés','Sans sucre ajouté','Régime sans sel'],'contraintes')}</div>
+          <span class="section-label">Rapport à la cuisine</span>
+          <div class="chips">${chips(['Je cuisine peu','Je cuisine régulièrement','J\'aime cuisiner','Pas le temps','Je mange souvent dehors'],'cuisine_rapport')}</div>
+        `,
+        save: () => {}
+      },
+      {
+        skippable: true,
+        note: "Ces informations affichent uniquement les recommandations officielles (ANSES, HAS, INSERM) associées à votre situation. Aucun diagnostic médical n'est établi.",
+        render: () => `
+          <div class="step-num">Étape 5 sur 7</div>
+          <div class="step-title">Votre santé <span class="optional-badge">très facultatif</span></div>
+          <p class="step-sub">Ne sélectionnez que ce que vous souhaitez partager. Uniquement pour afficher les recommandations officielles adaptées.</p>
+          <span class="section-label">Situations de vie particulières</span>
+          <div class="chips">${chips(['Grossesse','Allaitement','Ménopause','Post-partum','Personne aidante'],'vie')}</div>
+          <span class="section-label">Traitements en cours</span>
+          <div class="chips">${chips(['Traitement hormonal','Antihypertenseurs','Antiépileptiques','Chimiothérapie','Corticoïdes','Antidépresseurs','Anticoagulants'],'traitements')}</div>
+          <span class="section-label">Pathologies connues</span>
+          <div class="chips">${chips(['Diabète type 1','Diabète type 2','Hypertension','Maladie rénale','Cholestérol élevé','Épilepsie','Maladie cardiovasculaire','Hypothyroïdie','Troubles alimentaires','Dépression / anxiété','Endométriose'],'patho')}</div>
+          <span class="section-label">Symptômes fréquents</span>
+          <div class="chips">${chips(['Fatigue chronique','Troubles digestifs','Ballonnements','Constipation','Maux de tête','Difficultés de concentration','Troubles du sommeil','Fringales fréquentes'],'symptomes')}</div>
+        `,
+        save: () => {}
+      },
+      {
+        skippable: true,
+        note: "Ces objectifs personnalisent les rubriques mises en avant sur votre tableau de bord.",
+        render: () => `
+          <div class="step-num">Étape 6 sur 7</div>
+          <div class="step-title">Ce qui vous amène <span class="optional-badge">facultatif</span></div>
+          <p class="step-sub">Plusieurs réponses possibles. Pas de jugement.</p>
+          <div class="chips">${chips([
+            'Manger mieux avec peu de budget',
+            'Comprendre mon alimentation',
+            'Prévenir des maladies',
+            'Alimentation de mon enfant',
+            'Perdre du poids sainement',
+            'Avoir plus d\'énergie',
+            'Santé mentale et alimentation',
+            'Comprendre les étiquettes',
+            'Me renseigner sur les pesticides',
+            'Lutter contre les fake news',
+            'Alimentation et sport',
+            'Bien vieillir',
+            'Alimentation pendant la grossesse',
+            'Alimentation végétale',
+            'Comprendre le microbiote'
+          ],'objectifs')}</div>
+        `,
+        save: () => {}
+      },
+      {
+        skippable: false,
+        note: '',
+        render: () => `
+          <div class="step-num">Étape 7 sur 7</div>
+          <div class="step-title">Vos données vous appartiennent</div>
+          <p class="step-sub">Choisissez ce que vous acceptez. Tout est facultatif. Vous pouvez tout refuser et continuer à utiliser le site.</p>
+          <div class="chips">${chips([
+            'Sauvegarder mon profil sur cet appareil',
+            'Améliorer le site avec mes données anonymisées',
+            'Participer à la cohorte de recherche NutriVie',
+            'Recevoir des alertes nutritionnelles personnalisées',
+            'Contribuer aux données de recherche INRAE / INSERM'
+          ],'rgpd')}</div>
+          <div class="rgpd-notice">
+            Vos données ne sont <strong>jamais vendues</strong> ni partagées avec des entreprises agroalimentaires ou publicitaires. Vous pouvez modifier ou supprimer votre profil à tout moment.
+          </div>
+        `,
+        save: () => {}
+      }
+    ];
+
+    function val(id) {
+      const el = document.getElementById(id);
+      return el ? el.value : '';
+    }
+
+    function chips(options, group) {
+      if (!state.chips[group]) state.chips[group] = [];
+      return options.map(o => {
+        const safe = o.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        const selected = state.chips[group].includes(o) ? 'selected' : '';
+        return `<div class="chip ${selected}" onclick="toggleChip(this,'${group}','${safe}')">${o}</div>`;
+      }).join('');
+    }
+
+    function toggleChip(el, group, val) {
+      if (!state.chips[group]) state.chips[group] = [];
+      const i = state.chips[group].indexOf(val);
+      if (i > -1) { state.chips[group].splice(i, 1); el.classList.remove('selected'); }
+      else { state.chips[group].push(val); el.classList.add('selected'); }
+    }
+
+    function addMember() {
+      const nom = val('m-nom'), type = val('m-type'), age = val('m-age');
+      if (!age) return;
+      state.members.push({ nom, type, age });
+      render();
+    }
+
+    function removeMember(i) { state.members.splice(i, 1); render(); }
+
+    function render() {
+      const s = steps[step];
+      document.getElementById('step-content').innerHTML = s.render();
+      const pct = Math.round(((step + 1) / steps.length) * 100);
+      document.getElementById('prog').style.width = pct + '%';
+      document.getElementById('btn-back').style.visibility = step === 0 ? 'hidden' : 'visible';
+      document.getElementById('btn-skip').style.display = s.skippable ? 'inline' : 'none';
+      document.getElementById('note-text').textContent = s.note || '';
+      document.getElementById('btn-next').textContent = step === steps.length - 1 ? 'Créer mon profil →' : 'Continuer →';
+    }
+
+    function nav(dir) {
+      if (steps[step].save) steps[step].save();
+      const next = step + dir;
+      if (next < 0) return;
+      if (next >= steps.length) { showDone(); return; }
+      step = next;
+      render();
+    }
+
+    function showDone() {
+      localStorage.setItem('equitable_profil', JSON.stringify(state));
+      const prenom = state.prenom || 'Anonyme';
+      document.getElementById('step-content').innerHTML = `
+        <div style="text-align:center; padding: 1rem 0 1.5rem">
+          <div class="done-circle">✓</div>
+          <div class="step-title" style="text-align:center">Profil créé${state.prenom ? ' — ' + state.prenom : ''} !</div>
+          <p class="step-sub" style="text-align:center; margin-top:6px; margin-bottom:1.5rem">Votre tableau de bord personnalisé est prêt.</p>
+        </div>
+        <div class="summary-box">
+          <div class="summary-row"><span class="summary-key">Identité</span><span class="summary-val">${state.prenom||'Anonyme'} · ${state.age||'âge non renseigné'} · ${state.region||'région non renseignée'}</span></div>
+          <div class="summary-row"><span class="summary-key">Foyer</span><span class="summary-val">${state.members.length ? state.members.map(m=>m.nom||'?').join(', ') : 'Aucun membre ajouté'}</span></div>
+          <div class="summary-row"><span class="summary-key">Budget</span><span class="summary-val">${state.budget ? state.budget+'€/mois' : 'Non renseigné'}</span></div>
+          <div class="summary-row"><span class="summary-key">Régime</span><span class="summary-val">${state.chips.regime&&state.chips.regime.length ? state.chips.regime.join(', ') : 'Non précisé'}</span></div>
+          <div class="summary-row"><span class="summary-key">Objectifs</span><span class="summary-val">${state.chips.objectifs&&state.chips.objectifs.length ? state.chips.objectifs.slice(0,2).join(', ')+'…' : 'Non précisés'}</span></div>
+        </div>
+      `;
+      document.getElementById('prog').style.width = '100%';
+      document.getElementById('btn-back').style.visibility = 'hidden';
+      document.getElementById('btn-skip').style.display = 'none';
+      document.getElementById('btn-next').textContent = 'Voir mon tableau de bord →';
+      document.getElementById('btn-next').onclick = () => { window.location.href = 'dashboard.html'; };
+      document.getElementById('note-text').textContent = '';
+    }
+
+    render();
+  </script>
+</body>
+</html>

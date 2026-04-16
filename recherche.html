@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rechercher — EquiTable</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
+  <style>
+    .search-hero { padding: 4rem 0 3rem; text-align: center; }
+    .search-hero h1 { font-size: 2.5rem; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+    .search-hero p { font-size: 15px; color: var(--texte-sec); margin-bottom: 2rem; }
+    .search-bar { display: flex; gap: 10px; max-width: 600px; margin: 0 auto; }
+    .search-input { flex: 1; padding: 14px 18px; border: 2px solid var(--bordure); border-radius: 30px; font-size: 15px; font-family: 'DM Sans', sans-serif; background: white; color: var(--texte); transition: border-color 0.2s; }
+    .search-input:focus { outline: none; border-color: var(--vert); }
+    .search-btn { padding: 14px 24px; background: var(--vert); color: white; border: none; border-radius: 30px; font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.2s; font-family: inherit; white-space: nowrap; }
+    .search-btn:hover { background: var(--vert-fonce); }
+    .search-btn:disabled { opacity: 0.6; cursor: default; }
+    .suggestions-rapides { max-width: 600px; margin: 1rem auto 0; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .suggestion-pill { padding: 5px 12px; border-radius: 20px; border: 1px solid var(--bordure); font-size: 12px; cursor: pointer; background: white; color: var(--texte-sec); transition: all 0.15s; }
+    .suggestion-pill:hover { border-color: var(--vert); color: var(--vert-fonce); background: var(--vert-clair); }
+    .results-section { max-width: 800px; margin: 2rem auto; }
+    .result-card { background: white; border: 1px solid var(--bordure); border-radius: var(--rayon); padding: 1.25rem; margin-bottom: 10px; display: flex; gap: 1rem; align-items: flex-start; text-decoration: none; transition: all 0.2s; }
+    .result-card:hover { border-color: var(--vert); transform: translateX(4px); }
+    .result-card.prioritaire { border-color: #9FE1CB; background: linear-gradient(135deg, white 0%, #f8fefb 100%); }
+    .result-icon { font-size: 28px; flex-shrink: 0; }
+    .result-titre { font-size: 15px; font-weight: 500; color: var(--texte); margin-bottom: 4px; }
+    .result-desc { font-size: 13px; color: var(--texte-sec); line-height: 1.5; }
+    .result-badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; background: var(--vert-clair); color: var(--vert-fonce); font-weight: 500; margin-top: 6px; display: inline-block; }
+    .result-indispo { font-size: 11px; color: var(--texte-ter); margin-top: 4px; font-style: italic; }
+    .ia-response { background: var(--fond-sec); border-radius: var(--rayon); padding: 1.25rem; margin-bottom: 1.25rem; font-size: 14px; color: var(--texte-sec); line-height: 1.7; border-left: 3px solid var(--vert); }
+    .ia-response strong { color: var(--texte); }
+    .loading { display: none; text-align: center; padding: 2rem; color: var(--texte-sec); font-size: 14px; }
+    .loading.visible { display: block; }
+    .empty-state { text-align: center; padding: 3rem; color: var(--texte-ter); }
+    .empty-icon { font-size: 48px; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">Equi<span>Table</span></a>
+      <div class="nav-links">
+        <a href="dashboard.html">Mon tableau de bord</a>
+        <a href="questionnaire.html" class="btn-nav">Mon profil</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="search-hero">
+    <div class="container-sm">
+      <h1>🔍 Que cherchez-vous ?</h1>
+      <p>Décrivez votre situation ou votre question — l'IA vous oriente vers la rubrique qui correspond le mieux.</p>
+
+      <div class="search-bar">
+        <input class="search-input" id="search-input" type="text" placeholder="Ex : je suis diabétique, que manger ?" autocomplete="off">
+        <button class="search-btn" id="search-btn" onclick="rechercher()">Rechercher</button>
+      </div>
+
+      <div class="suggestions-rapides">
+        <div class="suggestion-pill" onclick="setQuery('Je mange peu et j\'ai du mal à me concentrer')">Concentration et alimentation</div>
+        <div class="suggestion-pill" onclick="setQuery('Manger équilibré avec 100€ par mois')">Petit budget</div>
+        <div class="suggestion-pill" onclick="setQuery('Mon enfant ne veut pas manger de légumes')">Enfants et légumes</div>
+        <div class="suggestion-pill" onclick="setQuery('Je suis souvent fatiguée')">Fatigue chronique</div>
+        <div class="suggestion-pill" onclick="setQuery('Quels fruits et légumes laver en priorité ?')">Pesticides</div>
+        <div class="suggestion-pill" onclick="setQuery('J\'ai le diabète, qu\'est-ce que je peux manger ?')">Diabète</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="results-section" id="results-section">
+    <div class="empty-state" id="empty-state">
+      <div class="empty-icon">🥦</div>
+      <p>Tapez votre question pour obtenir des recommandations personnalisées</p>
+    </div>
+    <div class="loading" id="loading">Recherche des rubriques les plus adaptées...</div>
+    <div id="ia-response-container"></div>
+    <div id="results-list"></div>
+  </div>
+
+  <script>
+    let rubriques = [];
+
+    async function chargerRubriques() {
+      try {
+        const res = await fetch('data/rubriques.json');
+        rubriques = await res.json();
+      } catch(e) { rubriques = []; }
+    }
+
+    function setQuery(q) {
+      document.getElementById('search-input').value = q;
+      rechercher();
+    }
+
+    document.getElementById('search-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') rechercher();
+    });
+
+    async function rechercher() {
+      const query = document.getElementById('search-input').value.trim();
+      if (!query) return;
+
+      document.getElementById('empty-state').style.display = 'none';
+      document.getElementById('loading').classList.add('visible');
+      document.getElementById('ia-response-container').innerHTML = '';
+      document.getElementById('results-list').innerHTML = '';
+      document.getElementById('search-btn').disabled = true;
+
+      // Recherche locale par mots-clés
+      const resultatsLocaux = rechercheLocale(query);
+
+      // Appel IA pour une réponse contextualisée
+      try {
+        const iaReponse = await appelIA(query, resultatsLocaux);
+        document.getElementById('ia-response-container').innerHTML = `
+          <div class="ia-response">
+            <strong>💬 EquiTable :</strong> ${iaReponse}
+          </div>
+        `;
+      } catch(e) {
+        // Si l'IA ne répond pas, on affiche juste les résultats locaux
+      }
+
+      afficherResultats(resultatsLocaux);
+      document.getElementById('loading').classList.remove('visible');
+      document.getElementById('search-btn').disabled = false;
+    }
+
+    function rechercheLocale(query) {
+      const mots = query.toLowerCase().split(' ').filter(m => m.length > 2);
+      return rubriques.map(r => {
+        let score = 0;
+        const texte = (r.titre + ' ' + r.description + ' ' + r.mots_cles.join(' ')).toLowerCase();
+        mots.forEach(mot => {
+          if (texte.includes(mot)) score += texte.split(mot).length - 1;
+        });
+        return { ...r, score };
+      })
+      .filter(r => r.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 6);
+    }
+
+    async function appelIA(query, resultatsLocaux) {
+      const rubriquesTexte = rubriquesDisponibles = resultatsLocaux.map(r => `- ${r.titre} : ${r.description}`).join('\n');
+
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 200,
+          system: `Tu es l'assistant nutritionnel d'EquiTable, un site de recommandations nutritionnelles scientifiques français. 
+Tu réponds en 2-3 phrases maximum, en français, de façon bienveillante et sans jugement. 
+Tu ne donnes pas de conseils médicaux. Tu orientes vers les rubriques disponibles sur le site.
+Les rubriques disponibles sont : ${rubriquesTexte}`,
+          messages: [{ role: 'user', content: query }]
+        })
+      });
+
+      const data = await response.json();
+      return data.content?.[0]?.text || '';
+    }
+
+    function afficherResultats(resultats) {
+      const container = document.getElementById('results-list');
+
+      if (resultats.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">🤔</div>
+            <p>Aucune rubrique trouvée exactement — mais nous enrichissons le contenu régulièrement !</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = resultats.map((r, i) => `
+        <a href="${r.disponible ? r.href : '#'}" class="result-card${i === 0 ? ' prioritaire' : ''}">
+          <span class="result-icon">${r.icone}</span>
+          <div style="flex:1">
+            <div class="result-titre">${r.titre}</div>
+            <div class="result-desc">${r.description}</div>
+            ${i === 0 ? '<span class="result-badge">✓ Meilleure correspondance</span>' : ''}
+            ${!r.disponible ? '<div class="result-indispo">Cette rubrique sera disponible prochainement</div>' : ''}
+          </div>
+        </a>
+      `).join('');
+    }
+
+    chargerRubriques();
+  </script>
+
+</body>
+</html>

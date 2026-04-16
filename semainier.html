@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon semainier — EquiTable</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
+  <style>
+    .page-hero { padding: 3rem 0 2rem; border-bottom: 1px solid var(--bordure); }
+    .page-hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .page-hero p { font-size: 15px; color: var(--texte-sec); }
+    .semainier-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin: 2rem 0; }
+    .jour-col { display: flex; flex-direction: column; gap: 6px; }
+    .jour-header { font-size: 12px; font-weight: 500; color: var(--texte-sec); text-align: center; padding: 6px 0; border-bottom: 2px solid var(--bordure); margin-bottom: 4px; }
+    .jour-header.today { color: var(--vert-fonce); border-color: var(--vert); }
+    .repas-slot { background: white; border: 1px solid var(--bordure); border-radius: var(--rayon-sm); padding: 8px; min-height: 70px; cursor: pointer; transition: all 0.15s; position: relative; }
+    .repas-slot:hover { border-color: var(--vert); }
+    .repas-slot.vide { border-style: dashed; display: flex; align-items: center; justify-content: center; }
+    .repas-slot.vide::after { content: '+'; font-size: 18px; color: var(--texte-ter); }
+    .repas-label { font-size: 10px; color: var(--texte-ter); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .repas-titre { font-size: 11px; font-weight: 500; color: var(--texte); line-height: 1.4; }
+    .repas-budget { font-size: 10px; color: var(--vert-fonce); margin-top: 3px; }
+    .repas-remove { position: absolute; top: 4px; right: 4px; font-size: 12px; color: var(--texte-ter); background: none; border: none; cursor: pointer; opacity: 0; transition: opacity 0.15s; line-height: 1; padding: 0; }
+    .repas-slot:hover .repas-remove { opacity: 1; }
+    .semainier-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .btn-small { padding: 7px 14px; border-radius: 20px; font-size: 13px; cursor: pointer; border: 1px solid var(--bordure); background: white; color: var(--texte-sec); transition: all 0.15s; font-family: inherit; }
+    .btn-small:hover { border-color: var(--vert); color: var(--vert-fonce); }
+    .btn-small.primary { background: var(--vert); color: white; border-color: var(--vert); }
+    .btn-small.primary:hover { background: var(--vert-fonce); }
+    .budget-total { font-size: 14px; color: var(--texte-sec); padding: 8px 14px; background: var(--fond-sec); border-radius: 20px; }
+    .budget-total strong { color: var(--vert-fonce); }
+    .section-title { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 500; margin-bottom: 1rem; }
+    .recettes-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .filter-chip { padding: 5px 12px; border-radius: 20px; border: 1px solid var(--bordure); font-size: 12px; cursor: pointer; background: var(--fond); color: var(--texte-sec); transition: all 0.15s; }
+    .filter-chip:hover, .filter-chip.active { background: var(--vert-clair); border-color: var(--vert); color: var(--vert-fonce); }
+    .recettes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+    .recette-card { background: white; border: 1px solid var(--bordure); border-radius: var(--rayon); padding: 1.25rem; transition: all 0.2s; cursor: pointer; }
+    .recette-card:hover { border-color: var(--vert); transform: translateY(-2px); }
+    .recette-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .recette-icon { font-size: 28px; }
+    .recette-titre { font-size: 15px; font-weight: 500; color: var(--texte); }
+    .recette-desc { font-size: 13px; color: var(--texte-sec); line-height: 1.5; margin-bottom: 10px; }
+    .recette-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+    .recette-meta-item { font-size: 11px; color: var(--texte-ter); display: flex; align-items: center; gap: 4px; }
+    .recette-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
+    .recette-tag { font-size: 10px; padding: 2px 7px; border-radius: 8px; background: var(--fond-sec); color: var(--texte-ter); }
+    .recette-tag.sante { background: var(--vert-clair); color: var(--vert-fonce); }
+    .btn-ajouter { width: 100%; padding: 7px; border-radius: var(--rayon-sm); font-size: 12px; font-weight: 500; background: var(--fond-sec); border: 1px solid var(--bordure); cursor: pointer; color: var(--texte-sec); transition: all 0.15s; font-family: inherit; }
+    .btn-ajouter:hover { background: var(--vert-clair); border-color: var(--vert); color: var(--vert-fonce); }
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1000; align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: white; border-radius: 16px; padding: 2rem; max-width: 520px; width: 90%; max-height: 80vh; overflow-y: auto; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+    .modal-close { background: none; border: none; font-size: 20px; cursor: pointer; color: var(--texte-sec); }
+    .modal h2 { font-family: 'Fraunces', serif; font-size: 1.5rem; }
+    .modal .etapes { list-style: decimal; padding-left: 1.25rem; }
+    .modal .etapes li { font-size: 14px; color: var(--texte-sec); padding: 6px 0; border-bottom: 1px solid var(--bordure); line-height: 1.6; }
+    .modal .etapes li:last-child { border-bottom: none; }
+    .slot-picker { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 1rem 0; }
+    .slot-picker-day { font-size: 11px; color: var(--texte-sec); text-align: center; }
+    .slot-picker-btn { font-size: 11px; padding: 5px 3px; border: 1px solid var(--bordure); border-radius: 6px; cursor: pointer; background: white; color: var(--texte-sec); transition: all 0.15s; text-align: center; width: 100%; font-family: inherit; }
+    .slot-picker-btn:hover { border-color: var(--vert); color: var(--vert-fonce); background: var(--vert-clair); }
+    .nutri-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 0.75rem; }
+    .nutri-table td { padding: 5px 8px; border-bottom: 1px solid var(--bordure); }
+    .nutri-table td:first-child { color: var(--texte-sec); }
+    .nutri-table td:last-child { font-weight: 500; text-align: right; }
+    @media (max-width: 768px) { .semainier-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 480px) { .semainier-grid { grid-template-columns: repeat(2, 1fr); } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">Equi<span>Table</span></a>
+      <div class="nav-links">
+        <a href="dashboard.html">← Mon tableau de bord</a>
+        <a href="questionnaire.html" class="btn-nav">Mon profil</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>🗓️ Mon semainier</h1>
+      <p>Planifiez vos repas de la semaine avec des idées recettes adaptées à votre profil et votre budget.</p>
+    </div>
+  </section>
+
+  <div class="container" style="padding: 2rem 0 3rem">
+
+    <div class="semainier-actions">
+      <button class="btn-small primary" onclick="genererSemaine()">✨ Générer une semaine automatiquement</button>
+      <button class="btn-small" onclick="viderSemaine()">🗑️ Vider la semaine</button>
+      <button class="btn-small" onclick="imprimerListe()">🛒 Liste de courses</button>
+      <div class="budget-total">Budget estimé : <strong id="budget-total">0€</strong></div>
+    </div>
+
+    <div class="semainier-grid" id="semainier"></div>
+
+    <div style="margin-top: 3rem">
+      <div class="section-title">📖 Les recettes EquiTable</div>
+
+      <div class="recettes-filters">
+        <div class="filter-chip active" onclick="filtrer('tous', this)">Toutes</div>
+        <div class="filter-chip" onclick="filtrer('budget', this)">💶 Moins de 1,50€</div>
+        <div class="filter-chip" onclick="filtrer('rapide', this)">⚡ Moins de 15 min</div>
+        <div class="filter-chip" onclick="filtrer('vegetarien', this)">🌱 Végétarien</div>
+        <div class="filter-chip" onclick="filtrer('vegan', this)">🌿 Vegan</div>
+        <div class="filter-chip" onclick="filtrer('halal', this)">☪️ Halal</div>
+        <div class="filter-chip" onclick="filtrer('diabete', this)">🩺 IG bas</div>
+        <div class="filter-chip" onclick="filtrer('enfants', this)">👶 Enfants</div>
+      </div>
+
+      <div class="recettes-grid" id="recettes-grid"></div>
+    </div>
+  </div>
+
+  <!-- MODAL RECETTE -->
+  <div class="modal-overlay" id="modal" onclick="fermerModal(event)">
+    <div class="modal" id="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-titre"></h2>
+        <button class="modal-close" onclick="fermerModal()">×</button>
+      </div>
+      <p id="modal-desc" style="font-size:14px; color:var(--texte-sec); margin-bottom:1rem"></p>
+      <div id="modal-meta" style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:1rem; font-size:13px; color:var(--texte-sec)"></div>
+      <div style="font-size:13px; font-weight:500; margin-bottom:0.5rem; color:var(--texte)">Ingrédients</div>
+      <ul id="modal-ingredients" style="list-style:none; margin-bottom:1rem"></ul>
+      <div style="font-size:13px; font-weight:500; margin-bottom:0.5rem; color:var(--texte)">Préparation</div>
+      <ol class="etapes" id="modal-etapes"></ol>
+      <div style="font-size:13px; font-weight:500; margin: 1rem 0 0.5rem; color:var(--texte)">Valeurs nutritionnelles (par portion)</div>
+      <table class="nutri-table" id="modal-nutri"></table>
+      <div style="font-size:13px; font-weight:500; margin: 1rem 0 0.5rem; color:var(--texte)">Ajouter au semainier</div>
+      <div class="slot-picker">
+        <div class="slot-picker-day">Lun</div><div class="slot-picker-day">Mar</div><div class="slot-picker-day">Mer</div><div class="slot-picker-day">Jeu</div><div class="slot-picker-day">Ven</div><div class="slot-picker-day">Sam</div><div class="slot-picker-day">Dim</div>
+        <div id="slot-midi-row" style="display:contents"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const JOURS = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+    const REPAS = ['Matin','Midi','Soir'];
+    const today = new Date().getDay();
+    const todayIdx = today === 0 ? 6 : today - 1;
+
+    let semaine = JSON.parse(localStorage.getItem('equitable_semainier') || 'null') || {};
+    let recettes = [];
+    let filtreActif = 'tous';
+    let recetteSelectionnee = null;
+
+    async function chargerRecettes() {
+      try {
+        const res = await fetch('data/recettes.json');
+        recettes = await res.json();
+      } catch(e) {
+        recettes = RECETTES_DEFAULT;
+      }
+      afficherRecettes();
+    }
+
+    function afficherSemainier() {
+      const grid = document.getElementById('semainier');
+      grid.innerHTML = '';
+      let budgetTotal = 0;
+
+      JOURS.forEach((jour, ji) => {
+        const col = document.createElement('div');
+        col.className = 'jour-col';
+        col.innerHTML = `<div class="jour-header${ji === todayIdx ? ' today' : ''}">${jour}</div>`;
+
+        REPAS.forEach(repas => {
+          const key = `${jour}_${repas}`;
+          const slot = document.createElement('div');
+          const recette = semaine[key];
+
+          if (recette) {
+            slot.className = 'repas-slot';
+            slot.innerHTML = `
+              <div class="repas-label">${repas}</div>
+              <div class="repas-titre">${recette.icone} ${recette.titre}</div>
+              <div class="repas-budget">${recette.budget}€/pers</div>
+              <button class="repas-remove" onclick="retirerRepas('${key}')">×</button>
+            `;
+            slot.onclick = (e) => { if (!e.target.classList.contains('repas-remove')) ouvrirRecette(recette); };
+            budgetTotal += recette.budget;
+          } else {
+            slot.className = 'repas-slot vide';
+            slot.title = `Ajouter ${repas} ${jour}`;
+            slot.onclick = () => ouvrirPickerRepas(jour, repas);
+          }
+          col.appendChild(slot);
+        });
+        grid.appendChild(col);
+      });
+
+      document.getElementById('budget-total').textContent = budgetTotal.toFixed(2) + '€';
+      localStorage.setItem('equitable_semainier', JSON.stringify(semaine));
+    }
+
+    function afficherRecettes() {
+      const grid = document.getElementById('recettes-grid');
+      const filtrees = recettes.filter(r => {
+        if (!r.disponible) return false;
+        if (filtreActif === 'tous') return true;
+        if (filtreActif === 'budget') return r.budget <= 1.5;
+        if (filtreActif === 'rapide') return r.temps_min <= 15;
+        if (filtreActif === 'diabete') return r.tags_sante?.includes('diabete_ok') || r.tags_sante?.includes('IG_bas');
+        if (filtreActif === 'enfants') return r.tags_sante?.includes('enfants_ok') || r.categories?.includes('enfants');
+        return r.regime?.includes(filtreActif) || r.cultures?.includes(filtreActif) || r.categories?.includes(filtreActif);
+      });
+
+      grid.innerHTML = filtrees.length === 0
+        ? '<p style="color:var(--texte-ter); font-size:14px">Aucune recette pour ce filtre pour l\'instant — d\'autres arrivent bientôt !</p>'
+        : filtrees.map(r => `
+          <div class="recette-card" onclick="ouvrirRecette(${JSON.stringify(r).replace(/"/g, '&quot;')})">
+            <div class="recette-header">
+              <span class="recette-icon">${r.icone}</span>
+              <span class="recette-titre">${r.titre}</span>
+            </div>
+            <div class="recette-desc">${r.description}</div>
+            <div class="recette-meta">
+              <span class="recette-meta-item">⏱ ${r.temps_min} min</span>
+              <span class="recette-meta-item">👥 ${r.portions} pers.</span>
+              <span class="recette-meta-item">💶 ${r.budget.toFixed(2)}€/pers</span>
+            </div>
+            <div class="recette-tags">
+              ${(r.tags_sante||[]).map(t => `<span class="recette-tag sante">${t.replace(/_/g,' ')}</span>`).join('')}
+              ${(r.regime||[]).map(t => `<span class="recette-tag">${t}</span>`).join('')}
+            </div>
+            <button class="btn-ajouter" onclick="event.stopPropagation(); ouvrirRecette(${JSON.stringify(r).replace(/"/g, '&quot;')})">+ Ajouter au semainier</button>
+          </div>
+        `).join('');
+    }
+
+    function filtrer(type, el) {
+      filtreActif = type;
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      afficherRecettes();
+    }
+
+    function ouvrirRecette(r) {
+      recetteSelectionnee = r;
+      document.getElementById('modal-titre').textContent = r.icone + ' ' + r.titre;
+      document.getElementById('modal-desc').textContent = r.description;
+      document.getElementById('modal-meta').innerHTML = `<span>⏱ ${r.temps_min} min</span><span>👥 ${r.portions} portions</span><span>💶 ${r.budget.toFixed(2)}€/personne</span>`;
+      document.getElementById('modal-ingredients').innerHTML = r.ingredients.map(i => `<li style="font-size:13px; color:var(--texte-sec); padding:4px 0; border-bottom:1px solid var(--bordure)">• ${i.quantite} ${i.nom}</li>`).join('');
+      document.getElementById('modal-etapes').innerHTML = r.etapes.map(e => `<li>${e}</li>`).join('');
+      const n = r.valeurs_nutritionnelles;
+      document.getElementById('modal-nutri').innerHTML = `
+        <tr><td>Énergie</td><td>${n.kcal} kcal</td></tr>
+        <tr><td>Protéines</td><td>${n.proteines} g</td></tr>
+        <tr><td>Glucides</td><td>${n.glucides} g</td></tr>
+        <tr><td>Fibres</td><td>${n.fibres} g</td></tr>
+        <tr><td>Lipides</td><td>${n.lipides} g</td></tr>
+      `;
+      const row = document.getElementById('slot-midi-row');
+      row.innerHTML = JOURS.map(j => `<button class="slot-picker-btn" onclick="ajouterRepas('${j}','Midi')">${j}</button>`).join('');
+      document.getElementById('modal').classList.add('open');
+    }
+
+    function fermerModal(e) {
+      if (!e || e.target === document.getElementById('modal')) {
+        document.getElementById('modal').classList.remove('open');
+      }
+    }
+
+    function ajouterRepas(jour, repas) {
+      if (!recetteSelectionnee) return;
+      semaine[`${jour}_${repas}`] = recetteSelectionnee;
+      afficherSemainier();
+      document.getElementById('modal').classList.remove('open');
+    }
+
+    function ouvrirPickerRepas(jour, repas) {
+      if (recettes.length === 0) return;
+      const r = recettes[Math.floor(Math.random() * recettes.filter(r => r.disponible).length)];
+      semaine[`${jour}_${repas}`] = r;
+      afficherSemainier();
+    }
+
+    function retirerRepas(key) {
+      delete semaine[key];
+      afficherSemainier();
+    }
+
+    function genererSemaine() {
+      const dispo = recettes.filter(r => r.disponible);
+      if (dispo.length === 0) return;
+      JOURS.forEach(j => {
+        REPAS.forEach(r => {
+          const key = `${j}_${r}`;
+          if (!semaine[key]) {
+            semaine[key] = dispo[Math.floor(Math.random() * dispo.length)];
+          }
+        });
+      });
+      afficherSemainier();
+    }
+
+    function viderSemaine() {
+      if (confirm('Vider toute la semaine ?')) {
+        semaine = {};
+        afficherSemainier();
+      }
+    }
+
+    function imprimerListe() {
+      const ingredients = {};
+      Object.values(semaine).forEach(r => {
+        r.ingredients.forEach(i => {
+          if (!ingredients[i.nom]) ingredients[i.nom] = { nom: i.nom, quantites: [] };
+          ingredients[i.nom].quantites.push(i.quantite);
+        });
+      });
+      const liste = Object.values(ingredients).map(i => `☐ ${i.nom} (${[...new Set(i.quantites)].join(', ')})`).join('\n');
+      const win = window.open('', '_blank');
+      win.document.write(`<pre style="font-family:sans-serif; padding:2rem; font-size:16px">🛒 LISTE DE COURSES EQUITABLE\n\n${liste || 'Semainier vide'}</pre>`);
+      win.print();
+    }
+
+    // Données par défaut si le JSON ne charge pas
+    const RECETTES_DEFAULT = [
+      { id:'r1', titre:'Soupe lentilles', description:'Soupe lentilles corail et cumin', icone:'🍲', budget:1.20, temps_min:25, portions:4, regime:['vegetarien','vegan','halal'], cultures:['maghrebine'], categories:['budget'], ingredients:[{nom:'Lentilles corail',quantite:'200g'},{nom:'Tomates',quantite:'400g'}], etapes:['Faire revenir oignon','Ajouter lentilles et eau','Mijoter 20 min'], valeurs_nutritionnelles:{kcal:220,proteines:14,glucides:35,fibres:9,lipides:4}, tags_sante:['IG_bas','riche_fibres','diabete_ok'], disponible:true }
+    ];
+
+    chargerRecettes();
+    afficherSemainier();
+  </script>
+</body>
+</html>

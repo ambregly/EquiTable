@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Événements et communauté — EquiTable</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
+  <style>
+    .page-hero { padding: 3rem 0 2rem; border-bottom: 1px solid var(--bordure); }
+    .page-hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .page-hero p { font-size: 15px; color: var(--texte-sec); }
+    .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--bordure); margin-bottom: 2rem; }
+    .tab { padding: 12px 20px; font-size: 14px; cursor: pointer; border-bottom: 2px solid transparent; color: var(--texte-sec); transition: all 0.15s; background: none; border-top: none; border-left: none; border-right: none; font-family: inherit; }
+    .tab:hover { color: var(--texte); }
+    .tab.active { color: var(--vert-fonce); border-bottom-color: var(--vert); font-weight: 500; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+    .event-card { background: white; border: 1px solid var(--bordure); border-radius: var(--rayon); padding: 1.25rem; transition: all 0.2s; }
+    .event-card:hover { border-color: var(--vert); transform: translateY(-2px); }
+    .event-date { font-size: 12px; font-weight: 500; color: var(--vert-fonce); background: var(--vert-clair); padding: 3px 9px; border-radius: 10px; display: inline-block; margin-bottom: 8px; }
+    .event-titre { font-size: 16px; font-weight: 500; color: var(--texte); margin-bottom: 6px; }
+    .event-desc { font-size: 13px; color: var(--texte-sec); line-height: 1.6; margin-bottom: 10px; }
+    .event-meta { font-size: 12px; color: var(--texte-ter); display: flex; flex-direction: column; gap: 3px; }
+    .event-gratuit { font-size: 11px; padding: 2px 8px; border-radius: 10px; background: var(--vert-clair); color: var(--vert-fonce); display: inline-block; margin-top: 8px; }
+    .event-payant { font-size: 11px; padding: 2px 8px; border-radius: 10px; background: var(--fond-sec); color: var(--texte-ter); display: inline-block; margin-top: 8px; }
+    .messages-section { max-width: 700px; }
+    .message-form { background: white; border: 1px solid var(--bordure); border-radius: var(--rayon); padding: 1.25rem; margin-bottom: 1.5rem; }
+    .message-form h3 { font-size: 15px; font-weight: 500; margin-bottom: 1rem; }
+    .message-form textarea { width: 100%; padding: 10px 14px; border: 1px solid var(--bordure); border-radius: var(--rayon-sm); font-size: 14px; font-family: inherit; resize: vertical; min-height: 80px; color: var(--texte); background: var(--fond); }
+    .message-form textarea:focus { outline: none; border-color: var(--vert); background: white; }
+    .form-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+    .form-note { font-size: 11px; color: var(--texte-ter); }
+    .message-item { background: white; border: 1px solid var(--bordure); border-radius: var(--rayon); padding: 1rem 1.25rem; margin-bottom: 8px; }
+    .message-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .message-auteur { font-size: 13px; font-weight: 500; color: var(--texte); }
+    .message-date { font-size: 11px; color: var(--texte-ter); }
+    .message-texte { font-size: 14px; color: var(--texte-sec); line-height: 1.6; }
+    .message-actions { display: flex; gap: 10px; margin-top: 8px; }
+    .message-like { font-size: 12px; color: var(--texte-ter); cursor: pointer; background: none; border: none; font-family: inherit; transition: color 0.15s; }
+    .message-like:hover { color: var(--vert-fonce); }
+    .region-filter { display: flex; gap: 8px; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .region-filter label { font-size: 13px; color: var(--texte-sec); }
+    .region-filter select { padding: 6px 10px; border: 1px solid var(--bordure); border-radius: 20px; font-size: 13px; font-family: inherit; background: white; color: var(--texte); }
+    .empty-events { text-align: center; padding: 3rem; color: var(--texte-ter); }
+    .proposer-btn { display: inline-block; padding: 10px 20px; background: var(--vert-clair); color: var(--vert-fonce); border-radius: 20px; font-size: 13px; font-weight: 500; text-decoration: none; border: 1px solid #9FE1CB; transition: all 0.15s; margin-top: 1rem; cursor: pointer; }
+    .proposer-btn:hover { background: var(--vert); color: white; border-color: var(--vert); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">Equi<span>Table</span></a>
+      <div class="nav-links">
+        <a href="dashboard.html">Mon tableau de bord</a>
+        <a href="questionnaire.html" class="btn-nav">Mon profil</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>👥 Communauté EquiTable</h1>
+      <p>Événements locaux, échanges entre participants, ateliers cuisine — rejoignez la communauté.</p>
+    </div>
+  </section>
+
+  <div class="container" style="padding: 2rem 0 3rem">
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('evenements', this)">📅 Événements</button>
+      <button class="tab" onclick="switchTab('messages', this)">💬 Messages</button>
+      <button class="tab" onclick="switchTab('groupes', this)">👥 Groupes</button>
+    </div>
+
+    <!-- ÉVÉNEMENTS -->
+    <div class="tab-content active" id="tab-evenements">
+      <div class="region-filter">
+        <label>Région :</label>
+        <select id="region-evt" onchange="filtrerEvenements()">
+          <option value="">Toutes les régions</option>
+          <option value="Occitanie">Occitanie</option>
+          <option value="Île-de-France">Île-de-France</option>
+          <option value="PACA">PACA</option>
+          <option value="Nouvelle-Aquitaine">Nouvelle-Aquitaine</option>
+          <option value="Auvergne-Rhône-Alpes">Auvergne-Rhône-Alpes</option>
+        </select>
+        <a class="proposer-btn" href="mailto:contact@equitable.fr?subject=Proposer un événement">+ Proposer un événement</a>
+      </div>
+      <div class="events-grid" id="events-grid"></div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div class="tab-content" id="tab-messages">
+      <div class="messages-section">
+        <div class="message-form">
+          <h3>💬 Partager avec la communauté</h3>
+          <textarea id="msg-input" placeholder="Partagez une astuce, une question, une recette découverte..."></textarea>
+          <div class="form-footer">
+            <span class="form-note">🔒 Anonyme par défaut — votre pseudonyme du profil si renseigné</span>
+            <button class="btn-nav" onclick="publierMessage()" style="font-size:13px; padding:8px 16px">Publier</button>
+          </div>
+        </div>
+        <div id="messages-list"></div>
+      </div>
+    </div>
+
+    <!-- GROUPES -->
+    <div class="tab-content" id="tab-groupes">
+      <p style="color:var(--texte-sec); margin-bottom:1.5rem; font-size:15px">Les groupes thématiques arrivent bientôt — rejoignez la liste d'attente.</p>
+      <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:1rem">
+        ${['Parents et alimentation', 'Étudiants petit budget', 'Diabète et alimentation', 'Recettes du monde', 'Jardinage urbain', 'Courses groupées'].map(g => `
+          <div style="background:white;border:1px solid var(--bordure);border-radius:var(--rayon);padding:1.25rem;opacity:0.7">
+            <div style="font-size:15px;font-weight:500;margin-bottom:6px">${g}</div>
+            <div style="font-size:12px;color:var(--texte-ter)">Bientôt disponible</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let evenements = [];
+    let messages = JSON.parse(localStorage.getItem('equitable_messages') || '[]');
+
+    function switchTab(nom, el) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById('tab-' + nom).classList.add('active');
+    }
+
+    async function chargerEvenements() {
+      try {
+        const res = await fetch('data/evenements.json');
+        evenements = await res.json();
+      } catch(e) { evenements = []; }
+
+      // Pré-filtrer selon le profil
+      const profil = JSON.parse(localStorage.getItem('equitable_profil') || 'null');
+      if (profil?.region) {
+        document.getElementById('region-evt').value = profil.region;
+      }
+      filtrerEvenements();
+    }
+
+    function filtrerEvenements() {
+      const region = document.getElementById('region-evt').value;
+      const filtres = evenements.filter(e => !region || e.region === region);
+      const grid = document.getElementById('events-grid');
+
+      if (filtres.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-events" style="grid-column:1/-1">
+            <p style="font-size:40px;margin-bottom:0.75rem">📅</p>
+            <p>Aucun événement pour cette région pour l'instant.</p>
+            <a class="proposer-btn" href="mailto:contact@equitable.fr?subject=Proposer un événement">Proposer le premier événement</a>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtres.map(e => {
+        const date = new Date(e.date);
+        const dateStr = date.toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long' });
+        return `
+          <div class="event-card">
+            <div class="event-date">📅 ${dateStr}</div>
+            <div class="event-titre">${e.titre}</div>
+            <div class="event-desc">${e.description}</div>
+            <div class="event-meta">
+              <span>📍 ${e.lieu} — ${e.ville}</span>
+              <span>⏰ ${e.heure}</span>
+              ${e.places ? `<span>👥 ${e.places} places</span>` : ''}
+              ${e.organisateur ? `<span>🏷️ ${e.organisateur}</span>` : ''}
+              ${e.contact ? `<span>✉️ <a href="mailto:${e.contact}" style="color:var(--vert-fonce)">${e.contact}</a></span>` : ''}
+            </div>
+            <span class="${e.gratuit ? 'event-gratuit' : 'event-payant'}">${e.gratuit ? '✓ Gratuit' : 'Payant'}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function publierMessage() {
+      const texte = document.getElementById('msg-input').value.trim();
+      if (!texte) return;
+      const profil = JSON.parse(localStorage.getItem('equitable_profil') || 'null');
+      const auteur = profil?.prenom || 'Anonyme';
+      const msg = {
+        id: Date.now(),
+        auteur,
+        texte,
+        date: new Date().toLocaleDateString('fr-FR'),
+        likes: 0
+      };
+      messages.unshift(msg);
+      localStorage.setItem('equitable_messages', JSON.stringify(messages));
+      document.getElementById('msg-input').value = '';
+      afficherMessages();
+    }
+
+    function likerMessage(id) {
+      const msg = messages.find(m => m.id === id);
+      if (msg) {
+        msg.likes = (msg.likes || 0) + 1;
+        localStorage.setItem('equitable_messages', JSON.stringify(messages));
+        afficherMessages();
+      }
+    }
+
+    function afficherMessages() {
+      const liste = document.getElementById('messages-list');
+      if (messages.length === 0) {
+        liste.innerHTML = '<p style="color:var(--texte-ter);font-size:14px;text-align:center;padding:2rem">Soyez le premier à partager un message !</p>';
+        return;
+      }
+      liste.innerHTML = messages.map(m => `
+        <div class="message-item">
+          <div class="message-header">
+            <span class="message-auteur">${m.auteur}</span>
+            <span class="message-date">${m.date}</span>
+          </div>
+          <div class="message-texte">${m.texte}</div>
+          <div class="message-actions">
+            <button class="message-like" onclick="likerMessage(${m.id})">👍 ${m.likes || 0}</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    chargerEvenements();
+    afficherMessages();
+  </script>
+
+</body>
+</html>

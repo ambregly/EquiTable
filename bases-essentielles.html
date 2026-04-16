@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les bases essentielles — EquiTable</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
+  <style>
+    .rubrique-hero {
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid var(--bordure);
+    }
+    .rubrique-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--vert-fonce);
+      background: var(--vert-clair);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .rubrique-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .rubrique-hero p {
+      font-size: 16px;
+      color: var(--texte-sec);
+      max-width: 600px;
+      line-height: 1.7;
+    }
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 3rem;
+      padding: 3rem 0;
+      align-items: start;
+    }
+    .main-content h2 {
+      font-size: 1.6rem;
+      margin: 2.5rem 0 1rem;
+      letter-spacing: -0.02em;
+    }
+    .main-content h2:first-child { margin-top: 0; }
+    .main-content p {
+      font-size: 15px;
+      color: var(--texte-sec);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .main-content strong { color: var(--texte); font-weight: 500; }
+    .source-tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: var(--fond-sec);
+      color: var(--texte-ter);
+      margin-left: 6px;
+      font-style: italic;
+      vertical-align: middle;
+    }
+    .chiffre-card {
+      background: white;
+      border: 1px solid var(--bordure);
+      border-radius: var(--rayon);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+    .chiffre-num {
+      font-family: 'Fraunces', serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--vert-fonce);
+      line-height: 1;
+      min-width: 80px;
+      text-align: center;
+    }
+    .chiffre-text { font-size: 14px; color: var(--texte-sec); line-height: 1.6; }
+    .chiffre-source { font-size: 11px; color: var(--texte-ter); margin-top: 6px; font-style: italic; }
+    .conseil-list {
+      list-style: none;
+      margin: 1rem 0 1.5rem;
+    }
+    .conseil-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--bordure);
+      font-size: 14px;
+      color: var(--texte-sec);
+      line-height: 1.6;
+    }
+    .conseil-list li:last-child { border-bottom: none; }
+    .conseil-list li::before {
+      content: '→';
+      color: var(--vert);
+      font-weight: 500;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .aliment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 8px;
+      margin: 1rem 0 1.5rem;
+    }
+    .aliment-pill {
+      background: var(--fond-sec);
+      border-radius: var(--rayon-sm);
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--texte-sec);
+      text-align: center;
+      line-height: 1.4;
+    }
+    .aliment-pill strong {
+      display: block;
+      color: var(--texte);
+      font-weight: 500;
+      font-size: 12px;
+    }
+    .myth-card {
+      border-radius: var(--rayon);
+      padding: 1.25rem;
+      margin: 1rem 0;
+    }
+    .myth-faux {
+      background: #FAECE7;
+      border-left: 3px solid var(--coral);
+      border-radius: 0 var(--rayon) var(--rayon) 0;
+    }
+    .myth-vrai {
+      background: var(--vert-clair);
+      border-left: 3px solid var(--vert);
+      border-radius: 0 var(--rayon) var(--rayon) 0;
+    }
+    .myth-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .myth-faux .myth-label { color: #7a2e14; }
+    .myth-vrai .myth-label { color: var(--vert-tres-fonce); }
+    .myth-text {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .myth-faux .myth-text { color: #5a2010; }
+    .myth-vrai .myth-text { color: var(--vert-tres-fonce); }
+    .sidebar {
+      position: sticky;
+      top: 80px;
+    }
+    .sidebar-card {
+      background: white;
+      border: 1px solid var(--bordure);
+      border-radius: var(--rayon);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--texte);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--bordure);
+    }
+    .sidebar-link {
+      display: block;
+      font-size: 13px;
+      color: var(--texte-sec);
+      padding: 5px 0;
+      cursor: pointer;
+      transition: color 0.15s;
+      text-decoration: none;
+    }
+    .sidebar-link:hover { color: var(--vert); }
+    .sources-list {
+      font-size: 12px;
+      color: var(--texte-ter);
+      line-height: 1.8;
+    }
+    .sources-list a {
+      color: var(--vert-fonce);
+      text-decoration: underline;
+    }
+    .section-divider {
+      height: 1px;
+      background: var(--bordure);
+      margin: 2.5rem 0;
+    }
+    @media (max-width: 768px) {
+      .content-grid { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="../index.html" class="logo">Equi<span>Table</span></a>
+      <div class="nav-links">
+        <a href="../index.html#rubriques">← Toutes les rubriques</a>
+        <a href="../questionnaire.html" class="btn-nav">Mon profil</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="rubrique-hero">
+    <div class="container">
+      <div class="rubrique-tag">🔬 One Health · Bases essentielles</div>
+      <h1>Les bases que tout le monde<br>devrait connaître</h1>
+      <p>Hydratation, fibres, microbiote — trois piliers fondamentaux de votre santé que les recommandations officielles mentionnent peu clairement. Voici ce que dit vraiment la science.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="content-grid">
+
+      <main class="main-content">
+
+        <!-- HYDRATATION -->
+        <h2>💧 L'hydratation</h2>
+
+        <p>L'eau est le composant le plus abondant du corps humain. <strong>Un adulte est composé à plus de 60 % d'eau.</strong> Chaque jour, le corps perd environ 2,5 litres par les urines, la transpiration et la respiration — des pertes qu'il faut compenser.</p>
+
+        <div class="chiffre-card">
+          <div class="chiffre-num">80%</div>
+          <div>
+            <div class="chiffre-text">des Français ne boivent pas suffisamment d'eau au quotidien. Près de la moitié consomment moins d'un litre par jour, bien en dessous des recommandations.</div>
+            <div class="chiffre-source">Étude nationale · 2024</div>
+          </div>
+        </div>
+
+        <p><strong>Combien boire ?</strong> <span class="source-tag">ANSES · EFSA</span></p>
+        <ul class="conseil-list">
+          <li>Femme adulte : 1,5 à 2 litres de boissons par jour (eau des aliments comprise : 2 litres total)</li>
+          <li>Homme adulte : 1,75 à 2,5 litres de boissons par jour</li>
+          <li>Femme enceinte : 1,6 litres minimum, le fœtus est composé à 90 % d'eau à 25 semaines</li>
+          <li>Enfant de 4 à 8 ans : environ 1,1 litre par jour</li>
+          <li>Senior : vigilance accrue car la sensation de soif diminue avec l'âge</li>
+          <li>Sportif : +1 litre minimum par heure d'effort intense</li>
+        </ul>
+
+        <p><strong>L'idée importante :</strong> si vous ressentez la soif, votre corps manque déjà d'eau. Il faut boire avant d'avoir soif, régulièrement tout au long de la journée.</p>
+
+        <div class="chiffre-card">
+          <div class="chiffre-num" style="font-size:1.8rem">65×</div>
+          <div>
+            <div class="chiffre-text">L'eau du robinet est en moyenne 65 fois moins chère que l'eau en bouteille. Elle est aussi le produit alimentaire le plus contrôlé en France. C'est une bonne nouvelle pour les petits budgets.</div>
+            <div class="chiffre-source">ANSES · Eau potable France</div>
+          </div>
+        </div>
+
+        <p><strong>Conseils pratiques :</strong></p>
+        <ul class="conseil-list">
+          <li>L'eau du robinet est sûre en France — utilisez une carafe si le goût du chlore vous dérange (aérez 30 min)</li>
+          <li>Les fruits et légumes contribuent à 20 % de vos besoins en eau — une bonne raison d'en manger plus</li>
+          <li>Tisanes et infusions sans sucre comptent dans votre apport hydrique quotidien</li>
+          <li>Les sodas et jus de fruits sucrés ne remplacent pas l'eau — ils augmentent même les besoins hydriques</li>
+        </ul>
+
+        <div class="section-divider"></div>
+
+        <!-- FIBRES -->
+        <h2>🌾 Les fibres alimentaires</h2>
+
+        <p>Les fibres sont des glucides présents uniquement dans les végétaux. Contrairement aux autres glucides, elles <strong>ne sont pas digérées par l'intestin grêle</strong> — elles arrivent intactes dans le côlon où elles nourrissent les bactéries du microbiote. C'est leur rôle principal.</p>
+
+        <div class="chiffre-card">
+          <div class="chiffre-num">98%</div>
+          <div>
+            <div class="chiffre-text">des Français ne consomment pas suffisamment de fibres. La moyenne française est inférieure à 18 g/jour alors que la recommandation est de 25 à 30 g/jour.</div>
+            <div class="chiffre-source">AFSSA · Santé Publique France</div>
+          </div>
+        </div>
+
+        <p><strong>Pourquoi c'est important ?</strong> <span class="source-tag">ANSES · INRAE</span></p>
+        <ul class="conseil-list">
+          <li>Réduisent le risque de maladies cardiovasculaires, diabète de type 2 et certains cancers</li>
+          <li>Régulent la glycémie et le taux de cholestérol</li>
+          <li>Donnent une sensation de satiété durable — utile pour gérer son poids naturellement</li>
+          <li>Favorisent un transit régulier et réduisent la constipation</li>
+          <li>Nourrissent les bonnes bactéries du microbiote intestinal</li>
+        </ul>
+
+        <p><strong>Où trouver des fibres ?</strong> Dans tous les végétaux — et les aliments peu transformés sont bien meilleurs que les compléments en poudre.</p>
+
+        <div class="aliment-grid">
+          <div class="aliment-pill"><strong>Artichaut cuit</strong>11 g/100g</div>
+          <div class="aliment-pill"><strong>Lentilles cuites</strong>7,9 g/100g</div>
+          <div class="aliment-pill"><strong>Pois chiches</strong>7,6 g/100g</div>
+          <div class="aliment-pill"><strong>Framboises</strong>6,5 g/100g</div>
+          <div class="aliment-pill"><strong>Pain complet</strong>6 g/100g</div>
+          <div class="aliment-pill"><strong>Brocoli cuit</strong>2,4 g/100g</div>
+          <div class="aliment-pill"><strong>Pomme</strong>2,4 g/100g</div>
+          <div class="aliment-pill"><strong>Flocons d'avoine</strong>9 g/100g</div>
+        </div>
+
+        <p><strong>Comment augmenter son apport progressivement</strong> — important car une augmentation trop rapide peut provoquer des ballonnements :</p>
+        <ul class="conseil-list">
+          <li>Remplacer le pain blanc par du pain complet ou aux céréales</li>
+          <li>Ajouter une poignée de légumineuses (lentilles, pois chiches) 2 à 3 fois par semaine</li>
+          <li>Manger la peau des fruits et légumes lavés plutôt que de les éplucher</li>
+          <li>Choisir les céréales complètes — riz complet, pâtes complètes</li>
+          <li>Augmenter très progressivement sur plusieurs semaines pour habituer le microbiote</li>
+        </ul>
+
+        <div class="section-divider"></div>
+
+        <!-- MICROBIOTE -->
+        <h2>🦠 Le microbiote intestinal</h2>
+
+        <p>Le microbiote intestinal, c'est l'ensemble des micro-organismes qui vivent dans votre tube digestif — principalement le côlon. <strong>Environ 10 000 milliards de bactéries</strong>, soit plus de cellules microbiennes que de cellules humaines dans votre corps.</p>
+
+        <div class="chiffre-card">
+          <div class="chiffre-num" style="font-size:1.6rem">−50%</div>
+          <div>
+            <div class="chiffre-text">Les populations occidentales ont perdu près de la moitié de la diversité de leur microbiote par rapport aux populations vivant de façon traditionnelle, principalement à cause de l'alimentation ultra-transformée et pauvre en fibres.</div>
+            <div class="chiffre-source">INRAE · Joël Doré, directeur de recherche</div>
+          </div>
+        </div>
+
+        <p><strong>À quoi sert le microbiote ?</strong> <span class="source-tag">INRAE · INSERM</span></p>
+        <ul class="conseil-list">
+          <li>Digestion : dégrade les fibres que nos enzymes ne peuvent pas traiter, produisant des molécules protectrices</li>
+          <li>Immunité : régule le système immunitaire et protège contre les infections</li>
+          <li>Barrière : protège la paroi intestinale contre les agents pathogènes</li>
+          <li>Cerveau : communique avec le système nerveux via l'axe intestin-cerveau — lien avec l'humeur et l'anxiété</li>
+          <li>Métabolisme : influence le poids, la glycémie, l'inflammation chronique</li>
+        </ul>
+
+        <p>Un microbiote déséquilibré — appelé <strong>dysbiose</strong> — est associé à l'obésité, aux maladies inflammatoires, au diabète de type 2 et à la dépression.</p>
+
+        <p><strong>Ce qui déséquilibre le microbiote :</strong></p>
+        <ul class="conseil-list">
+          <li>Alimentation ultra-transformée et pauvre en fibres</li>
+          <li>Prise d'antibiotiques (nécessaire parfois, mais à ne pas banaliser)</li>
+          <li>Stress chronique</li>
+          <li>Manque de diversité alimentaire</li>
+          <li>Manque de sommeil</li>
+        </ul>
+
+        <p><strong>Ce qui favorise un microbiote sain :</strong> <span class="source-tag">INRAE · Joël Doré</span></p>
+        <ul class="conseil-list">
+          <li>Diversité végétale — plus vous mangez de végétaux variés, plus votre microbiote est diversifié</li>
+          <li>Fibres en quantité — 30 g/jour est la cible pour un bon équilibre</li>
+          <li>Aliments fermentés — yaourt nature, kéfir, choucroute crue, miso</li>
+          <li>Oignons, poireaux, artichauts, topinambours — particulièrement bénéfiques pour les bactéries intestinales</li>
+          <li>Polyphénols — épices, cacao, baies colorées, artichaut : effets anti-inflammatoires documentés</li>
+        </ul>
+
+        <div class="section-divider"></div>
+
+        <!-- IDÉES REÇUES -->
+        <h2>🚫 Idées reçues sur ces 3 bases</h2>
+
+        <div class="myth-card myth-faux">
+          <div class="myth-label">❌ Idée reçue</div>
+          <div class="myth-text">"Il faut boire 8 verres d'eau par jour exactement"</div>
+        </div>
+        <div class="myth-card myth-vrai">
+          <div class="myth-label">✓ Ce que dit la science</div>
+          <div class="myth-text">Les besoins varient selon le poids, l'activité, le climat et l'alimentation. Une personne qui mange beaucoup de fruits et légumes a besoin de boire moins. L'objectif est d'avoir des urines claires et de boire avant d'avoir soif — pas un chiffre universel. <span class="source-tag">EFSA · ANSES</span></div>
+        </div>
+
+        <div class="myth-card myth-faux" style="margin-top:1.25rem">
+          <div class="myth-label">❌ Idée reçue</div>
+          <div class="myth-text">"Les yaourts aux probiotiques vendus en supermarché améliorent vraiment le microbiote"</div>
+        </div>
+        <div class="myth-card myth-vrai">
+          <div class="myth-label">✓ Ce que dit la science</div>
+          <div class="myth-text">L'effet des probiotiques dépend de la souche et de la dose — et l'alimentation reste le levier principal. Un yaourt nature classique (non pasteurisé) et une alimentation riche en fibres et végétaux divers est plus efficace que n'importe quel produit "spécial microbiote" à prix élevé. <span class="source-tag">INRAE · 2024</span></div>
+        </div>
+
+        <div class="myth-card myth-faux" style="margin-top:1.25rem">
+          <div class="myth-label">❌ Idée reçue</div>
+          <div class="myth-text">"Manger des fibres donne des ballonnements, mieux vaut en éviter"</div>
+        </div>
+        <div class="myth-card myth-vrai">
+          <div class="myth-label">✓ Ce que dit la science</div>
+          <div class="myth-text">Les ballonnements apparaissent quand on augmente les fibres trop vite, pas parce que les fibres sont mauvaises. La solution est d'augmenter progressivement sur plusieurs semaines pour laisser le microbiote s'adapter. Un microbiote habitué aux fibres les digère sans inconfort. <span class="source-tag">ANSES</span></div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- SOURCES -->
+        <h2>📚 Sources scientifiques</h2>
+        <div class="sources-list">
+          <p>• ANSES — <a href="https://www.anses.fr" target="_blank">Eau de boisson : bonnes pratiques de consommation</a></p>
+          <p>• EFSA (Autorité européenne de sécurité des aliments) — Recommandations hydratation adultes</p>
+          <p>• INRAE — <a href="https://www.inrae.fr/actualites/microbiote-revolution-intestinale-bien-nourrir-son-microbiote" target="_blank">Microbiote : la révolution intestinale</a></p>
+          <p>• INRAE — <a href="https://www.inrae.fr/actualites/biodiversite-alimentaire-microbiote-bien-etre-recherche-explore-liens-potentiels" target="_blank">Biodiversité alimentaire, microbiote et bien-être</a></p>
+          <p>• AFSSA / Santé Publique France — Consommation de fibres en France</p>
+          <p>• Ameli.fr (Assurance Maladie) — Recommandations hydratation</p>
+          <p>• Gut Microbiota for Health — Fibres et microbiote intestinal</p>
+        </div>
+
+      </main>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-title">Dans cette rubrique</div>
+          <a href="#hydratation" class="sidebar-link">💧 L'hydratation</a>
+          <a href="#fibres" class="sidebar-link">🌾 Les fibres alimentaires</a>
+          <a href="#microbiote" class="sidebar-link">🦠 Le microbiote</a>
+          <a href="#mythes" class="sidebar-link">🚫 Idées reçues</a>
+          <a href="#sources" class="sidebar-link">📚 Sources</a>
+        </div>
+
+        <div class="sidebar-card" style="background:var(--vert-clair); border-color:#9FE1CB">
+          <div class="sidebar-title" style="color:var(--vert-fonce); border-color:#9FE1CB">Résumé en 3 points</div>
+          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6; margin-bottom:8px">1. Boire 1,5 à 2 L d'eau par jour — avant d'avoir soif</p>
+          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6; margin-bottom:8px">2. Viser 25 à 30 g de fibres/jour — légumes, légumineuses, céréales complètes</p>
+          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6">3. Diversifier les végétaux pour nourrir un microbiote varié et équilibré</p>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-title">Rubriques liées</div>
+          <a href="budget.html" class="sidebar-link">💶 Petit budget</a>
+          <a href="sante-mentale.html" class="sidebar-link">🧠 Santé mentale</a>
+          <a href="fake-news.html" class="sidebar-link">🚫 Idées reçues</a>
+          <a href="pesticides.html" class="sidebar-link">🌱 Pesticides et additifs</a>
+        </div>
+
+        <div class="sidebar-card" style="border-color:#9FE1CB">
+          <div class="sidebar-title">Ce contenu ne remplace pas un avis médical</div>
+          <p style="font-size:12px; color:var(--texte-sec); line-height:1.6">En cas de pathologie ou de traitement en cours, consultez votre médecin ou un diététicien avant de modifier votre alimentation.</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- CTA BAS DE PAGE -->
+  <section style="background:var(--fond-sec); padding:3rem 0; margin-top:2rem; border-top:1px solid var(--bordure)">
+    <div class="container-sm" style="text-align:center">
+      <h2 style="font-size:1.75rem; margin-bottom:0.75rem">Envie de recommandations personnalisées ?</h2>
+      <p style="font-size:15px; color:var(--texte-sec); margin-bottom:1.5rem">Créez votre profil pour obtenir des conseils adaptés à votre situation, votre budget et votre santé.</p>
+      <a href="../questionnaire.html" class="btn-primary">Créer mon profil gratuit</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">Equi<span>Table</span></div>
+          <p class="footer-desc">Le savoir nutritionnel appartient à tout le monde.</p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Accueil</a>
+          <a href="../index.html#rubriques">Rubriques</a>
+          <a href="../questionnaire.html">Mon profil</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 EquiTable</span>
+        <span>Sources : ANSES · INRAE · INSERM · Santé Publique France</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

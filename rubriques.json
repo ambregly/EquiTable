@@ -1,0 +1,112 @@
+[
+  {
+    "id": "bases-essentielles",
+    "titre": "Les bases essentielles",
+    "description": "Hydratation, fibres, microbiote intestinal — les fondamentaux que tout le monde devrait connaître.",
+    "mots_cles": ["eau", "hydratation", "fibres", "microbiote", "intestin", "transit", "bactéries", "soif", "déshydratation", "probiotiques", "prébiotiques"],
+    "href": "pages/bases-essentielles.html",
+    "icone": "🔬",
+    "categorie": "bases",
+    "profils": ["tous"],
+    "disponible": true
+  },
+  {
+    "id": "diabete-type2",
+    "titre": "Diabète type 2",
+    "description": "Index glycémique, fibres, alimentation méditerranéenne — les recommandations HAS 2024.",
+    "mots_cles": ["diabète", "glycémie", "sucre", "insuline", "index glycémique", "IG", "glucides", "HbA1c", "pancréas", "hyperglycémie", "insulinorésistance"],
+    "href": "pages/pathologies/diabete-type2.html",
+    "icone": "🩺",
+    "categorie": "pathologie",
+    "profils": ["diabete"],
+    "disponible": true
+  },
+  {
+    "id": "hypertension",
+    "titre": "Hypertension artérielle",
+    "description": "Sel, alimentation DASH, potassium — comment l'alimentation agit sur la pression artérielle.",
+    "mots_cles": ["hypertension", "pression artérielle", "sel", "sodium", "potassium", "tension", "cardiovasculaire", "DASH"],
+    "href": "pages/pathologies/hypertension.html",
+    "icone": "🫀",
+    "categorie": "pathologie",
+    "profils": ["hypertension"],
+    "disponible": false
+  },
+  {
+    "id": "budget",
+    "titre": "Petit budget",
+    "description": "Manger équilibré avec moins de 150€/mois — recettes, astuces, marchés locaux.",
+    "mots_cles": ["budget", "pas cher", "économique", "étudiant", "pauvre", "argent", "peu de moyens", "faible revenu", "CROUS", "courses pas chères", "économies"],
+    "href": "pages/budget/index.html",
+    "icone": "💶",
+    "categorie": "situation",
+    "profils": ["budget_serre", "etudiant"],
+    "disponible": false
+  },
+  {
+    "id": "sante-mentale",
+    "titre": "Santé mentale et alimentation",
+    "description": "Liens alimentation-humeur, carences et dépression, réseaux sociaux et image corporelle.",
+    "mots_cles": ["dépression", "anxiété", "humeur", "stress", "fatigue", "mental", "cerveau", "oméga-3", "sérotonine", "dopamine", "réseaux sociaux", "image corporelle"],
+    "href": "pages/sante-mentale/index.html",
+    "icone": "🧠",
+    "categorie": "sante",
+    "profils": ["sante_mentale"],
+    "disponible": false
+  },
+  {
+    "id": "grossesse",
+    "titre": "Grossesse et alimentation",
+    "description": "Besoins nutritionnels par trimestre, carences à surveiller, post-partum.",
+    "mots_cles": ["grossesse", "enceinte", "bébé", "fœtus", "acide folique", "fer", "iode", "vitamine D", "allaitement", "post-partum", "nausées"],
+    "href": "pages/ages/grossesse.html",
+    "icone": "🤰",
+    "categorie": "age",
+    "profils": ["grossesse"],
+    "disponible": false
+  },
+  {
+    "id": "pesticides",
+    "titre": "Pesticides et additifs",
+    "description": "Quels fruits laver en priorité, comment lire une étiquette NOVA, réduire son exposition.",
+    "mots_cles": ["pesticides", "additifs", "NOVA", "ultra-transformé", "glyphosate", "bio", "résidus", "étiquette", "conservation", "colorants", "conservateurs"],
+    "href": "pages/pesticides/index.html",
+    "icone": "🌱",
+    "categorie": "environnement",
+    "profils": ["tous"],
+    "disponible": false
+  },
+  {
+    "id": "fake-news",
+    "titre": "Idées reçues nutritionnelles",
+    "description": "Déconstruire les fake news nutritionnelles — régimes miracles, superaliments, détox.",
+    "mots_cles": ["fake news", "mythes", "idées reçues", "régime", "détox", "superaliments", "gluten", "lactose", "jeûne", "intermittent", "sucre", "gras"],
+    "href": "pages/fake-news/index.html",
+    "icone": "🚫",
+    "categorie": "desinformation",
+    "profils": ["tous"],
+    "disponible": false
+  },
+  {
+    "id": "maghrebine",
+    "titre": "Cuisine maghrébine",
+    "description": "Valeur nutritionnelle de la cuisine maghrébine, recettes adaptées, épiceries locales.",
+    "mots_cles": ["couscous", "tajine", "harira", "lentilles", "pois chiches", "maghreb", "maroc", "algérie", "tunisie", "halal", "épices", "cumin", "coriandre"],
+    "href": "pages/cultures/maghrebine.html",
+    "icone": "🫕",
+    "categorie": "culture",
+    "profils": ["culture_maghrebine"],
+    "disponible": false
+  },
+  {
+    "id": "asiatique",
+    "titre": "Cuisines asiatiques",
+    "description": "Riz, tofu, légumes fermentés — la richesse nutritionnelle des cuisines asiatiques.",
+    "mots_cles": ["riz", "tofu", "soja", "kimchi", "miso", "ramen", "wok", "gingembre", "curcuma", "algues", "asie", "chine", "japon", "vietnam", "corée"],
+    "href": "pages/cultures/asiatique.html",
+    "icone": "🥢",
+    "categorie": "culture",
+    "profils": ["culture_asiatique"],
+    "disponible": false
+  }
+]

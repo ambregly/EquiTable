@@ -1,0 +1,252 @@
+[
+  {
+    "id": "rec_001",
+    "titre": "Soupe lentilles corail et cumin",
+    "description": "Une soupe chaude, nourrissante et économique — parfaite en automne-hiver.",
+    "icone": "🍲",
+    "budget": 1.20,
+    "temps_min": 25,
+    "portions": 4,
+    "regime": ["vegetarien", "vegan", "halal"],
+    "cultures": ["maghrebine", "indienne"],
+    "categories": ["hiver", "budget", "legumineuses"],
+    "ingredients": [
+      { "nom": "Lentilles corail", "quantite": "200g", "prix_approx": 0.40 },
+      { "nom": "Oignon", "quantite": "1", "prix_approx": 0.15 },
+      { "nom": "Tomates pelées en boîte", "quantite": "400g", "prix_approx": 0.60 },
+      { "nom": "Cumin en poudre", "quantite": "1 c.à.c", "prix_approx": 0.05 },
+      { "nom": "Bouillon cube légumes", "quantite": "1", "prix_approx": 0.10 },
+      { "nom": "Huile d'olive", "quantite": "1 c.à.s", "prix_approx": 0.10 }
+    ],
+    "etapes": [
+      "Faire revenir l'oignon émincé dans l'huile d'olive 3 min",
+      "Ajouter le cumin, mélanger 30 secondes",
+      "Ajouter les lentilles rincées, les tomates et 600ml d'eau avec le bouillon",
+      "Laisser mijoter 20 min à feu moyen jusqu'à ce que les lentilles soient fondantes",
+      "Mixer partiellement ou entièrement selon la texture souhaitée"
+    ],
+    "valeurs_nutritionnelles": {
+      "kcal": 220,
+      "proteines": 14,
+      "glucides": 35,
+      "fibres": 9,
+      "lipides": 4
+    },
+    "tags_sante": ["IG_bas", "riche_fibres", "proteines_vegetales", "diabete_ok"],
+    "source": "Recette EquiTable",
+    "disponible": true
+  },
+  {
+    "id": "rec_002",
+    "titre": "Riz aux légumes sautés façon asiatique",
+    "description": "Un plat complet, rapide et délicieux qui valorise les restes de riz.",
+    "icone": "🍚",
+    "budget": 1.50,
+    "temps_min": 15,
+    "portions": 2,
+    "regime": ["vegetarien", "vegan"],
+    "cultures": ["asiatique"],
+    "categories": ["rapide", "budget", "anti-gaspi"],
+    "ingredients": [
+      { "nom": "Riz cuit (restes)", "quantite": "200g", "prix_approx": 0.20 },
+      { "nom": "Carottes", "quantite": "2", "prix_approx": 0.30 },
+      { "nom": "Courgette", "quantite": "1", "prix_approx": 0.40 },
+      { "nom": "Oeuf", "quantite": "2", "prix_approx": 0.40 },
+      { "nom": "Sauce soja", "quantite": "2 c.à.s", "prix_approx": 0.10 },
+      { "nom": "Gingembre frais", "quantite": "1 cm", "prix_approx": 0.10 }
+    ],
+    "etapes": [
+      "Couper les légumes en petits dés",
+      "Faire chauffer un filet d'huile dans une poêle très chaude",
+      "Sauter les légumes 5 min à feu vif",
+      "Pousser sur le côté, casser les œufs et brouiller",
+      "Ajouter le riz froid, la sauce soja et le gingembre râpé",
+      "Mélanger 3 min à feu vif"
+    ],
+    "valeurs_nutritionnelles": {
+      "kcal": 380,
+      "proteines": 16,
+      "glucides": 55,
+      "fibres": 5,
+      "lipides": 10
+    },
+    "tags_sante": ["complet", "anti_gaspi", "rapide"],
+    "source": "Recette EquiTable",
+    "disponible": true
+  },
+  {
+    "id": "rec_003",
+    "titre": "Salade de pois chiches méditerranéenne",
+    "description": "Fraîche, rassasiante, économique — idéale pour les personnes diabétiques.",
+    "icone": "🥗",
+    "budget": 1.80,
+    "temps_min": 10,
+    "portions": 2,
+    "regime": ["vegetarien", "vegan", "halal"],
+    "cultures": ["maghrebine", "mediterraneenne"],
+    "categories": ["ete", "sans_cuisson", "legumineuses", "diabete"],
+    "ingredients": [
+      { "nom": "Pois chiches en boîte", "quantite": "400g", "prix_approx": 0.70 },
+      { "nom": "Tomates cerises", "quantite": "200g", "prix_approx": 0.60 },
+      { "nom": "Concombre", "quantite": "1/2", "prix_approx": 0.25 },
+      { "nom": "Citron", "quantite": "1", "prix_approx": 0.20 },
+      { "nom": "Huile d'olive", "quantite": "2 c.à.s", "prix_approx": 0.20 },
+      { "nom": "Persil frais", "quantite": "1 bouquet", "prix_approx": 0.30 }
+    ],
+    "etapes": [
+      "Rincer et égoutter les pois chiches",
+      "Couper tomates et concombre en dés",
+      "Mélanger le tout",
+      "Assaisonner avec jus de citron, huile d'olive, sel et poivre",
+      "Ajouter le persil ciselé"
+    ],
+    "valeurs_nutritionnelles": {
+      "kcal": 310,
+      "proteines": 14,
+      "glucides": 40,
+      "fibres": 11,
+      "lipides": 9
+    },
+    "tags_sante": ["IG_bas", "riche_fibres", "proteines_vegetales", "diabete_ok", "sans_cuisson"],
+    "source": "Recette EquiTable",
+    "disponible": true
+  },
+  {
+    "id": "rec_004",
+    "titre": "Porridge avoine et fruits",
+    "description": "Le petit-déjeuner idéal pour une glycémie stable toute la matinée.",
+    "icone": "🥣",
+    "budget": 0.60,
+    "temps_min": 8,
+    "portions": 1,
+    "regime": ["vegetarien"],
+    "cultures": [],
+    "categories": ["petit_dejeuner", "budget", "diabete", "enfants"],
+    "ingredients": [
+      { "nom": "Flocons d'avoine", "quantite": "50g", "prix_approx": 0.15 },
+      { "nom": "Lait (ou boisson végétale)", "quantite": "200ml", "prix_approx": 0.20 },
+      { "nom": "Banane", "quantite": "1/2", "prix_approx": 0.15 },
+      { "nom": "Cannelle", "quantite": "1 pincée", "prix_approx": 0.02 }
+    ],
+    "etapes": [
+      "Verser les flocons et le lait dans une casserole",
+      "Chauffer à feu moyen en remuant 5 min",
+      "Servir avec la banane tranchée et la cannelle"
+    ],
+    "valeurs_nutritionnelles": {
+      "kcal": 285,
+      "proteines": 9,
+      "glucides": 48,
+      "fibres": 6,
+      "lipides": 6
+    },
+    "tags_sante": ["IG_bas", "fibres", "diabete_ok", "enfants_ok"],
+    "source": "Recette EquiTable",
+    "disponible": true
+  },
+  {
+    "id": "rec_005",
+    "titre": "Taboulé maison économique",
+    "description": "Plus nutritif que le taboulé industriel, prêt en 20 min.",
+    "icone": "🌿",
+    "budget": 1.40,
+    "temps_min": 20,
+    "portions": 4,
+    "regime": ["vegetarien", "vegan", "halal"],
+    "cultures": ["maghrebine", "mediterraneenne"],
+    "categories": ["ete", "budget", "anti-gaspi"],
+    "ingredients": [
+      { "nom": "Semoule de blé", "quantite": "200g", "prix_approx": 0.40 },
+      { "nom": "Tomates", "quantite": "3", "prix_approx": 0.60 },
+      { "nom": "Concombre", "quantite": "1", "prix_approx": 0.40 },
+      { "nom": "Persil frais", "quantite": "1 gros bouquet", "prix_approx": 0.30 },
+      { "nom": "Citron", "quantite": "2", "prix_approx": 0.30 },
+      { "nom": "Huile d'olive", "quantite": "3 c.à.s", "prix_approx": 0.25 }
+    ],
+    "etapes": [
+      "Verser de l'eau bouillante sur la semoule, couvrir 5 min puis égrener",
+      "Couper tomates et concombre en très petits dés",
+      "Ciseler finement le persil",
+      "Mélanger tous les ingrédients",
+      "Assaisonner généreusement avec citron, huile, sel, poivre",
+      "Laisser reposer 30 min au frais"
+    ],
+    "valeurs_nutritionnelles": {
+      "kcal": 240,
+      "proteines": 7,
+      "glucides": 42,
+      "fibres": 4,
+      "lipides": 7
+    },
+    "tags_sante": ["fibres", "vitamines", "frais"],
+    "source": "Recette EquiTable",
+    "disponible": true
+  },
+  {
+    "id": "rec_006",
+    "titre": "Galettes de haricots rouges",
+    "description": "Riches en protéines végétales, économiques et faciles à personnaliser.",
+    "icone": "🫘",
+    "budget": 1.00,
+    "temps_min": 20,
+    "portions": 2,
+    "regime": ["vegetarien", "vegan", "halal"],
+    "cultures": ["latino", "africaine"],
+    "categories": ["budget", "legumineuses", "proteines"],
+    "ingredients": [
+      { "nom": "Haricots rouges en boîte", "quantite": "400g", "prix_approx": 0.60 },
+      { "nom": "Oignon", "quantite": "1/2", "prix_approx": 0.10 },
+      { "nom": "Cumin", "quantite": "1 c.à.c", "prix_approx": 0.05 },
+      { "nom": "Farine", "quantite": "2 c.à.s", "prix_approx": 0.05 },
+      { "nom": "Huile", "quantite": "1 c.à.s", "prix_approx": 0.10 }
+    ],
+    "etapes": [
+      "Écraser les haricots égouttés à la fourchette",
+      "Ajouter l'oignon finement émincé, le cumin et la farine",
+      "Façonner des galettes avec les mains",
+      "Cuire à la poêle 4 min de chaque côté"
+    ],
+    "valeurs_nutritionnelles": {
+      "kcal": 280,
+      "proteines": 16,
+      "glucides": 42,
+      "fibres": 13,
+      "lipides": 5
+    },
+    "tags_sante": ["IG_bas", "riche_fibres", "proteines_vegetales", "diabete_ok"],
+    "source": "Recette EquiTable",
+    "disponible": true
+  },
+  {
+    "id": "rec_007",
+    "titre": "Smoothie banane épinards",
+    "description": "Un petit-déjeuner rapide riche en fer et en énergie.",
+    "icone": "🥤",
+    "budget": 0.80,
+    "temps_min": 5,
+    "portions": 1,
+    "regime": ["vegetarien", "vegan"],
+    "cultures": [],
+    "categories": ["petit_dejeuner", "rapide", "fer", "grossesse"],
+    "ingredients": [
+      { "nom": "Banane congelée", "quantite": "1", "prix_approx": 0.20 },
+      { "nom": "Épinards frais", "quantite": "2 poignées", "prix_approx": 0.30 },
+      { "nom": "Lait végétal", "quantite": "200ml", "prix_approx": 0.25 },
+      { "nom": "Graines de chia", "quantite": "1 c.à.s", "prix_approx": 0.10 }
+    ],
+    "etapes": [
+      "Mixer tous les ingrédients jusqu'à obtenir une texture lisse",
+      "Servir immédiatement"
+    ],
+    "valeurs_nutritionnelles": {
+      "kcal": 220,
+      "proteines": 6,
+      "glucides": 38,
+      "fibres": 7,
+      "lipides": 6
+    },
+    "tags_sante": ["fer", "vitamine_C", "fibres", "grossesse_ok"],
+    "source": "Recette EquiTable",
+    "disponible": true
+  }
+]
