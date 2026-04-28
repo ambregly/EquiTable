@@ -2,10 +2,485 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=dashboard.html">
-  <title>EquiTable</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EquiTable — L'alimentation saine, accessible à tous</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
+  <style>
+    /* HERO VISUEL */
+    .hero-visuel {
+      margin-top: 2.5rem;
+      background: white;
+      border: 1px solid var(--bordure);
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.06);
+    }
+    .hero-visuel-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+    }
+    .mini-card {
+      background: var(--fond-sec);
+      border-radius: var(--rayon);
+      padding: 1rem;
+      text-align: center;
+    }
+    .mini-card-icon { font-size: 28px; margin-bottom: 6px; }
+    .mini-card-label { font-size: 12px; font-weight: 500; color: var(--texte-sec); }
+
+    /* INEEGALITES */
+    .ineg-section {
+      padding: 5rem 0;
+      background: white;
+    }
+    .ineg-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .ineg-texte h2 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .ineg-texte p {
+      font-size: 15px;
+      color: var(--texte-sec);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .ineg-chiffres {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .chiffre-bloc {
+      background: var(--fond-sec);
+      border-radius: var(--rayon);
+      padding: 1.25rem 1.5rem;
+      border-left: 3px solid var(--vert);
+    }
+    .chiffre-num {
+      font-family: 'Fraunces', system-ui, serif;
+      font-size: 2.25rem;
+      font-weight: 600;
+      color: var(--vert-fonce);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .chiffre-num.coral { color: var(--coral); }
+    .chiffre-desc { font-size: 13px; color: var(--texte-sec); line-height: 1.5; }
+    .chiffre-source { font-size: 11px; color: var(--texte-ter); margin-top: 4px; font-style: italic; }
+
+    /* FONCTIONNALITES */
+    .fonct-section { padding: 5rem 0; }
+    .fonct-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .fonct-card {
+      background: white;
+      border: 1px solid var(--bordure);
+      border-radius: var(--rayon);
+      padding: 2rem;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: block;
+    }
+    .fonct-card:hover {
+      border-color: var(--vert);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(29,158,117,0.1);
+    }
+    .fonct-card.disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+    .fonct-card.disabled:hover {
+      border-color: var(--bordure);
+      transform: none;
+      box-shadow: none;
+    }
+    .fonct-icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--rayon);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 1.25rem;
+    }
+    .fonct-card h3 {
+      font-family: 'Fraunces', system-ui, serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--texte);
+      margin-bottom: 0.5rem;
+    }
+    .fonct-card p {
+      font-size: 14px;
+      color: var(--texte-sec);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .fonct-lien {
+      font-size: 13px;
+      color: var(--vert-fonce);
+      font-weight: 500;
+    }
+    .fonct-bientot {
+      font-size: 11px;
+      color: var(--texte-ter);
+      background: var(--fond-sec);
+      padding: 3px 9px;
+      border-radius: 10px;
+      font-weight: 500;
+    }
+
+    /* TOULOUSE */
+    .toulouse-section {
+      padding: 5rem 0;
+      background: var(--vert-tres-fonce);
+      color: white;
+    }
+    .toulouse-section .eyebrow { color: rgba(255,255,255,0.5); }
+    .toulouse-section h2 { color: white; font-size: clamp(1.75rem, 3vw, 2.5rem); margin-bottom: 1rem; }
+    .toulouse-section .section-lead { font-size: 16px; color: rgba(255,255,255,0.7); max-width: 560px; line-height: 1.7; margin-bottom: 2.5rem; }
+    .toulouse-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 2.5rem;
+    }
+    .toulouse-pill {
+      padding: 8px 18px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--rayon-pill);
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.08);
+    }
+    .toulouse-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: var(--rayon-pill);
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .toulouse-cta:hover { background: rgba(255,255,255,0.2); }
+
+    /* GRATUIT */
+    .gratuit-section { padding: 5rem 0; background: white; }
+    .gratuit-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .gratuit-texte h2 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .gratuit-texte p {
+      font-size: 15px;
+      color: var(--texte-sec);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+    .gratuit-liste {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .gratuit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--texte-sec);
+      line-height: 1.6;
+    }
+    .gratuit-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--vert-clair);
+      color: var(--vert-fonce);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .gratuit-badge-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .gratuit-badge {
+      background: var(--fond-sec);
+      border-radius: var(--rayon);
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .gratuit-badge-icon { font-size: 28px; flex-shrink: 0; }
+    .gratuit-badge-titre { font-size: 14px; font-weight: 500; color: var(--texte); margin-bottom: 4px; }
+    .gratuit-badge-desc { font-size: 13px; color: var(--texte-sec); line-height: 1.5; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .ineg-grid, .fonct-grid, .gratuit-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-visuel-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .fonct-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <p>Redirection vers <a href="dashboard.html">le tableau de bord</a>…</p>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">Equi<span>Table</span></a>
+      <div class="nav-links">
+        <a href="pathologies.html">Rubriques</a>
+        <a href="evenements.html">Événements</a>
+        <a href="carte.html">Carte</a>
+        <a href="dashboard.html" class="btn-nav">Mon tableau de bord</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">100% gratuit · Toulouse & partout en France</div>
+      <h1>L'alimentation saine,<br><em>accessible à tous</em></h1>
+      <p>EquiTable réunit les outils du quotidien, le savoir scientifique vulgarisé et les ressources locales pour que bien manger ne soit plus une question de moyens.</p>
+      <div class="hero-btns">
+        <a href="questionnaire.html" class="btn-primary">Créer mon profil gratuit</a>
+        <a href="dashboard.html" class="btn-outline">Voir le tableau de bord</a>
+      </div>
+
+      <div class="hero-visuel">
+        <div class="hero-visuel-row">
+          <div class="mini-card">
+            <div class="mini-card-icon">📅</div>
+            <div class="mini-card-label">Semainier &amp; courses</div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-icon">🗺️</div>
+            <div class="mini-card-label">Carte locale &amp; épiceries</div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-icon">🔬</div>
+            <div class="mini-card-label">Savoir scientifique vulgarisé</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INEGALITES -->
+  <section class="ineg-section">
+    <div class="container">
+      <div class="ineg-grid">
+        <div class="ineg-texte">
+          <span class="eyebrow">Pourquoi EquiTable ?</span>
+          <h2>Les inégalités alimentaires sont une réalité en France</h2>
+          <p>En France, ce que vous mangez dépend encore trop de vos revenus, de votre quartier et de votre accès à l'information. Un tiers des Français renonce à des aliments frais par manque de budget. Les maladies liées à l'alimentation touchent davantage les populations précaires.</p>
+          <p>EquiTable ne juge pas, ne vend rien et ne moralise pas. Il donne accès aux mêmes informations et aux mêmes outils que ceux disponibles pour les personnes qui ont les moyens de consulter une diététicienne.</p>
+        </div>
+        <div class="ineg-chiffres">
+          <div class="chiffre-bloc">
+            <div class="chiffre-num coral">1/3</div>
+            <div class="chiffre-desc">des Français a du mal à s'alimenter correctement par manque de moyens</div>
+            <div class="chiffre-source">Source : CREDOC 2023</div>
+          </div>
+          <div class="chiffre-bloc">
+            <div class="chiffre-num">+40%</div>
+            <div class="chiffre-desc">de risque de diabète type 2 dans les quartiers les plus défavorisés</div>
+            <div class="chiffre-source">Source : INSERM · Cohorte NutriNet-Santé</div>
+          </div>
+          <div class="chiffre-bloc">
+            <div class="chiffre-num">150€</div>
+            <div class="chiffre-desc">c'est le budget suffisant pour manger équilibré seul chaque mois, avec les bons outils</div>
+            <div class="chiffre-source">Source : ANSES · repères PNNS</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FONCTIONNALITES -->
+  <section class="fonct-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Ce que propose EquiTable</span>
+        <h2>Quatre outils concrets pour le quotidien</h2>
+        <p>Pas de superflu. Des outils pensés pour être utiles dès la première visite.</p>
+      </div>
+      <div class="fonct-grid">
+
+        <a href="bases-essentielles.html" class="fonct-card">
+          <div class="fonct-icon-wrap" style="background:#E1F5EE">🔬</div>
+          <h3>Savoir scientifique vulgarisé</h3>
+          <p>Les recommandations officielles (HAS, ANSES, INSERM) expliquées simplement — sans jargon, avec des sources vérifiables. Pathologies, idées reçues, nutriments essentiels.</p>
+          <span class="fonct-lien">Explorer les rubriques →</span>
+        </a>
+
+        <a href="semainier.html" class="fonct-card">
+          <div class="fonct-icon-wrap" style="background:#FAEEDA">📅</div>
+          <h3>Semainier &amp; liste de courses</h3>
+          <p>Planifiez vos repas de la semaine, générez automatiquement votre liste de courses et estimez votre budget. Adapté à votre profil et vos contraintes alimentaires.</p>
+          <span class="fonct-lien">Ouvrir le semainier →</span>
+        </a>
+
+        <a href="carte.html" class="fonct-card">
+          <div class="fonct-icon-wrap" style="background:#EAF3DE">🗺️</div>
+          <h3>Carte locale &amp; ressources</h3>
+          <p>Marchés, épiceries solidaires, associations d'aide alimentaire, jardins partagés — trouvez les ressources autour de chez vous pour manger mieux sans dépenser plus.</p>
+          <span class="fonct-lien">Voir la carte →</span>
+        </a>
+
+        <a href="evenements.html" class="fonct-card">
+          <div class="fonct-icon-wrap" style="background:#E6F1FB">📍</div>
+          <h3>Événements à Toulouse</h3>
+          <p>Ateliers cuisine collective, groupes d'achat, meetings nutritionnels organisés avec des associations et la mairie de Toulouse. Des rencontres réelles, pas virtuelles.</p>
+          <span class="fonct-lien">Voir les événements →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TOULOUSE -->
+  <section class="toulouse-section">
+    <div class="container">
+      <span class="eyebrow">Ancré dans le territoire</span>
+      <h2>EquiTable commence à Toulouse</h2>
+      <p class="section-lead">Le projet est né à Toulouse et s'appuie sur le tissu associatif local, les marchés de quartier et les initiatives de la mairie pour proposer des ressources concrètes et accessibles à pied.</p>
+      <div class="toulouse-pills">
+        <span class="toulouse-pill">🤝 Associations partenaires</span>
+        <span class="toulouse-pill">🏛️ Mairie de Toulouse</span>
+        <span class="toulouse-pill">🥘 Ateliers cuisine collective</span>
+        <span class="toulouse-pill">🛒 Groupes d'achat solidaire</span>
+        <span class="toulouse-pill">🌱 Jardins partagés</span>
+        <span class="toulouse-pill">🎤 Conférences nutritionnelles</span>
+      </div>
+      <a href="evenements.html" class="toulouse-cta">Voir tous les événements à Toulouse →</a>
+    </div>
+  </section>
+
+  <!-- GRATUIT -->
+  <section class="gratuit-section">
+    <div class="container">
+      <div class="gratuit-inner">
+        <div class="gratuit-texte">
+          <span class="eyebrow">Notre engagement</span>
+          <h2>100% gratuit,<br>pour toujours</h2>
+          <p>EquiTable est un projet à but non lucratif. Facturer l'accès à l'information nutritionnelle irait à l'encontre de sa raison d'être.</p>
+          <div class="gratuit-liste">
+            <div class="gratuit-item">
+              <div class="gratuit-check">✓</div>
+              <span>Aucun abonnement, aucune fonctionnalité payante cachée</span>
+            </div>
+            <div class="gratuit-item">
+              <div class="gratuit-check">✓</div>
+              <span>Vos données ne sont jamais revendues ni utilisées à des fins publicitaires</span>
+            </div>
+            <div class="gratuit-item">
+              <div class="gratuit-check">✓</div>
+              <span>Toutes les sources scientifiques sont citées et accessibles</span>
+            </div>
+            <div class="gratuit-item">
+              <div class="gratuit-check">✓</div>
+              <span>Le profil est optionnel — vous pouvez utiliser le site sans vous inscrire</span>
+            </div>
+          </div>
+        </div>
+        <div class="gratuit-badge-wrap">
+          <div class="gratuit-badge">
+            <div class="gratuit-badge-icon">🏛️</div>
+            <div>
+              <div class="gratuit-badge-titre">Sources officielles uniquement</div>
+              <div class="gratuit-badge-desc">HAS, ANSES, INSERM, INRAE, NutriNet-Santé. Aucune information non vérifiée.</div>
+            </div>
+          </div>
+          <div class="gratuit-badge">
+            <div class="gratuit-badge-icon">🔒</div>
+            <div>
+              <div class="gratuit-badge-titre">Données stockées localement</div>
+              <div class="gratuit-badge-desc">Votre profil est enregistré sur votre appareil. Aucun compte requis, aucun serveur tiers.</div>
+            </div>
+          </div>
+          <div class="gratuit-badge">
+            <div class="gratuit-badge-icon">♿</div>
+            <div>
+              <div class="gratuit-badge-titre">Conçu pour tous</div>
+              <div class="gratuit-badge-desc">Langage simple, navigation accessible, contenu adapté à chaque profil et situation.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-block">
+        <h2>Commencez maintenant</h2>
+        <p>Créez votre profil en 3 minutes pour accéder à des recommandations personnalisées — ou explorez directement.</p>
+        <div class="hero-btns">
+          <a href="questionnaire.html" class="btn-white">Créer mon profil gratuit</a>
+          <a href="dashboard.html" style="padding:13px 28px; color:rgba(255,255,255,0.7); font-size:15px; text-decoration:none; border: 1px solid rgba(255,255,255,0.3); border-radius:var(--rayon-pill); transition:all 0.2s">Explorer sans profil</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">Equi<span>Table</span></div>
+          <p class="footer-desc">Le savoir nutritionnel appartient à tout le monde.</p>
+        </div>
+        <div class="footer-links">
+          <a href="pathologies.html">Rubriques</a>
+          <a href="semainier.html">Semainier</a>
+          <a href="carte.html">Carte locale</a>
+          <a href="evenements.html">Événements Toulouse</a>
+          <a href="questionnaire.html">Mon profil</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 EquiTable — Projet à but non lucratif</span>
+        <span>Sources : HAS · ANSES · INSERM · NutriNet-Santé</span>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
