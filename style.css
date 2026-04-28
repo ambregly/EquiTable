@@ -23,7 +23,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   background: var(--fond);
   color: var(--texte);
   font-size: 16px;
@@ -32,7 +32,7 @@ body {
 }
 
 h1, h2, h3 {
-  font-family: 'Fraunces', serif;
+  font-family: 'Fraunces', system-ui, serif;
   font-weight: 500;
   line-height: 1.2;
 }
@@ -71,7 +71,7 @@ nav {
 }
 
 .logo {
-  font-family: 'Fraunces', serif;
+  font-family: 'Fraunces', system-ui, serif;
   font-size: 22px;
   font-weight: 600;
   color: var(--texte);
@@ -241,7 +241,7 @@ nav {
 }
 
 .stat-num {
-  font-family: 'Fraunces', serif;
+  font-family: 'Fraunces', system-ui, serif;
   font-size: 2.5rem;
   font-weight: 600;
   line-height: 1;
@@ -329,7 +329,7 @@ nav {
 }
 
 .rubrique-card h3 {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 16px;
   font-weight: 500;
 }
@@ -376,7 +376,7 @@ nav {
 }
 
 .principe h3 {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 15px;
   font-weight: 500;
   margin-bottom: 0.5rem;
@@ -491,7 +491,7 @@ footer {
 }
 
 .footer-logo {
-  font-family: 'Fraunces', serif;
+  font-family: 'Fraunces', system-ui, serif;
   font-size: 20px;
   color: white;
   font-weight: 500;
