@@ -422,15 +422,15 @@
         <div class="section-title-db">Explorer toutes les rubriques</div>
       </div>
       <div class="toutes-grid">
-        <a href="pages/bases-essentielles.html" class="rubrique-small">
+        <a href="bases-essentielles.html" class="rubrique-small">
           <span class="rubrique-small-icon">🔬</span>
           <span class="rubrique-small-title">Les bases</span>
         </a>
-        <a href="pages/budget/index.html" class="rubrique-small">
+        <a href="#" class="rubrique-small" style="opacity:.5;cursor:default">
           <span class="rubrique-small-icon">💶</span>
           <span class="rubrique-small-title">Petit budget</span>
         </a>
-        <a href="pages/sante-mentale/index.html" class="rubrique-small">
+        <a href="#" class="rubrique-small" style="opacity:.5;cursor:default">
           <span class="rubrique-small-icon">🧠</span>
           <span class="rubrique-small-title">Santé mentale</span>
         </a>
@@ -438,23 +438,23 @@
           <span class="rubrique-small-icon">🩺</span>
           <span class="rubrique-small-title">Pathologies</span>
         </a>
-        <a href="pages/pesticides/index.html" class="rubrique-small">
+        <a href="#" class="rubrique-small" style="opacity:.5;cursor:default">
           <span class="rubrique-small-icon">🌱</span>
           <span class="rubrique-small-title">Pesticides</span>
         </a>
-        <a href="pages/fake-news/index.html" class="rubrique-small">
+        <a href="#" class="rubrique-small" style="opacity:.5;cursor:default">
           <span class="rubrique-small-icon">🚫</span>
           <span class="rubrique-small-title">Idées reçues</span>
         </a>
-        <a href="pages/cultures/index.html" class="rubrique-small">
+        <a href="#" class="rubrique-small" style="opacity:.5;cursor:default">
           <span class="rubrique-small-icon">🌍</span>
           <span class="rubrique-small-title">Cuisines du monde</span>
         </a>
-        <a href="pages/ages/index.html" class="rubrique-small">
+        <a href="#" class="rubrique-small" style="opacity:.5;cursor:default">
           <span class="rubrique-small-icon">👶</span>
           <span class="rubrique-small-title">Âges de la vie</span>
         </a>
-        <a href="pages/traitements/index.html" class="rubrique-small">
+        <a href="#" class="rubrique-small" style="opacity:.5;cursor:default">
           <span class="rubrique-small-icon">💊</span>
           <span class="rubrique-small-title">Traitements</span>
         </a>
@@ -462,7 +462,7 @@
           <span class="rubrique-small-icon">🗺️</span>
           <span class="rubrique-small-title">Carte locale</span>
         </a>
-        <a href="pages/communaute/index.html" class="rubrique-small">
+        <a href="#" class="rubrique-small" style="opacity:.5;cursor:default">
           <span class="rubrique-small-icon">👥</span>
           <span class="rubrique-small-title">Communauté</span>
         </a>
@@ -506,13 +506,13 @@
 
     // Toutes les rubriques disponibles avec leurs métadonnées
     const RUBRIQUES = [
-      { id:'bases', icon:'🔬', title:'Les bases essentielles', desc:'Hydratation, fibres, microbiote — les fondamentaux pour tout le monde.', tag:'One Health', tagClass:'tag-vert', href:'pages/bases-essentielles.html', iconBg:'#E1F5EE', always:true },
-      { id:'budget', icon:'💶', title:'Petit budget', desc:'Manger équilibré avec moins de 150€/mois — recettes, astuces, marchés.', tag:'Pratique', tagClass:'tag-vert', href:'pages/budget/index.html', iconBg:'#FAEEDA', triggers:['budget_serre','logement_etudiant','logement_famille_mono'] },
-      { id:'sante-mentale', icon:'🧠', title:'Santé mentale', desc:'Liens alimentation–humeur, carences et dépression, réseaux sociaux.', tag:'INSERM', tagClass:'tag-coral', href:'pages/sante-mentale/index.html', iconBg:'#FAECE7', triggers:['obj_sante_mentale','patho_depression','symptome_fatigue'] },
-      { id:'pathologies', icon:'🩺', title:'Pathologies', desc:'Recommandations nutritionnelles officielles pour chaque pathologie.', tag:'HAS · ANSES', tagClass:'tag-coral', href:'pages/pathologies/index.html', iconBg:'#FAECE7', triggers:['has_patho','has_traitement'] },
-      { id:'pesticides', icon:'🌱', title:'Pesticides & additifs', desc:'Quels fruits laver, lire une étiquette NOVA, réduire son exposition.', tag:'INSERM · ANSES', tagClass:'tag-vert', href:'pages/pesticides/index.html', iconBg:'#EAF3DE', triggers:['obj_pesticides'] },
-      { id:'cultures', icon:'🌍', title:'Cuisines du monde', desc:'Vos traditions culinaires valorisées — recettes adaptées et carte locale.', tag:'+ carte épiceries', tagClass:'tag-ambre', href:'pages/cultures/index.html', iconBg:'#FAEEDA', triggers:['has_culture'] },
-      { id:'fake-news', icon:'🚫', title:'Idées reçues', desc:'Déconstruire les fake news nutritionnelles, preuves scientifiques à l\'appui.', tag:'Fact-checking', tagClass:'tag-coral', href:'pages/fake-news/index.html', iconBg:'#FBEAF0', triggers:['obj_fake_news'] },
+      { id:'bases', icon:'🔬', title:'Les bases essentielles', desc:'Hydratation, fibres, microbiote — les fondamentaux pour tout le monde.', tag:'One Health', tagClass:'tag-vert', href:'bases-essentielles.html', iconBg:'#E1F5EE', always:true },
+      { id:'budget', icon:'💶', title:'Petit budget', desc:'Manger équilibré avec moins de 150€/mois — recettes, astuces, marchés.', tag:'Pratique', tagClass:'tag-vert', href:'#', iconBg:'#FAEEDA', triggers:['budget_serre','logement_etudiant','logement_famille_mono'] },
+      { id:'sante-mentale', icon:'🧠', title:'Santé mentale', desc:'Liens alimentation–humeur, carences et dépression, réseaux sociaux.', tag:'INSERM', tagClass:'tag-coral', href:'#', iconBg:'#FAECE7', triggers:['obj_sante_mentale','patho_depression','symptome_fatigue'] },
+      { id:'pathologies', icon:'🩺', title:'Pathologies', desc:'Recommandations nutritionnelles officielles pour chaque pathologie.', tag:'HAS · ANSES', tagClass:'tag-coral', href:'pathologies.html', iconBg:'#FAECE7', triggers:['has_patho','has_traitement'] },
+      { id:'pesticides', icon:'🌱', title:'Pesticides & additifs', desc:'Quels fruits laver, lire une étiquette NOVA, réduire son exposition.', tag:'INSERM · ANSES', tagClass:'tag-vert', href:'#', iconBg:'#EAF3DE', triggers:['obj_pesticides'] },
+      { id:'cultures', icon:'🌍', title:'Cuisines du monde', desc:'Vos traditions culinaires valorisées — recettes adaptées et carte locale.', tag:'+ carte épiceries', tagClass:'tag-ambre', href:'#', iconBg:'#FAEEDA', triggers:['has_culture'] },
+      { id:'fake-news', icon:'🚫', title:'Idées reçues', desc:'Déconstruire les fake news nutritionnelles, preuves scientifiques à l\'appui.', tag:'Fact-checking', tagClass:'tag-coral', href:'#', iconBg:'#FBEAF0', triggers:['obj_fake_news'] },
     ];
 
     function renderDefault() {
@@ -591,20 +591,20 @@
       // Alertes nutritionnelles
       const alertes = [];
       if (p.chips?.patho?.some(pa => pa.includes('Diabète'))) {
-        alertes.push({ icon: '🩺', title: 'Diabète : recommandations nutritionnelles disponibles', text: 'Des recommandations officielles (HAS · ANSES) sont disponibles pour votre profil.', link: 'pages/pathologies/diabete-type2.html', linkText: 'Voir la rubrique diabète →' });
+        alertes.push({ icon: '🩺', title: 'Diabète : recommandations nutritionnelles disponibles', text: 'Des recommandations officielles (HAS · ANSES) sont disponibles pour votre profil.', link: 'diabete-type2.html', linkText: 'Voir la rubrique diabète →' });
       }
       if (p.chips?.patho?.some(pa => pa.includes('Hypertension'))) {
         alertes.push({ icon: '🩺', title: 'Hypertension : alimentation et sel', text: 'La HAS recommande une réduction du sel à moins de 6g/jour. Découvrez comment.', link: 'pages/pathologies/hypertension.html', linkText: 'Voir la rubrique →' });
       }
       if (p.chips?.vie?.some(v => v.includes('Grossesse'))) {
-        alertes.push({ icon: '🤰', title: 'Grossesse : besoins nutritionnels augmentés', text: 'Acide folique, fer, iode, vitamine D — les carences à surveiller pendant la grossesse.', link: 'pages/ages/grossesse.html', linkText: 'Voir la rubrique grossesse →' });
+        alertes.push({ icon: '🤰', title: 'Grossesse : besoins nutritionnels augmentés', text: 'Acide folique, fer, iode, vitamine D — les carences à surveiller pendant la grossesse.', link: '#', linkText: 'Voir la rubrique grossesse →' });
       }
       if (p.chips?.symptomes?.some(s => s.includes('fatigue'))) {
-        alertes.push({ icon: '⚡', title: 'Fatigue chronique signalée', text: 'Plusieurs carences (fer, vitamine D, B12) peuvent expliquer une fatigue persistante. Voir les sources alimentaires.', link: 'pages/bases-essentielles.html', linkText: 'Voir les bases →' });
+        alertes.push({ icon: '⚡', title: 'Fatigue chronique signalée', text: 'Plusieurs carences (fer, vitamine D, B12) peuvent expliquer une fatigue persistante. Voir les sources alimentaires.', link: 'bases-essentielles.html', linkText: 'Voir les bases →' });
       }
       // Alerte automatique femme + fatigue = potentielle carence fer
       if (p.sexe === 'f' && p.chips?.symptomes?.some(s => s.includes('fatigue'))) {
-        alertes.push({ icon: '🔴', title: 'Possible carence en fer', text: 'Chez les femmes en âge de procréer, la carence en fer est fréquente et peut expliquer fatigue et difficultés de concentration. Sources alimentaires recommandées par l\'ANSES.', link: 'pages/bases-essentielles.html', linkText: 'En savoir plus →' });
+        alertes.push({ icon: '🔴', title: 'Possible carence en fer', text: 'Chez les femmes en âge de procréer, la carence en fer est fréquente et peut expliquer fatigue et difficultés de concentration. Sources alimentaires recommandées par l\'ANSES.', link: 'bases-essentielles.html', linkText: 'En savoir plus →' });
       }
 
       if (alertes.length > 0) {
