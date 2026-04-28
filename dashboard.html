@@ -338,7 +338,7 @@
     <div class="container nav-inner">
       <a href="index.html" class="logo">Equi<span>Table</span></a>
       <div class="nav-links">
-        <a href="pathologies.html">Rubriques</a>
+        <a href="rubriques.html">Rubriques</a>
         <a href="carte.html">Carte</a>
         <button class="edit-link" onclick="window.location.href='questionnaire.html'">Modifier mon profil</button>
       </div>
@@ -434,7 +434,7 @@
           <span class="rubrique-small-icon">🧠</span>
           <span class="rubrique-small-title">Santé mentale</span>
         </a>
-        <a href="pathologies.html" class="rubrique-small">
+        <a href="rubriques.html" class="rubrique-small">
           <span class="rubrique-small-icon">🩺</span>
           <span class="rubrique-small-title">Pathologies</span>
         </a>
@@ -509,7 +509,7 @@
       { id:'bases', icon:'🔬', title:'Les bases essentielles', desc:'Hydratation, fibres, microbiote — les fondamentaux pour tout le monde.', tag:'One Health', tagClass:'tag-vert', href:'bases-essentielles.html', iconBg:'#E1F5EE', always:true },
       { id:'budget', icon:'💶', title:'Petit budget', desc:'Manger équilibré avec moins de 150€/mois — recettes, astuces, marchés.', tag:'Pratique', tagClass:'tag-vert', href:'#', iconBg:'#FAEEDA', triggers:['budget_serre','logement_etudiant','logement_famille_mono'] },
       { id:'sante-mentale', icon:'🧠', title:'Santé mentale', desc:'Liens alimentation–humeur, carences et dépression, réseaux sociaux.', tag:'INSERM', tagClass:'tag-coral', href:'#', iconBg:'#FAECE7', triggers:['obj_sante_mentale','patho_depression','symptome_fatigue'] },
-      { id:'pathologies', icon:'🩺', title:'Pathologies', desc:'Recommandations nutritionnelles officielles pour chaque pathologie.', tag:'HAS · ANSES', tagClass:'tag-coral', href:'pathologies.html', iconBg:'#FAECE7', triggers:['has_patho','has_traitement'] },
+      { id:'pathologies', icon:'🩺', title:'Pathologies', desc:'Recommandations nutritionnelles officielles pour chaque pathologie.', tag:'HAS · ANSES', tagClass:'tag-coral', href:'rubriques.html?theme=pathologies', iconBg:'#FAECE7', triggers:['has_patho','has_traitement'] },
       { id:'pesticides', icon:'🌱', title:'Pesticides & additifs', desc:'Quels fruits laver, lire une étiquette NOVA, réduire son exposition.', tag:'INSERM · ANSES', tagClass:'tag-vert', href:'#', iconBg:'#EAF3DE', triggers:['obj_pesticides'] },
       { id:'cultures', icon:'🌍', title:'Cuisines du monde', desc:'Vos traditions culinaires valorisées — recettes adaptées et carte locale.', tag:'+ carte épiceries', tagClass:'tag-ambre', href:'#', iconBg:'#FAEEDA', triggers:['has_culture'] },
       { id:'fake-news', icon:'🚫', title:'Idées reçues', desc:'Déconstruire les fake news nutritionnelles, preuves scientifiques à l\'appui.', tag:'Fact-checking', tagClass:'tag-coral', href:'#', iconBg:'#FBEAF0', triggers:['obj_fake_news'] },

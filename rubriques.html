@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rubriques — EquiTable</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
+  <style>
+    /* PAGE HEADER */
+    .page-header {
+      padding: 3.5rem 0 2.5rem;
+      border-bottom: 1px solid var(--bordure);
+    }
+    .page-header h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .page-header h1 em { color: var(--vert); font-style: italic; }
+    .page-header p {
+      font-size: 16px;
+      color: var(--texte-sec);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* PROFIL BANDEAU */
+    .profil-bandeau {
+      background: var(--vert-clair);
+      border: 1px solid #9FE1CB;
+      border-radius: var(--rayon);
+      padding: 1rem 1.25rem;
+      margin: 2rem 0 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--vert-fonce);
+    }
+    .profil-bandeau strong { font-weight: 500; }
+
+    /* THEMES */
+    .themes-section { padding: 2.5rem 0 1.5rem; }
+    .themes-titre {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--texte-ter);
+      margin-bottom: 1rem;
+    }
+    .themes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 8px;
+    }
+    .theme-btn {
+      background: white;
+      border: 1.5px solid var(--bordure);
+      border-radius: var(--rayon);
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.18s;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+    }
+    .theme-btn:hover {
+      border-color: var(--vert);
+      background: var(--vert-clair);
+    }
+    .theme-btn.actif {
+      border-color: var(--vert);
+      background: var(--vert-clair);
+      box-shadow: 0 0 0 2px rgba(29,158,117,0.15);
+    }
+    .theme-btn.recommande::after {
+      content: '● Pour vous';
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--vert-fonce);
+      background: white;
+      padding: 2px 6px;
+      border-radius: 8px;
+      letter-spacing: 0.03em;
+    }
+    .theme-icon { font-size: 22px; }
+    .theme-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--texte);
+      line-height: 1.3;
+    }
+    .theme-count {
+      font-size: 11px;
+      color: var(--texte-ter);
+    }
+    .reset-btn {
+      background: none;
+      border: 1.5px solid var(--bordure);
+      border-radius: var(--rayon);
+      padding: 1rem;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--texte-ter);
+      transition: all 0.18s;
+      text-align: center;
+    }
+    .reset-btn:hover { border-color: var(--texte-ter); color: var(--texte-sec); }
+
+    /* RUBRIQUES GRID */
+    .rubriques-section { padding-bottom: 4rem; }
+    .rubriques-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.25rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--bordure);
+    }
+    .rubriques-header h2 {
+      font-family: 'Fraunces', system-ui, serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+    }
+    .rubriques-count {
+      font-size: 13px;
+      color: var(--texte-ter);
+    }
+    .rubriques-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+    .rubrique-article {
+      background: white;
+      border: 1px solid var(--bordure);
+      border-radius: var(--rayon);
+      padding: 1.5rem;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .rubrique-article:hover {
+      border-color: var(--vert);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(29,158,117,0.09);
+    }
+    .rubrique-article.indispo {
+      opacity: 0.55;
+      cursor: default;
+    }
+    .rubrique-article.indispo:hover {
+      transform: none;
+      box-shadow: none;
+      border-color: var(--bordure);
+    }
+    .rubrique-article.pour-vous {
+      border-color: #9FE1CB;
+      background: linear-gradient(135deg, white 0%, #f8fefb 100%);
+    }
+    .pour-vous-badge {
+      position: absolute;
+      top: -9px;
+      left: 14px;
+      font-size: 10px;
+      font-weight: 600;
+      color: white;
+      background: var(--vert);
+      padding: 2px 9px;
+      border-radius: 10px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .bientot-badge {
+      position: absolute;
+      top: -9px;
+      right: 14px;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--texte-ter);
+      background: var(--fond-sec);
+      border: 1px solid var(--bordure);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+    .article-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--rayon-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+    .article-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--texte);
+      line-height: 1.3;
+    }
+    .article-desc {
+      font-size: 13px;
+      color: var(--texte-sec);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .article-themes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .article-theme-tag {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 8px;
+      background: var(--fond-sec);
+      color: var(--texte-ter);
+      border: 1px solid var(--bordure);
+    }
+    .article-source {
+      font-size: 11px;
+      color: var(--texte-ter);
+      font-style: italic;
+    }
+
+    /* VIDE */
+    .rubriques-vide {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem;
+      color: var(--texte-ter);
+      font-size: 14px;
+    }
+
+    @media (max-width: 640px) {
+      .themes-grid { grid-template-columns: repeat(2, 1fr); }
+      .rubriques-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">Equi<span>Table</span></a>
+      <div class="nav-links">
+        <a href="rubriques.html" style="color:var(--texte); font-weight:500">Rubriques</a>
+        <a href="evenements.html">Événements</a>
+        <a href="carte.html">Carte</a>
+        <a href="dashboard.html" class="btn-nav">Mon tableau de bord</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>Toutes les <em>rubriques</em></h1>
+      <p>Des articles fondés sur des sources scientifiques officielles, organisés par grands thèmes. Sélectionnez un thème pour filtrer.</p>
+      <div id="profil-bandeau" style="display:none" class="profil-bandeau">
+        <span>🎯</span>
+        <span>Les rubriques <strong>recommandées pour votre profil</strong> sont mises en avant.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- THEMES -->
+    <section class="themes-section">
+      <div class="themes-titre">Filtrer par thème</div>
+      <div class="themes-grid" id="themes-grid"></div>
+    </section>
+
+    <!-- RUBRIQUES -->
+    <section class="rubriques-section">
+      <div class="rubriques-header">
+        <h2 id="rubriques-titre">Toutes les rubriques</h2>
+        <span class="rubriques-count" id="rubriques-count"></span>
+      </div>
+      <div class="rubriques-grid" id="rubriques-grid"></div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">Equi<span>Table</span></div>
+          <p class="footer-desc">Le savoir nutritionnel appartient à tout le monde.</p>
+        </div>
+        <div class="footer-links">
+          <a href="rubriques.html">Rubriques</a>
+          <a href="semainier.html">Semainier</a>
+          <a href="carte.html">Carte locale</a>
+          <a href="evenements.html">Événements</a>
+          <a href="questionnaire.html">Mon profil</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 EquiTable</span>
+        <span>Sources : HAS · ANSES · INSERM · NutriNet-Santé</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ─── DONNÉES ───────────────────────────────────────────────────────────────
+
+    const THEMES = [
+      { id: 'bases',         icon: '🔬', label: 'Les bases',          desc: 'Fondamentaux nutritionnels',    profil: [] },
+      { id: 'sante-mentale', icon: '🧠', label: 'Santé mentale',      desc: 'Alimentation et humeur',        profil: ['obj_sante_mentale', 'patho_depression', 'symptome_fatigue'] },
+      { id: 'sante-physique',icon: '💪', label: 'Santé physique',     desc: 'Énergie, immunité, sommeil',    profil: ['obj_forme'] },
+      { id: 'pathologies',   icon: '🩺', label: 'Pathologies',        desc: 'Maladies chroniques',           profil: ['has_patho', 'has_traitement'] },
+      { id: 'budget',        icon: '💶', label: 'Petit budget',        desc: 'Manger sain sans se ruiner',    profil: ['budget_serre', 'logement_etudiant'] },
+      { id: 'durable',       icon: '🌱', label: 'Alimentation durable',desc: 'Pesticides, étiquettes, bio',  profil: ['obj_pesticides'] },
+      { id: 'cultures',      icon: '🌍', label: 'Cuisines du monde',   desc: 'Traditions valorisées',         profil: ['has_culture'] },
+      { id: 'ages',          icon: '👶', label: 'Âges de la vie',      desc: 'Enfants, grossesse, seniors',   profil: ['has_age_specifique'] },
+      { id: 'traitements',   icon: '💊', label: 'Médicaments',         desc: 'Interactions aliments-médicaments', profil: ['has_traitement'] },
+      { id: 'fake-news',     icon: '🚫', label: 'Idées reçues',        desc: 'Fact-checking nutritionnel',    profil: ['obj_fake_news'] },
+    ];
+
+    const RUBRIQUES = [
+      {
+        id: 'bases-essentielles',
+        icon: '🔬', iconBg: '#E1F5EE',
+        title: 'Les bases essentielles',
+        desc: 'Hydratation, fibres, microbiote, macronutriments — les fondamentaux que tout le monde devrait connaître.',
+        themes: ['bases', 'sante-physique'],
+        source: 'ANSES · PNNS',
+        href: 'bases-essentielles.html',
+        dispo: true,
+        profil: [],
+      },
+      {
+        id: 'diabete-type2',
+        icon: '🩺', iconBg: '#FAECE7',
+        title: 'Diabète de type 2',
+        desc: 'Index glycémique, fibres, alimentation méditerranéenne — les recommandations HAS 2024 expliquées simplement.',
+        themes: ['pathologies', 'sante-physique'],
+        source: 'HAS · ANSES · 2024',
+        href: 'diabete-type2.html',
+        dispo: true,
+        profil: ['patho_diabete'],
+      },
+      {
+        id: 'hypertension',
+        icon: '🫀', iconBg: '#FAECE7',
+        title: 'Hypertension artérielle',
+        desc: 'Réduction du sel, alimentation DASH, potassium — comment l'alimentation agit directement sur la pression artérielle.',
+        themes: ['pathologies', 'sante-physique'],
+        source: 'HAS · ANSES',
+        href: '#',
+        dispo: false,
+        profil: ['patho_hypertension'],
+      },
+      {
+        id: 'cholesterol',
+        icon: '🩸', iconBg: '#FAECE7',
+        title: 'Cholestérol élevé',
+        desc: 'Graisses saturées vs insaturées, oméga-3, fibres solubles — comprendre et agir sur son bilan lipidique.',
+        themes: ['pathologies', 'sante-physique'],
+        source: 'HAS · ANSES',
+        href: '#',
+        dispo: false,
+        profil: [],
+      },
+      {
+        id: 'depression',
+        icon: '🧠', iconBg: '#E6F1FB',
+        title: 'Dépression et anxiété',
+        desc: 'Lien microbiote–cerveau, oméga-3, carences en fer et vitamine D — l'alimentation au service de la santé mentale.',
+        themes: ['sante-mentale', 'pathologies'],
+        source: 'INSERM · INRAE',
+        href: '#',
+        dispo: false,
+        profil: ['patho_depression', 'obj_sante_mentale'],
+      },
+      {
+        id: 'stress',
+        icon: '😮‍💨', iconBg: '#E6F1FB',
+        title: 'Stress et alimentation',
+        desc: 'Comment le stress agit sur nos habitudes alimentaires, les aliments qui soutiennent le système nerveux.',
+        themes: ['sante-mentale', 'bases'],
+        source: 'INSERM',
+        href: '#',
+        dispo: false,
+        profil: ['obj_sante_mentale'],
+      },
+      {
+        id: 'sommeil',
+        icon: '😴', iconBg: '#EAF3DE',
+        title: 'Sommeil et nutrition',
+        desc: 'Tryptophane, magnésium, caféine — l'impact de l'alimentation sur la qualité du sommeil.',
+        themes: ['sante-mentale', 'sante-physique'],
+        source: 'INSERM',
+        href: '#',
+        dispo: false,
+        profil: ['symptome_fatigue'],
+      },
+      {
+        id: 'immunite',
+        icon: '🛡️', iconBg: '#EAF3DE',
+        title: 'Immunité et alimentation',
+        desc: 'Vitamines C, D, zinc, probiotiques — les nutriments qui soutiennent les défenses immunitaires.',
+        themes: ['sante-physique', 'bases'],
+        source: 'ANSES · EFSA',
+        href: '#',
+        dispo: false,
+        profil: [],
+      },
+      {
+        id: 'sport',
+        icon: '💪', iconBg: '#EAF3DE',
+        title: 'Sport et nutrition',
+        desc: 'Protéines, glucides, hydratation avant et après l'effort — adapter son alimentation à son activité physique.',
+        themes: ['sante-physique'],
+        source: 'ANSES · INSERM',
+        href: '#',
+        dispo: false,
+        profil: ['obj_sport'],
+      },
+      {
+        id: 'budget-semaine',
+        icon: '💶', iconBg: '#FAEEDA',
+        title: 'Manger équilibré pour 150€/mois',
+        desc: 'Légumineuses, céréales complètes, fruits et légumes de saison — composer des menus équilibrés avec un petit budget.',
+        themes: ['budget'],
+        source: 'ANSES · PNNS',
+        href: '#',
+        dispo: false,
+        profil: ['budget_serre', 'logement_etudiant'],
+      },
+      {
+        id: 'marches',
+        icon: '🛒', iconBg: '#FAEEDA',
+        title: 'Marchés, épiceries solidaires et aides alimentaires',
+        desc: 'Trouver les ressources alimentaires locales — marchés de fin de journée, banques alimentaires, épiceries sociales.',
+        themes: ['budget'],
+        source: 'CAF · ANDES',
+        href: '#',
+        dispo: false,
+        profil: ['budget_serre'],
+      },
+      {
+        id: 'pesticides',
+        icon: '🌱', iconBg: '#EAF3DE',
+        title: 'Pesticides et additifs alimentaires',
+        desc: 'Quels fruits et légumes laver en priorité, comprendre le score NOVA, réduire son exposition aux perturbateurs endocriniens.',
+        themes: ['durable', 'sante-physique'],
+        source: 'INSERM · ANSES',
+        href: '#',
+        dispo: false,
+        profil: ['obj_pesticides'],
+      },
+      {
+        id: 'etiquettes',
+        icon: '📋', iconBg: '#EAF3DE',
+        title: 'Lire une étiquette alimentaire',
+        desc: 'Nutri-Score, liste d'ingrédients, allégations nutritionnelles — décrypter les emballages sans se faire piéger.',
+        themes: ['durable', 'fake-news', 'bases'],
+        source: 'ANSES · UFC-Que Choisir',
+        href: '#',
+        dispo: false,
+        profil: [],
+      },
+      {
+        id: 'cuisines-africaines',
+        icon: '🌍', iconBg: '#FAEEDA',
+        title: 'Cuisines d'Afrique subsaharienne',
+        desc: 'Valeurs nutritionnelles des plats traditionnels, adaptations pour la santé, ingrédients locaux à retrouver à Toulouse.',
+        themes: ['cultures'],
+        source: 'FAO · OMS',
+        href: '#',
+        dispo: false,
+        profil: [],
+      },
+      {
+        id: 'cuisines-asiatiques',
+        icon: '🥢', iconBg: '#FAEEDA',
+        title: 'Cuisines d'Asie',
+        desc: 'Riz, soja, fermentés, algues — les atouts nutritionnels des cuisines asiatiques et comment les intégrer au quotidien.',
+        themes: ['cultures'],
+        source: 'FAO',
+        href: '#',
+        dispo: false,
+        profil: [],
+      },
+      {
+        id: 'grossesse',
+        icon: '🤰', iconBg: '#FBEAF0',
+        title: 'Alimentation pendant la grossesse',
+        desc: 'Acide folique, fer, iode, vitamine D — les besoins augmentés et les aliments à éviter pendant la grossesse.',
+        themes: ['ages', 'sante-physique'],
+        source: 'HAS · ANSES',
+        href: '#',
+        dispo: false,
+        profil: ['vie_grossesse'],
+      },
+      {
+        id: 'enfants',
+        icon: '👶', iconBg: '#FBEAF0',
+        title: 'Alimentation de l'enfant',
+        desc: 'Diversification alimentaire, besoins en calcium et fer, gérer les refus alimentaires — de 6 mois à l'adolescence.',
+        themes: ['ages'],
+        source: 'HAS · ANSES',
+        href: '#',
+        dispo: false,
+        profil: ['foyer_enfant'],
+      },
+      {
+        id: 'seniors',
+        icon: '👴', iconBg: '#E6F1FB',
+        title: 'Nutrition après 65 ans',
+        desc: 'Prévenir la dénutrition, maintenir la masse musculaire, adapter les textures — les besoins spécifiques des personnes âgées.',
+        themes: ['ages', 'sante-physique'],
+        source: 'HAS · SFNEP',
+        href: '#',
+        dispo: false,
+        profil: ['foyer_senior'],
+      },
+      {
+        id: 'interactions',
+        icon: '💊', iconBg: '#FAECE7',
+        title: 'Interactions médicaments–aliments',
+        desc: 'Pamplemousse et statines, vitamine K et anticoagulants, levothyroxine et soja — les interactions à connaître.',
+        themes: ['traitements', 'pathologies'],
+        source: 'HAS · ANSM',
+        href: '#',
+        dispo: false,
+        profil: ['has_traitement'],
+      },
+      {
+        id: 'cancer',
+        icon: '🎗️', iconBg: '#FBEAF0',
+        title: 'Cancer et chimiothérapie',
+        desc: 'Prévenir la dénutrition, maintenir l'énergie, gérer les effets secondaires — recommandations INCA et SFNEP.',
+        themes: ['pathologies', 'traitements'],
+        source: 'INCA · SFNEP · HAS',
+        href: '#',
+        dispo: false,
+        profil: [],
+      },
+      {
+        id: 'sucre',
+        icon: '🍬', iconBg: '#FAEEDA',
+        title: 'Le sucre est-il vraiment mauvais ?',
+        desc: 'Sucres libres vs sucres naturels, index glycémique, édulcorants — ce que dit vraiment la science.',
+        themes: ['fake-news', 'bases'],
+        source: 'ANSES · OMS',
+        href: '#',
+        dispo: false,
+        profil: [],
+      },
+      {
+        id: 'veganisme',
+        icon: '🥦', iconBg: '#EAF3DE',
+        title: 'Végétalisme : plus sain ?',
+        desc: 'Carences possibles en B12, fer, oméga-3 — comment adopter un régime végétalien de manière équilibrée.',
+        themes: ['fake-news', 'durable', 'bases'],
+        source: 'ANSES · 2021',
+        href: '#',
+        dispo: false,
+        profil: ['regime_vegan'],
+      },
+      {
+        id: 'detox',
+        icon: '🧃', iconBg: '#FAEEDA',
+        title: '"Détox" : mythe ou réalité ?',
+        desc: 'Jeûnes, jus verts, cures — ce que la science dit réellement des régimes "détox" et de la purification.',
+        themes: ['fake-news'],
+        source: 'INSERM · ANSES',
+        href: '#',
+        dispo: false,
+        profil: [],
+      },
+    ];
+
+    // ─── LOGIQUE PROFIL ────────────────────────────────────────────────────────
+
+    const raw = localStorage.getItem('equitable_profil');
+    const profil = raw ? JSON.parse(raw) : null;
+    const triggers = new Set();
+
+    if (profil) {
+      document.getElementById('profil-bandeau').style.display = 'flex';
+      if (profil.budget && parseInt(profil.budget) <= 200) triggers.add('budget_serre');
+      if (profil.chips?.logement?.some(l => l.includes('tudiant') || l.includes('CROUS'))) triggers.add('logement_etudiant');
+      if (profil.chips?.objectifs?.some(o => o.toLowerCase().includes('mental'))) triggers.add('obj_sante_mentale');
+      if (profil.chips?.objectifs?.some(o => o.toLowerCase().includes('pesticide'))) triggers.add('obj_pesticides');
+      if (profil.chips?.objectifs?.some(o => o.toLowerCase().includes('fake') || o.toLowerCase().includes('idée'))) triggers.add('obj_fake_news');
+      if (profil.chips?.objectifs?.some(o => o.toLowerCase().includes('sport') || o.toLowerCase().includes('forme'))) triggers.add('obj_forme');
+      if (profil.chips?.patho?.length > 0) triggers.add('has_patho');
+      if (profil.chips?.patho?.some(p => p.toLowerCase().includes('diab'))) triggers.add('patho_diabete');
+      if (profil.chips?.patho?.some(p => p.toLowerCase().includes('hyper'))) triggers.add('patho_hypertension');
+      if (profil.chips?.patho?.some(p => p.toLowerCase().includes('épression') || p.toLowerCase().includes('anxiété'))) triggers.add('patho_depression');
+      if (profil.chips?.traitements?.length > 0) triggers.add('has_traitement');
+      if (profil.chips?.culture?.length > 0) triggers.add('has_culture');
+      if (profil.chips?.symptomes?.some(s => s.toLowerCase().includes('fatigue'))) triggers.add('symptome_fatigue');
+      if (profil.chips?.vie?.some(v => v.toLowerCase().includes('grossesse'))) triggers.add('vie_grossesse');
+      if (profil.chips?.regime?.some(r => r.toLowerCase().includes('vegan') || r.toLowerCase().includes('végéta'))) triggers.add('regime_vegan');
+      if (profil.members?.some(m => parseInt(m.age) < 18)) triggers.add('foyer_enfant');
+      if (profil.members?.some(m => parseInt(m.age) >= 65)) triggers.add('foyer_senior');
+      if (profil.chips?.age?.some(a => parseInt(a) >= 65)) triggers.add('has_age_specifique');
+    }
+
+    // Détecter les thèmes recommandés
+    const themesRecommandesIds = new Set(
+      THEMES.filter(t => t.profil.some(p => triggers.has(p))).map(t => t.id)
+    );
+
+    // Détecter les rubriques recommandées
+    const rubriquesRecommandeesIds = new Set(
+      RUBRIQUES.filter(r => r.profil.some(p => triggers.has(p))).map(r => r.id)
+    );
+
+    // ─── RENDU ─────────────────────────────────────────────────────────────────
+
+    let themeActif = null;
+
+    function compterRubriques(themeId) {
+      return RUBRIQUES.filter(r => r.themes.includes(themeId)).length;
+    }
+
+    function renderThemes() {
+      const grid = document.getElementById('themes-grid');
+      grid.innerHTML = '';
+
+      THEMES.forEach(t => {
+        const recommande = themesRecommandesIds.has(t.id);
+        const actif = themeActif === t.id;
+        const btn = document.createElement('button');
+        btn.className = `theme-btn${actif ? ' actif' : ''}${recommande ? ' recommande' : ''}`;
+        btn.innerHTML = `
+          <span class="theme-icon">${t.icon}</span>
+          <span class="theme-label">${t.label}</span>
+          <span class="theme-count">${compterRubriques(t.id)} rubrique${compterRubriques(t.id) > 1 ? 's' : ''}</span>
+        `;
+        btn.addEventListener('click', () => {
+          themeActif = actif ? null : t.id;
+          renderThemes();
+          renderRubriques();
+        });
+        grid.appendChild(btn);
+      });
+
+      // Bouton reset
+      if (themeActif) {
+        const reset = document.createElement('button');
+        reset.className = 'reset-btn';
+        reset.textContent = '✕ Tous les thèmes';
+        reset.addEventListener('click', () => { themeActif = null; renderThemes(); renderRubriques(); });
+        grid.appendChild(reset);
+      }
+    }
+
+    function renderRubriques() {
+      const grid = document.getElementById('rubriques-grid');
+      const titre = document.getElementById('rubriques-titre');
+      const count = document.getElementById('rubriques-count');
+      grid.innerHTML = '';
+
+      let liste = themeActif
+        ? RUBRIQUES.filter(r => r.themes.includes(themeActif))
+        : [...RUBRIQUES];
+
+      // Trier : recommandées en premier, puis disponibles, puis à venir
+      liste.sort((a, b) => {
+        const aRec = rubriquesRecommandeesIds.has(a.id) ? 0 : 1;
+        const bRec = rubriquesRecommandeesIds.has(b.id) ? 0 : 1;
+        if (aRec !== bRec) return aRec - bRec;
+        if (a.dispo !== b.dispo) return a.dispo ? -1 : 1;
+        return 0;
+      });
+
+      // Titre dynamique
+      if (themeActif) {
+        const theme = THEMES.find(t => t.id === themeActif);
+        titre.textContent = `${theme.icon} ${theme.label}`;
+      } else {
+        titre.textContent = 'Toutes les rubriques';
+      }
+      count.textContent = `${liste.length} rubrique${liste.length > 1 ? 's' : ''}`;
+
+      if (liste.length === 0) {
+        grid.innerHTML = '<div class="rubriques-vide">Aucune rubrique pour ce thème pour l'instant.</div>';
+        return;
+      }
+
+      liste.forEach(r => {
+        const pourVous = rubriquesRecommandeesIds.has(r.id);
+        const a = document.createElement('a');
+        a.href = r.dispo ? r.href : '#';
+        a.className = `rubrique-article${!r.dispo ? ' indispo' : ''}${pourVous && r.dispo ? ' pour-vous' : ''}`;
+        if (!r.dispo) a.addEventListener('click', e => e.preventDefault());
+
+        const themeLabels = r.themes.map(tid => {
+          const t = THEMES.find(x => x.id === tid);
+          return t ? `<span class="article-theme-tag">${t.icon} ${t.label}</span>` : '';
+        }).join('');
+
+        a.innerHTML = `
+          ${pourVous && r.dispo ? '<div class="pour-vous-badge">Pour vous</div>' : ''}
+          ${!r.dispo ? '<div class="bientot-badge">Bientôt</div>' : ''}
+          <div class="article-icon-wrap" style="background:${r.iconBg}">${r.icon}</div>
+          <div class="article-title">${r.title}</div>
+          <div class="article-desc">${r.desc}</div>
+          <div class="article-themes">${themeLabels}</div>
+          <div class="article-source">${r.source}</div>
+        `;
+        grid.appendChild(a);
+      });
+    }
+
+    // Init
+    renderThemes();
+    renderRubriques();
+  </script>
+
+</body>
+</html>
