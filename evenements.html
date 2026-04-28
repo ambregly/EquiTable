@@ -135,7 +135,7 @@
 
     async function chargerEvenements() {
       try {
-        const res = await fetch('data/evenements.json');
+        const res = await fetch('evenements.json');
         evenements = await res.json();
       } catch(e) { evenements = []; }
 

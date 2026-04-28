@@ -245,7 +245,7 @@
 
     async function chargerLocations() {
       try {
-        const res = await fetch('data/locations.json');
+        const res = await fetch('locations.json');
         locations = await res.json();
       } catch(e) {
         locations = [];

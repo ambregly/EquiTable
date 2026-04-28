@@ -153,7 +153,7 @@
 
     async function chargerRecettes() {
       try {
-        const res = await fetch('data/recettes.json');
+        const res = await fetch('recettes.json');
         recettes = await res.json();
       } catch(e) {
         recettes = RECETTES_DEFAULT;

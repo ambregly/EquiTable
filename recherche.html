@@ -84,7 +84,7 @@
 
     async function chargerRubriques() {
       try {
-        const res = await fetch('data/rubriques.json');
+        const res = await fetch('rubriques.json');
         rubriques = await res.json();
       } catch(e) { rubriques = []; }
     }
