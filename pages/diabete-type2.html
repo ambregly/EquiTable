@@ -5,58 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Diabète type 2 et alimentation — EquiTable</title>
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/rubrique.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
-  <style>
-    .rubrique-hero { padding: 4rem 0 3rem; border-bottom: 1px solid var(--bordure); }
-    .rubrique-tag { display: inline-block; font-size: 12px; font-weight: 500; color: #7a2e14; background: var(--coral-clair); padding: 4px 12px; border-radius: 20px; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
-    .rubrique-hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; letter-spacing: -0.02em; }
-    .rubrique-hero p { font-size: 16px; color: var(--texte-sec); max-width: 600px; line-height: 1.7; }
-    .content-grid { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; padding: 3rem 0; align-items: start; }
-    .main-content h2 { font-size: 1.6rem; margin: 2.5rem 0 1rem; letter-spacing: -0.02em; }
-    .main-content h2:first-child { margin-top: 0; }
-    .main-content p { font-size: 15px; color: var(--texte-sec); line-height: 1.8; margin-bottom: 1rem; }
-    .main-content strong { color: var(--texte); font-weight: 500; }
-    .source-tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 6px; background: var(--fond-sec); color: var(--texte-ter); margin-left: 6px; font-style: italic; vertical-align: middle; }
-    .chiffre-card { background: white; border: 1px solid var(--bordure); border-radius: var(--rayon); padding: 1.5rem; margin: 1.5rem 0; display: flex; gap: 1.25rem; align-items: flex-start; }
-    .chiffre-num { font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 600; line-height: 1; min-width: 80px; text-align: center; }
-    .chiffre-num.rouge { color: var(--coral); }
-    .chiffre-num.vert { color: var(--vert-fonce); }
-    .chiffre-text { font-size: 14px; color: var(--texte-sec); line-height: 1.6; }
-    .chiffre-source { font-size: 11px; color: var(--texte-ter); margin-top: 6px; font-style: italic; }
-    .conseil-list { list-style: none; margin: 1rem 0 1.5rem; }
-    .conseil-list li { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--bordure); font-size: 14px; color: var(--texte-sec); line-height: 1.6; }
-    .conseil-list li:last-child { border-bottom: none; }
-    .conseil-list li::before { content: '→'; color: var(--vert); font-weight: 500; flex-shrink: 0; margin-top: 1px; }
-    .aliment-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin: 1rem 0 1.5rem; }
-    .aliment-pill { background: var(--fond-sec); border-radius: var(--rayon-sm); padding: 8px 12px; font-size: 13px; color: var(--texte-sec); text-align: center; line-height: 1.4; }
-    .aliment-pill strong { display: block; color: var(--texte); font-weight: 500; font-size: 12px; }
-    .aliment-pill.eviter { background: #FAECE7; color: #7a2e14; border: 1px solid #F0997B; }
-    .aliment-pill.eviter strong { color: #7a2e14; }
-    .myth-card { border-radius: var(--rayon); padding: 1.25rem; margin: 1rem 0; }
-    .myth-faux { background: #FAECE7; border-left: 3px solid var(--coral); border-radius: 0 var(--rayon) var(--rayon) 0; }
-    .myth-vrai { background: var(--vert-clair); border-left: 3px solid var(--vert); border-radius: 0 var(--rayon) var(--rayon) 0; }
-    .myth-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
-    .myth-faux .myth-label { color: #7a2e14; }
-    .myth-vrai .myth-label { color: var(--vert-tres-fonce); }
-    .myth-text { font-size: 14px; line-height: 1.6; }
-    .myth-faux .myth-text { color: #5a2010; }
-    .myth-vrai .myth-text { color: var(--vert-tres-fonce); }
-    .section-divider { height: 1px; background: var(--bordure); margin: 2.5rem 0; }
-    .sidebar { position: sticky; top: 80px; }
-    .sidebar-card { background: white; border: 1px solid var(--bordure); border-radius: var(--rayon); padding: 1.25rem; margin-bottom: 1rem; }
-    .sidebar-title { font-size: 13px; font-weight: 500; color: var(--texte); margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--bordure); }
-    .sidebar-link { display: block; font-size: 13px; color: var(--texte-sec); padding: 5px 0; cursor: pointer; transition: color 0.15s; text-decoration: none; }
-    .sidebar-link:hover { color: var(--vert); }
-    .sources-list { font-size: 12px; color: var(--texte-ter); line-height: 1.8; }
-    .sources-list a { color: var(--vert-fonce); text-decoration: underline; }
-    .lien-rubrique { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: white; border: 1px solid var(--bordure); border-radius: var(--rayon-sm); margin-bottom: 6px; font-size: 13px; text-decoration: none; color: var(--texte-sec); transition: all 0.15s; }
-    .lien-rubrique:hover { border-color: var(--vert); color: var(--texte); }
-    .lien-rubrique-icon { font-size: 18px; flex-shrink: 0; }
-    .warning-box { background: #FAECE7; border: 1px solid #F0997B; border-radius: var(--rayon); padding: 1.25rem; margin: 1.5rem 0; }
-    .warning-box p { font-size: 14px; color: #5a2010; line-height: 1.6; margin: 0; }
-    .warning-box strong { color: #7a2e14; }
-    @media (max-width: 768px) { .content-grid { grid-template-columns: 1fr; } .sidebar { position: static; } }
-  </style>
 </head>
 <body>
 
@@ -288,11 +238,11 @@
             <span class="lien-rubrique-icon">🔬</span>
             <span>Les bases : fibres et microbiote</span>
           </a>
-          <a href="../budget/index.html" class="lien-rubrique">
+          <a href="budget.html" class="lien-rubrique">
             <span class="lien-rubrique-icon">💶</span>
             <span>Petit budget — recettes IG bas</span>
           </a>
-          <a href="../fake-news/index.html" class="lien-rubrique">
+          <a href="fake-news.html" class="lien-rubrique">
             <span class="lien-rubrique-icon">🚫</span>
             <span>Idées reçues sur le sucre</span>
           </a>
