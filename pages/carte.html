@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carte EquiTable — Ressources alimentaires locales</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
   <style>
@@ -40,7 +40,7 @@
 
   <nav>
     <div class="container nav-inner">
-      <a href="index.html" class="logo">Equi<span>Table</span></a>
+      <a href="../index.html" class="logo">Equi<span>Table</span></a>
       <div class="nav-links">
         <a href="dashboard.html">Mon tableau de bord</a>
       </div>
@@ -245,7 +245,7 @@
 
     async function chargerLocations() {
       try {
-        const res = await fetch('locations.json');
+        const res = await fetch('../data/locations.json');
         locations = await res.json();
       } catch(e) {
         locations = [];

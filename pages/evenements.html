@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Événements et communauté — EquiTable</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
   <style>
     .page-hero { padding: 3rem 0 2rem; border-bottom: 1px solid var(--bordure); }
@@ -52,7 +52,7 @@
 
   <nav>
     <div class="container nav-inner">
-      <a href="index.html" class="logo">Equi<span>Table</span></a>
+      <a href="../index.html" class="logo">Equi<span>Table</span></a>
       <div class="nav-links">
         <a href="dashboard.html">Mon tableau de bord</a>
         <a href="questionnaire.html" class="btn-nav">Mon profil</a>
@@ -135,7 +135,7 @@
 
     async function chargerEvenements() {
       try {
-        const res = await fetch('evenements.json');
+        const res = await fetch('../data/evenements.json');
         evenements = await res.json();
       } catch(e) { evenements = []; }
 

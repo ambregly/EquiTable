@@ -20,25 +20,31 @@ Réduire les inégalités d'accès à l'information nutritionnelle scientifique 
 ## Structure du projet
 
 ```
-equitable/
-├── index.html          ← Page d'accueil
-├── questionnaire.html  ← Création de profil
-├── dashboard.html      ← Tableau de bord personnalisé
+EquiTable/
+├── index.html                  ← Page d'accueil
+├── README.md
 ├── css/
-│   └── style.css       ← Styles principaux
-├── js/
-│   └── main.js         ← Scripts principaux
-└── pages/
-    ├── budget.html
-    ├── enfants.html
-    ├── sante-mentale.html
-    ├── traitements.html
-    ├── grossesse.html
-    ├── cultures.html
-    ├── pesticides.html
-    ├── fake-news.html
-    └── microbiote.html
+│   └── style.css               ← Styles principaux (partagés par toutes les pages)
+├── data/                       ← Données du site (JSON)
+│   ├── locations.json          ← Ressources locales (carte)
+│   ├── evenements.json         ← Événements locaux
+│   ├── recettes.json           ← Recettes (semainier)
+│   └── rubriques.json          ← Rubriques nutritionnelles (recherche)
+└── pages/                      ← Pages de contenu
+    ├── questionnaire.html      ← Création de profil (7 étapes)
+    ├── dashboard.html          ← Tableau de bord personnalisé
+    ├── rubriques.html          ← Rubriques nutritionnelles par thème
+    ├── recherche.html          ← Recherche dans les rubriques
+    ├── carte.html              ← Carte des ressources locales (Leaflet)
+    ├── semainier.html          ← Semainier de recettes
+    ├── evenements.html         ← Événements locaux
+    ├── bases-essentielles.html ← Bases de la nutrition
+    ├── pathologies.html        ← Index des pathologies
+    └── diabete-type2.html      ← Fiche pathologie : diabète de type 2
 ```
+
+> Note : le JavaScript est pour l'instant inclus directement dans chaque page HTML
+> (pas de fichier `.js` séparé). Les données sont chargées dynamiquement depuis `data/`.
 
 ## Déploiement
 
