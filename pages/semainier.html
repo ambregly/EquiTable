@@ -10,27 +10,62 @@
     .page-hero { padding: 3rem 0 2rem; border-bottom: 1px solid var(--bordure); }
     .page-hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
     .page-hero p { font-size: 15px; color: var(--texte-sec); }
-    .semainier-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin: 2rem 0; }
+    .section-title { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 500; margin-bottom: 1rem; }
+
+    /* ---- Calculateur de besoins ---- */
+    .besoins-panel { background: white; border: 1px solid var(--bordure); border-radius: var(--rayon); padding: 1.5rem; margin: 1.5rem 0; }
+    .reglages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; margin-bottom: 1.25rem; }
+    .champ label { display: block; font-size: 12px; font-weight: 500; color: var(--texte-sec); margin-bottom: 5px; }
+    .champ select, .champ input { width: 100%; padding: 8px 10px; border: 1px solid var(--bordure); border-radius: var(--rayon-sm); font-size: 13px; font-family: inherit; background: white; color: var(--texte); }
+    .personnes-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1rem; }
+    .personne-card { display: grid; grid-template-columns: 1fr repeat(4, 80px) 30px; gap: 8px; align-items: end; background: var(--fond-sec); border-radius: var(--rayon-sm); padding: 10px 12px; }
+    .personne-card .sexe-toggle { display: flex; gap: 4px; }
+    .sexe-btn { flex: 1; padding: 7px 0; border: 1px solid var(--bordure); border-radius: var(--rayon-sm); background: white; font-size: 13px; cursor: pointer; color: var(--texte-sec); }
+    .sexe-btn.active { background: var(--vert); color: white; border-color: var(--vert); }
+    .personne-remove { background: none; border: none; color: var(--texte-ter); font-size: 18px; cursor: pointer; padding: 6px 0; }
+    .mg-champ { display: none; }
+    .mg-on .mg-champ { display: block; }
+    .macros-perso { display: none; gap: 1rem; margin-top: 0.5rem; }
+    .macros-perso.show { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .macro-sum { font-size: 12px; margin-top: 6px; }
+    .besoins-resultats { margin-top: 1.25rem; }
+    .res-personne { display: grid; grid-template-columns: 1.2fr repeat(4, 1fr); gap: 6px; align-items: center; padding: 10px 12px; border-radius: var(--rayon-sm); background: var(--vert-clair); margin-bottom: 6px; }
+    .res-personne.head { background: none; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--texte-ter); padding: 4px 12px; }
+    .res-personne.total { background: var(--texte); color: white; font-weight: 500; }
+    .res-nom { font-size: 13px; font-weight: 500; color: var(--vert-tres-fonce); }
+    .res-personne.total .res-nom { color: white; }
+    .res-val { font-size: 13px; text-align: center; color: var(--vert-tres-fonce); }
+    .res-personne.total .res-val { color: white; }
+    .res-val b { display: block; font-size: 15px; }
+    .besoins-note { font-size: 12px; color: var(--texte-ter); margin-top: 0.75rem; line-height: 1.6; font-style: italic; }
+    @media (max-width: 680px) {
+      .personne-card { grid-template-columns: 1fr 1fr; }
+      .res-personne { grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; }
+      .res-personne.head { display: none; }
+    }
+
+    /* ---- Semainier grid ---- */
+    .semainier-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin: 1rem 0 2rem; }
     .jour-col { display: flex; flex-direction: column; gap: 6px; }
     .jour-header { font-size: 12px; font-weight: 500; color: var(--texte-sec); text-align: center; padding: 6px 0; border-bottom: 2px solid var(--bordure); margin-bottom: 4px; }
     .jour-header.today { color: var(--vert-fonce); border-color: var(--vert); }
     .repas-slot { background: white; border: 1px solid var(--bordure); border-radius: var(--rayon-sm); padding: 8px; min-height: 70px; cursor: pointer; transition: all 0.15s; position: relative; }
     .repas-slot:hover { border-color: var(--vert); }
+    .repas-slot.incompatible { opacity: 0.45; }
     .repas-slot.vide { border-style: dashed; display: flex; align-items: center; justify-content: center; }
     .repas-slot.vide::after { content: '+'; font-size: 18px; color: var(--texte-ter); }
     .repas-label { font-size: 10px; color: var(--texte-ter); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
     .repas-titre { font-size: 11px; font-weight: 500; color: var(--texte); line-height: 1.4; }
-    .repas-budget { font-size: 10px; color: var(--vert-fonce); margin-top: 3px; }
+    .repas-kcal { font-size: 10px; color: var(--vert-fonce); margin-top: 3px; }
     .repas-remove { position: absolute; top: 4px; right: 4px; font-size: 12px; color: var(--texte-ter); background: none; border: none; cursor: pointer; opacity: 0; transition: opacity 0.15s; line-height: 1; padding: 0; }
     .repas-slot:hover .repas-remove { opacity: 1; }
-    .semainier-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .semainier-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
     .btn-small { padding: 7px 14px; border-radius: 20px; font-size: 13px; cursor: pointer; border: 1px solid var(--bordure); background: white; color: var(--texte-sec); transition: all 0.15s; font-family: inherit; }
     .btn-small:hover { border-color: var(--vert); color: var(--vert-fonce); }
     .btn-small.primary { background: var(--vert); color: white; border-color: var(--vert); }
     .btn-small.primary:hover { background: var(--vert-fonce); }
-    .budget-total { font-size: 14px; color: var(--texte-sec); padding: 8px 14px; background: var(--fond-sec); border-radius: 20px; }
-    .budget-total strong { color: var(--vert-fonce); }
-    .section-title { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 500; margin-bottom: 1rem; }
+    .regime-note { font-size: 13px; color: #185FA5; background: #E6F1FB; border: 1px solid #93C5E8; border-radius: var(--rayon-sm); padding: 10px 14px; margin-bottom: 1rem; line-height: 1.5; }
+
     .recettes-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.25rem; }
     .filter-chip { padding: 5px 12px; border-radius: 20px; border: 1px solid var(--bordure); font-size: 12px; cursor: pointer; background: var(--fond); color: var(--texte-sec); transition: all 0.15s; }
     .filter-chip:hover, .filter-chip.active { background: var(--vert-clair); border-color: var(--vert); color: var(--vert-fonce); }
@@ -87,24 +122,89 @@
   <section class="page-hero">
     <div class="container">
       <h1>🗓️ Mon semainier</h1>
-      <p>Planifiez vos repas de la semaine avec des idées recettes adaptées à votre profil et votre budget.</p>
+      <p>Calculez vos besoins nutritionnels personnalisés, puis planifiez vos repas de la semaine.</p>
     </div>
   </section>
 
   <div class="container" style="padding: 2rem 0 3rem">
 
-    <div class="semainier-actions">
-      <button class="btn-small primary" onclick="genererSemaine()">✨ Générer une semaine automatiquement</button>
-      <button class="btn-small" onclick="viderSemaine()">🗑️ Vider la semaine</button>
-      <button class="btn-small" onclick="imprimerListe()">🛒 Liste de courses</button>
-      <div class="budget-total">Budget estimé : <strong id="budget-total">0€</strong></div>
+    <!-- ================= CALCULATEUR DE BESOINS ================= -->
+    <div class="section-title">🎯 Mes besoins nutritionnels</div>
+    <div class="besoins-panel">
+
+      <div class="reglages-grid">
+        <div class="champ">
+          <label>Niveau d'activité</label>
+          <select id="cfg-activite" onchange="calculer()">
+            <option value="sedentaire">Sédentaire (peu/pas de sport)</option>
+            <option value="leger">Léger (1-3 j/sem)</option>
+            <option value="modere" selected>Modéré (3-5 j/sem)</option>
+            <option value="intense">Intense (6-7 j/sem)</option>
+            <option value="sportif">Sportif (entraînement quotidien)</option>
+          </select>
+        </div>
+        <div class="champ">
+          <label>Objectif</label>
+          <select id="cfg-objectif" onchange="calculer()">
+            <option value="maintien" selected>Maintien du poids</option>
+            <option value="perte">Perte de poids (-15%)</option>
+            <option value="prise">Prise de masse (+10%)</option>
+          </select>
+        </div>
+        <div class="champ">
+          <label>Protéines</label>
+          <select id="cfg-prot" onchange="majMode(); calculer()">
+            <option value="standard" selected>Standard (~1 g/kg)</option>
+            <option value="sportif">Sportif (1,8–2 g/kg de masse sèche)</option>
+            <option value="perso">Macros personnalisées</option>
+          </select>
+        </div>
+        <div class="champ">
+          <label>Régime</label>
+          <select id="cfg-regime" onchange="calculer(); majRecettes()">
+            <option value="equilibre" selected>Équilibré</option>
+            <option value="vegetarien">Végétarien</option>
+            <option value="vegan">Vegan</option>
+            <option value="sans_gluten">Sans gluten</option>
+            <option value="sans_lactose">Sans lactose</option>
+            <option value="cetogene">Cétogène</option>
+            <option value="halal">Halal</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Macros personnalisées -->
+      <div class="macros-perso" id="macros-perso">
+        <div class="champ"><label>Protéines (%)</label><input type="number" id="macro-p" value="30" min="5" max="60" oninput="calculer()"></div>
+        <div class="champ"><label>Glucides (%)</label><input type="number" id="macro-g" value="40" min="0" max="80" oninput="calculer()"></div>
+        <div class="champ"><label>Lipides (%)</label><input type="number" id="macro-l" value="30" min="10" max="80" oninput="calculer()"></div>
+      </div>
+      <div class="macro-sum" id="macro-sum"></div>
+
+      <!-- Personnes -->
+      <div style="font-size:13px; font-weight:500; margin:1.25rem 0 0.5rem; color:var(--texte)">Les personnes du foyer</div>
+      <div class="personnes-list" id="personnes-list"></div>
+      <button class="btn-small" onclick="ajouterPersonne()">+ Ajouter une personne</button>
+
+      <!-- Résultats -->
+      <div class="besoins-resultats" id="besoins-resultats"></div>
+      <div class="besoins-note" id="besoins-note"></div>
     </div>
 
+    <!-- ================= SEMAINIER ================= -->
+    <div class="section-title" style="margin-top:2.5rem">🗓️ Ma semaine</div>
+    <div class="regime-note" id="regime-note" style="display:none"></div>
+    <div class="semainier-actions">
+      <button class="btn-small primary" onclick="chargerMenuType()">📋 Charger le menu type</button>
+      <button class="btn-small" onclick="genererSemaine()">🎲 Remplir au hasard</button>
+      <button class="btn-small" onclick="viderSemaine()">🗑️ Vider</button>
+      <button class="btn-small" onclick="imprimerListe()">🛒 Liste de courses</button>
+    </div>
     <div class="semainier-grid" id="semainier"></div>
 
-    <div style="margin-top: 3rem">
+    <!-- ================= RECETTES ================= -->
+    <div style="margin-top: 2.5rem">
       <div class="section-title">📖 Les recettes EquiTable</div>
-
       <div class="recettes-filters">
         <div class="filter-chip active" onclick="filtrer('tous', this)">Toutes</div>
         <div class="filter-chip" onclick="filtrer('budget', this)">💶 Moins de 1,50€</div>
@@ -113,9 +213,7 @@
         <div class="filter-chip" onclick="filtrer('vegan', this)">🌿 Vegan</div>
         <div class="filter-chip" onclick="filtrer('halal', this)">☪️ Halal</div>
         <div class="filter-chip" onclick="filtrer('diabete', this)">🩺 IG bas</div>
-        <div class="filter-chip" onclick="filtrer('enfants', this)">👶 Enfants</div>
       </div>
-
       <div class="recettes-grid" id="recettes-grid"></div>
     </div>
   </div>
@@ -154,41 +252,241 @@
     let filtreActif = 'tous';
     let recetteSelectionnee = null;
 
-    async function chargerRecettes() {
-      try {
-        const res = await fetch('../data/recettes.json');
-        recettes = await res.json();
-      } catch(e) {
-        recettes = RECETTES_DEFAULT;
-      }
-      afficherRecettes();
+    // ============ CALCULATEUR DE BESOINS ============
+    const ACTIVITE = { sedentaire:1.2, leger:1.375, modere:1.55, intense:1.725, sportif:1.9 };
+    const OBJECTIF = { maintien:1.0, perte:0.85, prise:1.10 };
+
+    let personnes = JSON.parse(localStorage.getItem('equitable_besoins_personnes') || 'null') ||
+      [{ nom:'Moi', sexe:'F', age:30, taille:165, poids:62, mg:0 }];
+
+    function getCfg() {
+      return {
+        activite: document.getElementById('cfg-activite').value,
+        objectif: document.getElementById('cfg-objectif').value,
+        prot: document.getElementById('cfg-prot').value,
+        regime: document.getElementById('cfg-regime').value,
+        mp: +document.getElementById('macro-p').value || 0,
+        mg: +document.getElementById('macro-g').value || 0,
+        ml: +document.getElementById('macro-l').value || 0,
+      };
     }
 
+    function bmr(p) {
+      const base = 10*p.poids + 6.25*p.taille - 5*p.age;
+      return p.sexe === 'H' ? base + 5 : base - 161;
+    }
+
+    function besoinsPersonne(p, cfg) {
+      const kcal = Math.round(bmr(p) * ACTIVITE[cfg.activite] * OBJECTIF[cfg.objectif]);
+      let prot, glu, lip;
+      if (cfg.prot === 'perso') {
+        prot = kcal * (cfg.mp/100) / 4;
+        glu  = kcal * (cfg.mg/100) / 4;
+        lip  = kcal * (cfg.ml/100) / 9;
+      } else {
+        if (cfg.prot === 'sportif') {
+          const masseSeche = (p.mg > 0) ? p.poids * (1 - p.mg/100) : p.poids;
+          prot = masseSeche * 1.9; // 1,8–2 g/kg, milieu
+        } else {
+          prot = p.poids * 1.0;
+        }
+        if (cfg.regime === 'cetogene') {
+          glu = 30;                              // glucides très bas
+          lip = (kcal - prot*4 - glu*4) / 9;     // le reste en lipides
+        } else {
+          lip = kcal * 0.30 / 9;                 // 30% lipides
+          glu = (kcal - prot*4 - lip*9) / 4;     // le reste en glucides
+        }
+      }
+      return { kcal, prot: Math.max(0,Math.round(prot)), glu: Math.max(0,Math.round(glu)), lip: Math.max(0,Math.round(lip)) };
+    }
+
+    function majMode() {
+      const perso = document.getElementById('cfg-prot').value === 'perso';
+      document.getElementById('macros-perso').classList.toggle('show', perso);
+      // afficher le champ masse grasse si mode sportif
+      const sportif = document.getElementById('cfg-prot').value === 'sportif';
+      document.getElementById('personnes-list').classList.toggle('mg-on', sportif);
+      renderPersonnes();
+    }
+
+    function renderPersonnes() {
+      const sportif = document.getElementById('cfg-prot').value === 'sportif';
+      const list = document.getElementById('personnes-list');
+      list.classList.toggle('mg-on', sportif);
+      list.innerHTML = personnes.map((p, i) => `
+        <div class="personne-card">
+          <div class="champ"><label>Prénom</label><input type="text" value="${p.nom}" oninput="majP(${i},'nom',this.value)"></div>
+          <div class="champ"><label>Sexe</label>
+            <div class="sexe-toggle">
+              <button class="sexe-btn ${p.sexe==='F'?'active':''}" onclick="majP(${i},'sexe','F')">F</button>
+              <button class="sexe-btn ${p.sexe==='H'?'active':''}" onclick="majP(${i},'sexe','H')">H</button>
+            </div>
+          </div>
+          <div class="champ"><label>Âge</label><input type="number" value="${p.age}" min="2" max="110" oninput="majP(${i},'age',this.value)"></div>
+          <div class="champ"><label>Taille (cm)</label><input type="number" value="${p.taille}" min="80" max="230" oninput="majP(${i},'taille',this.value)"></div>
+          <div class="champ"><label>Poids (kg)</label><input type="number" value="${p.poids}" min="15" max="250" oninput="majP(${i},'poids',this.value)"></div>
+          <button class="personne-remove" title="Retirer" onclick="retirerPersonne(${i})">×</button>
+        </div>
+        ${sportif ? `<div class="champ mg-champ" style="max-width:220px; margin:-4px 0 4px 12px"><label>% masse grasse de ${p.nom||'cette personne'} (optionnel, pour la masse sèche)</label><input type="number" value="${p.mg||''}" placeholder="ex. 18" min="3" max="60" oninput="majP(${i},'mg',this.value)"></div>` : ''}
+      `).join('');
+    }
+
+    function majP(i, champ, val) {
+      if (['age','taille','poids','mg'].includes(champ)) val = +val || 0;
+      personnes[i][champ] = val;
+      if (champ === 'sexe') renderPersonnes();
+      calculer();
+    }
+    function ajouterPersonne() {
+      personnes.push({ nom:'Personne '+(personnes.length+1), sexe:'H', age:30, taille:175, poids:70, mg:0 });
+      renderPersonnes(); calculer();
+    }
+    function retirerPersonne(i) {
+      if (personnes.length <= 1) return;
+      personnes.splice(i,1); renderPersonnes(); calculer();
+    }
+
+    function calculer() {
+      const cfg = getCfg();
+      // somme des macros perso
+      if (cfg.prot === 'perso') {
+        const s = cfg.mp + cfg.mg + cfg.ml;
+        const el = document.getElementById('macro-sum');
+        el.textContent = `Total : ${s}% ` + (s===100 ? '✓' : '— ajustez pour atteindre 100%');
+        el.style.color = s===100 ? 'var(--vert-fonce)' : 'var(--coral)';
+      } else {
+        document.getElementById('macro-sum').textContent = '';
+      }
+
+      const tot = { kcal:0, prot:0, glu:0, lip:0 };
+      let rows = `<div class="res-personne head"><span class="res-nom">Personne</span><span class="res-val">kcal/j</span><span class="res-val">Protéines</span><span class="res-val">Glucides</span><span class="res-val">Lipides</span></div>`;
+      personnes.forEach(p => {
+        const b = besoinsPersonne(p, cfg);
+        tot.kcal+=b.kcal; tot.prot+=b.prot; tot.glu+=b.glu; tot.lip+=b.lip;
+        rows += `<div class="res-personne">
+          <span class="res-nom">${p.nom||'—'} <span style="font-weight:400;color:var(--texte-ter)">(${p.sexe}, ${p.age} ans)</span></span>
+          <span class="res-val"><b>${b.kcal}</b>kcal</span>
+          <span class="res-val"><b>${b.prot} g</b>protéines</span>
+          <span class="res-val"><b>${b.glu} g</b>glucides</span>
+          <span class="res-val"><b>${b.lip} g</b>lipides</span>
+        </div>`;
+      });
+      if (personnes.length > 1) {
+        rows += `<div class="res-personne total">
+          <span class="res-nom">Total foyer / jour</span>
+          <span class="res-val"><b>${tot.kcal}</b>kcal</span>
+          <span class="res-val"><b>${tot.prot} g</b>protéines</span>
+          <span class="res-val"><b>${tot.glu} g</b>glucides</span>
+          <span class="res-val"><b>${tot.lip} g</b>lipides</span>
+        </div>`;
+      }
+      document.getElementById('besoins-resultats').innerHTML = rows;
+
+      let note = "Estimations basées sur l'équation de Mifflin-St Jeor (métabolisme de base) et les repères ANSES. ";
+      if (cfg.prot === 'sportif') note += "Mode sportif : 1,8–2 g de protéines par kg (de masse sèche si % de masse grasse renseigné, sinon du poids total). ";
+      if (cfg.regime === 'cetogene') note += "Régime cétogène : glucides limités à ~30 g/j, le reste de l'énergie en lipides — à n'entreprendre qu'avec un suivi adapté. ";
+      note += "⚠️ Ce sont des estimations indicatives, pas un avis médical. Pour un objectif de santé précis, consultez un diététicien.";
+      document.getElementById('besoins-note').textContent = note;
+
+      localStorage.setItem('equitable_besoins_personnes', JSON.stringify(personnes));
+    }
+
+    // ============ MENU TYPE (d'après le PDF) ============
+    // [icone, titre, composition, kcal, P, G, L, sansGluten, sansLactose, vegetarien]
+    function meal(a){ return { menu:true, icone:a[0], titre:a[1], composition:a[2],
+      valeurs_nutritionnelles:{kcal:a[3],proteines:a[4],glucides:a[5],fibres:6,lipides:a[6]},
+      sansGluten:a[7], sansLactose:a[8], vegetarien:a[9],
+      ingredients:a[2].split(', ').map(n=>({nom:n,quantite:''})),
+      etapes:['Préparez et assemblez les ingrédients selon vos goûts.'],
+      temps_min:20, portions:1, budget:2.0, regime: a[9]?['vegetarien']:[], disponible:true }; }
+
+    const MATIN = [
+      ['🥚','Œuf dur, pain de seigle & fruit','œuf dur, pain de seigle, un fruit',350,18,35,14,false,true,true],
+      ['🥣','Porridge avoine, beurre d\'amande & banane','flocons d\'avoine, beurre d\'amande, cannelle, banane',420,12,55,16,false,true,true],
+      ['🍳','Œufs brouillés, tomate & avocat','œufs brouillés, tomate, avocat',380,16,12,30,true,true,true],
+      ['🍳','Œufs brouillés, bacon, oignon & épinards','œufs, bacon, oignon, épinards',400,22,8,31,true,true,false],
+      ['🥛','Yaourt grec/Skyr, fruits rouges & amandes','yaourt grec ou skyr, fruits rouges, amandes',320,22,28,12,true,false,true],
+      ['🥪','Pain complet, jambon, fromage & tomate','pain complet, jambon, fromage, tomate',400,22,38,16,false,false,false],
+      ['🥞','Crêpes, noix & sirop d\'érable','crêpes, noix, sirop d\'érable',450,12,60,18,false,false,true],
+    ];
+    const MIDI = [
+      ['🥩','Bœuf, champignons & riz complet','bœuf, champignons, riz complet ou basmati',600,40,55,22,true,true,false],
+      ['🍲','Lentilles corail, salade & riz','lentilles corail, salade, riz complet',550,22,85,10,true,true,true],
+      ['🍝','Tagliatelles au poulet, sauce basilic-tomate','tagliatelles, poulet, sauce tomate-basilic',620,38,70,18,false,true,false],
+      ['🥗','Salade œuf, pois chiches, fromage & crudités','œuf, pois chiches, fromage, chou, carotte, poivron, avocat, graines',520,26,35,28,true,false,true],
+      ['🍗','Cuisse de poulet rôtie, patate douce & brocoli','poulet rôti, patate douce, brocoli',580,40,45,24,true,true,false],
+      ['🐟','Poisson au four, patate douce & feuilles vertes','poisson, patate douce, feuilles vertes',480,38,40,16,true,true,false],
+      ['🍗','Poulet, légumes & pommes de terre vapeur','poulet, oignon, tomate, poivron, courgette, pommes de terre',540,40,50,18,true,true,false],
+    ];
+    const SOIR = [
+      ['🐟','Poisson sauté à l\'ail, manioc & tomates','poisson, ail, beurre, persil, manioc, tomates',520,36,45,20,true,false,false],
+      ['🍲','Soupe de lentilles, poulet & courgettes','lentilles, poulet, courgettes au four',480,34,45,14,true,true,false],
+      ['🍗','Poulet rôti sauce soja & pommes de terre sautées','poulet, sauce soja, pommes de terre, légumes',580,38,50,24,false,true,false],
+      ['🥩','Filet de porc, poivrons & pommes de terre vapeur','porc, oignon, tomate, poivrons, pommes de terre',560,38,45,24,true,true,false],
+      ['🥩','Filet de porc, légumes & pommes de terre','porc, légumes variés, pommes de terre vapeur',560,38,45,24,true,true,false],
+      ['🍳','Omelette de légumes & chorizo','œufs, légumes, chorizo',480,28,12,36,true,true,false],
+      ['🍝','Pâtes complètes, courgette & bolognaise','pâtes complètes, courgette, sauce bolognaise',600,32,70,20,false,true,false],
+    ];
+
+    function chargerMenuType() {
+      JOURS.forEach((j,i) => {
+        semaine[`${j}_Matin`] = meal(MATIN[i]);
+        semaine[`${j}_Midi`]  = meal(MIDI[i]);
+        semaine[`${j}_Soir`]  = meal(SOIR[i]);
+      });
+      afficherSemainier();
+    }
+
+    function majRecettes() {
+      const reg = document.getElementById('cfg-regime').value;
+      const note = document.getElementById('regime-note');
+      const labels = { equilibre:null,
+        vegetarien:'🌱 Régime végétarien : remplacez viandes/poissons par tofu, tempeh, légumineuses ou œufs.',
+        vegan:'🌿 Régime vegan : remplacez viandes, poissons, œufs et laitages par des protéines végétales (tofu, tempeh, légumineuses) et boissons végétales enrichies.',
+        sans_gluten:'🚫🌾 Sans gluten : les repas avec pain, pâtes, tagliatelles, crêpes ou semoule sont signalés (grisés). Remplacez par riz, quinoa, sarrasin, patate douce.',
+        sans_lactose:'🚫🥛 Sans lactose : les repas avec yaourt, fromage ou crêpes au lait sont signalés. Optez pour des versions végétales.',
+        cetogene:'🥑 Cétogène : privilégiez les repas riches en protéines/lipides et limitez fortement riz, pâtes, pain et féculents. À encadrer médicalement.',
+        halal:'☪️ Halal : remplacez porc, bacon, jambon et chorizo par des alternatives halal (volaille, bœuf halal, dinde fumée).' };
+      if (labels[reg]) { note.textContent = labels[reg]; note.style.display = 'block'; }
+      else note.style.display = 'none';
+      afficherSemainier();
+    }
+
+    function repasIncompatible(r, reg) {
+      if (!r || !r.menu) return false;
+      if (reg === 'sans_gluten' && r.sansGluten === false) return true;
+      if (reg === 'sans_lactose' && r.sansLactose === false) return true;
+      if ((reg === 'vegetarien' || reg === 'vegan') && r.vegetarien === false) return true;
+      if (reg === 'cetogene' && r.valeurs_nutritionnelles.glucides > 45) return true;
+      if (reg === 'halal' && /porc|bacon|jambon|chorizo/i.test(r.composition||'')) return true;
+      return false;
+    }
+
+    // ============ SEMAINIER ============
     function afficherSemainier() {
       const grid = document.getElementById('semainier');
+      const reg = document.getElementById('cfg-regime').value;
       grid.innerHTML = '';
-      let budgetTotal = 0;
-
       JOURS.forEach((jour, ji) => {
         const col = document.createElement('div');
         col.className = 'jour-col';
         col.innerHTML = `<div class="jour-header${ji === todayIdx ? ' today' : ''}">${jour}</div>`;
-
         REPAS.forEach(repas => {
           const key = `${jour}_${repas}`;
           const slot = document.createElement('div');
           const recette = semaine[key];
-
           if (recette) {
-            slot.className = 'repas-slot';
+            const incompat = repasIncompatible(recette, reg);
+            slot.className = 'repas-slot' + (incompat ? ' incompatible' : '');
+            const kcal = recette.valeurs_nutritionnelles?.kcal;
             slot.innerHTML = `
-              <div class="repas-label">${repas}</div>
+              <div class="repas-label">${repas}${incompat ? ' ⚠️' : ''}</div>
               <div class="repas-titre">${recette.icone} ${recette.titre}</div>
-              <div class="repas-budget">${recette.budget}€/pers</div>
+              ${kcal ? `<div class="repas-kcal">${kcal} kcal</div>` : ''}
               <button class="repas-remove" onclick="retirerRepas('${key}')">×</button>
             `;
             slot.onclick = (e) => { if (!e.target.classList.contains('repas-remove')) ouvrirRecette(recette); };
-            budgetTotal += recette.budget;
           } else {
             slot.className = 'repas-slot vide';
             slot.title = `Ajouter ${repas} ${jour}`;
@@ -198,9 +496,13 @@
         });
         grid.appendChild(col);
       });
-
-      document.getElementById('budget-total').textContent = budgetTotal.toFixed(2) + '€';
       localStorage.setItem('equitable_semainier', JSON.stringify(semaine));
+    }
+
+    async function chargerRecettes() {
+      try { const res = await fetch('../data/recettes.json'); recettes = await res.json(); }
+      catch(e) { recettes = []; }
+      afficherRecettes();
     }
 
     function afficherRecettes() {
@@ -211,36 +513,27 @@
         if (filtreActif === 'budget') return r.budget <= 1.5;
         if (filtreActif === 'rapide') return r.temps_min <= 15;
         if (filtreActif === 'diabete') return r.tags_sante?.includes('diabete_ok') || r.tags_sante?.includes('IG_bas');
-        if (filtreActif === 'enfants') return r.tags_sante?.includes('enfants_ok') || r.categories?.includes('enfants');
         return r.regime?.includes(filtreActif) || r.cultures?.includes(filtreActif) || r.categories?.includes(filtreActif);
       });
-
       grid.innerHTML = filtrees.length === 0
-        ? '<p style="color:var(--texte-ter); font-size:14px">Aucune recette pour ce filtre pour l\'instant — d\'autres arrivent bientôt !</p>'
+        ? '<p style="color:var(--texte-ter); font-size:14px">Aucune recette pour ce filtre pour l\'instant.</p>'
         : filtrees.map(r => `
-          <div class="recette-card" onclick="ouvrirRecette(${JSON.stringify(r).replace(/"/g, '&quot;')})">
-            <div class="recette-header">
-              <span class="recette-icon">${r.icone}</span>
-              <span class="recette-titre">${r.titre}</span>
-            </div>
+          <div class="recette-card" onclick='ouvrirRecette(${JSON.stringify(r).replace(/'/g,"&#39;")})'>
+            <div class="recette-header"><span class="recette-icon">${r.icone}</span><span class="recette-titre">${r.titre}</span></div>
             <div class="recette-desc">${r.description}</div>
             <div class="recette-meta">
               <span class="recette-meta-item">⏱ ${r.temps_min} min</span>
               <span class="recette-meta-item">👥 ${r.portions} pers.</span>
               <span class="recette-meta-item">💶 ${r.budget.toFixed(2)}€/pers</span>
             </div>
-            <div class="recette-tags">
-              ${(r.tags_sante||[]).map(t => `<span class="recette-tag sante">${t.replace(/_/g,' ')}</span>`).join('')}
-              ${(r.regime||[]).map(t => `<span class="recette-tag">${t}</span>`).join('')}
-            </div>
-            <button class="btn-ajouter" onclick="event.stopPropagation(); ouvrirRecette(${JSON.stringify(r).replace(/"/g, '&quot;')})">+ Ajouter au semainier</button>
-          </div>
-        `).join('');
+            <div class="recette-tags">${(r.tags_sante||[]).map(t => `<span class="recette-tag sante">${t.replace(/_/g,' ')}</span>`).join('')}</div>
+            <button class="btn-ajouter" onclick='event.stopPropagation(); ouvrirRecette(${JSON.stringify(r).replace(/'/g,"&#39;")})'>+ Ajouter au semainier</button>
+          </div>`).join('');
     }
 
     function filtrer(type, el) {
       filtreActif = type;
-      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.recettes-filters .filter-chip').forEach(c => c.classList.remove('active'));
       el.classList.add('active');
       afficherRecettes();
     }
@@ -248,88 +541,42 @@
     function ouvrirRecette(r) {
       recetteSelectionnee = r;
       document.getElementById('modal-titre').textContent = r.icone + ' ' + r.titre;
-      document.getElementById('modal-desc').textContent = r.description;
-      document.getElementById('modal-meta').innerHTML = `<span>⏱ ${r.temps_min} min</span><span>👥 ${r.portions} portions</span><span>💶 ${r.budget.toFixed(2)}€/personne</span>`;
-      document.getElementById('modal-ingredients').innerHTML = r.ingredients.map(i => `<li style="font-size:13px; color:var(--texte-sec); padding:4px 0; border-bottom:1px solid var(--bordure)">• ${i.quantite} ${i.nom}</li>`).join('');
-      document.getElementById('modal-etapes').innerHTML = r.etapes.map(e => `<li>${e}</li>`).join('');
-      const n = r.valeurs_nutritionnelles;
+      document.getElementById('modal-desc').textContent = r.description || r.composition || '';
+      document.getElementById('modal-meta').innerHTML = `<span>⏱ ${r.temps_min||'—'} min</span><span>👥 ${r.portions||1} portion(s)</span>` + (r.budget ? `<span>💶 ${r.budget.toFixed(2)}€/pers</span>` : '');
+      document.getElementById('modal-ingredients').innerHTML = (r.ingredients||[]).map(i => `<li style="font-size:13px; color:var(--texte-sec); padding:4px 0; border-bottom:1px solid var(--bordure)">• ${i.quantite||''} ${i.nom}</li>`).join('');
+      document.getElementById('modal-etapes').innerHTML = (r.etapes||[]).map(e => `<li>${e}</li>`).join('');
+      const n = r.valeurs_nutritionnelles || {};
       document.getElementById('modal-nutri').innerHTML = `
-        <tr><td>Énergie</td><td>${n.kcal} kcal</td></tr>
-        <tr><td>Protéines</td><td>${n.proteines} g</td></tr>
-        <tr><td>Glucides</td><td>${n.glucides} g</td></tr>
-        <tr><td>Fibres</td><td>${n.fibres} g</td></tr>
-        <tr><td>Lipides</td><td>${n.lipides} g</td></tr>
-      `;
-      const row = document.getElementById('slot-midi-row');
-      row.innerHTML = JOURS.map(j => `<button class="slot-picker-btn" onclick="ajouterRepas('${j}','Midi')">${j}</button>`).join('');
+        <tr><td>Énergie</td><td>${n.kcal||'—'} kcal</td></tr>
+        <tr><td>Protéines</td><td>${n.proteines||'—'} g</td></tr>
+        <tr><td>Glucides</td><td>${n.glucides||'—'} g</td></tr>
+        <tr><td>Lipides</td><td>${n.lipides||'—'} g</td></tr>`;
+      document.getElementById('slot-midi-row').innerHTML = JOURS.map(j => `<button class="slot-picker-btn" onclick="ajouterRepas('${j}','Midi')">${j}</button>`).join('');
       document.getElementById('modal').classList.add('open');
     }
-
-    function fermerModal(e) {
-      if (!e || e.target === document.getElementById('modal')) {
-        document.getElementById('modal').classList.remove('open');
-      }
-    }
-
-    function ajouterRepas(jour, repas) {
-      if (!recetteSelectionnee) return;
-      semaine[`${jour}_${repas}`] = recetteSelectionnee;
-      afficherSemainier();
-      document.getElementById('modal').classList.remove('open');
-    }
-
-    function ouvrirPickerRepas(jour, repas) {
-      if (recettes.length === 0) return;
-      const r = recettes[Math.floor(Math.random() * recettes.filter(r => r.disponible).length)];
-      semaine[`${jour}_${repas}`] = r;
-      afficherSemainier();
-    }
-
-    function retirerRepas(key) {
-      delete semaine[key];
-      afficherSemainier();
-    }
-
+    function fermerModal(e) { if (!e || e.target === document.getElementById('modal')) document.getElementById('modal').classList.remove('open'); }
+    function ajouterRepas(jour, repas) { if (!recetteSelectionnee) return; semaine[`${jour}_${repas}`] = recetteSelectionnee; afficherSemainier(); document.getElementById('modal').classList.remove('open'); }
+    function ouvrirPickerRepas(jour, repas) { const d = recettes.filter(r => r.disponible); if (!d.length) return; semaine[`${jour}_${repas}`] = d[Math.floor(Math.random()*d.length)]; afficherSemainier(); }
+    function retirerRepas(key) { delete semaine[key]; afficherSemainier(); }
     function genererSemaine() {
-      const dispo = recettes.filter(r => r.disponible);
-      if (dispo.length === 0) return;
-      JOURS.forEach(j => {
-        REPAS.forEach(r => {
-          const key = `${j}_${r}`;
-          if (!semaine[key]) {
-            semaine[key] = dispo[Math.floor(Math.random() * dispo.length)];
-          }
-        });
-      });
+      const pools = { Matin: MATIN.map(meal), Midi: MIDI.map(meal), Soir: SOIR.map(meal) };
+      JOURS.forEach(j => REPAS.forEach(r => { const p = pools[r]; semaine[`${j}_${r}`] = p[Math.floor(Math.random()*p.length)]; }));
       afficherSemainier();
     }
-
-    function viderSemaine() {
-      if (confirm('Vider toute la semaine ?')) {
-        semaine = {};
-        afficherSemainier();
-      }
-    }
-
+    function viderSemaine() { if (confirm('Vider toute la semaine ?')) { semaine = {}; afficherSemainier(); } }
     function imprimerListe() {
-      const ingredients = {};
-      Object.values(semaine).forEach(r => {
-        r.ingredients.forEach(i => {
-          if (!ingredients[i.nom]) ingredients[i.nom] = { nom: i.nom, quantites: [] };
-          ingredients[i.nom].quantites.push(i.quantite);
-        });
-      });
-      const liste = Object.values(ingredients).map(i => `☐ ${i.nom} (${[...new Set(i.quantites)].join(', ')})`).join('\n');
+      const ing = {};
+      Object.values(semaine).forEach(r => (r.ingredients||[]).forEach(i => { ing[i.nom] = ing[i.nom] || { nom:i.nom, q:[] }; if (i.quantite) ing[i.nom].q.push(i.quantite); }));
+      const liste = Object.values(ing).map(i => `☐ ${i.nom}${i.q.length?' ('+[...new Set(i.q)].join(', ')+')':''}`).join('\n');
       const win = window.open('', '_blank');
       win.document.write(`<pre style="font-family:sans-serif; padding:2rem; font-size:16px">🛒 LISTE DE COURSES EQUITABLE\n\n${liste || 'Semainier vide'}</pre>`);
       win.print();
     }
 
-    // Données par défaut si le JSON ne charge pas
-    const RECETTES_DEFAULT = [
-      { id:'r1', titre:'Soupe lentilles', description:'Soupe lentilles corail et cumin', icone:'🍲', budget:1.20, temps_min:25, portions:4, regime:['vegetarien','vegan','halal'], cultures:['maghrebine'], categories:['budget'], ingredients:[{nom:'Lentilles corail',quantite:'200g'},{nom:'Tomates',quantite:'400g'}], etapes:['Faire revenir oignon','Ajouter lentilles et eau','Mijoter 20 min'], valeurs_nutritionnelles:{kcal:220,proteines:14,glucides:35,fibres:9,lipides:4}, tags_sante:['IG_bas','riche_fibres','diabete_ok'], disponible:true }
-    ];
-
+    // Init
+    majMode();
+    renderPersonnes();
+    calculer();
     chargerRecettes();
     afficherSemainier();
   </script>
