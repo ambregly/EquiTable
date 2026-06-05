@@ -84,13 +84,22 @@ nav {
   display: flex;
   gap: 1.5rem;
   align-items: center;
+  /* Reste sur une ligne ; défile horizontalement (sans barre visible) si ça déborde */
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+.nav-links::-webkit-scrollbar { display: none; }
 
 .nav-links a {
   font-size: 14px;
   color: var(--texte-sec);
   transition: color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
+
+.nav-links .btn-nav { flex-shrink: 0; white-space: nowrap; }
 
 .nav-links a:hover { color: var(--texte); }
 
@@ -549,18 +558,11 @@ footer {
 
 /* RESPONSIVE */
 @media (max-width: 640px) {
-  /* Nav toujours visible : défilement horizontal au lieu d'être cachée */
+  /* Nav plus compacte sur mobile (le défilement horizontal est géré globalement) */
   .nav-inner { gap: 0.6rem; }
-  .nav-links {
-    gap: 0.85rem;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .nav-links::-webkit-scrollbar { display: none; }
-  .nav-links a { font-size: 13px; white-space: nowrap; flex-shrink: 0; }
-  .btn-nav { padding: 7px 12px; white-space: nowrap; flex-shrink: 0; }
+  .nav-links { gap: 0.85rem; -webkit-overflow-scrolling: touch; }
+  .nav-links a { font-size: 13px; }
+  .btn-nav { padding: 7px 12px; }
   .hero { padding: 3rem 0 2rem; }
   .hero h1 { font-size: 2rem; }
   .cta-block h2 { font-size: 1.75rem; }

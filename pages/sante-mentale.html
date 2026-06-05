@@ -3,10 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alimentation et santé mentale — EquiTable</title>
+  <title>Alimentation, humeur et santé mentale — EquiTable</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/rubrique.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
+  <style>
+    /* ---- Test d'auto-évaluation (spécifique à cette page) ---- */
+    .quiz { background: white; border: 1px solid var(--bordure); border-radius: var(--rayon); padding: 1.5rem; margin: 1.5rem 0; }
+    .quiz-intro { font-size: 14px; color: var(--texte-sec); line-height: 1.6; margin-bottom: 1.25rem; }
+    .quiz-group-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--vert-fonce); margin: 1.25rem 0 0.5rem; }
+    .quiz-q { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 11px 0; border-bottom: 1px solid var(--bordure); }
+    .quiz-q-text { font-size: 14px; color: var(--texte); line-height: 1.5; }
+    .quiz-opts { display: flex; gap: 6px; flex-shrink: 0; }
+    .quiz-btn { font-size: 13px; padding: 5px 16px; border-radius: var(--rayon-pill); border: 1px solid var(--bordure); background: var(--fond-sec); color: var(--texte-sec); cursor: pointer; transition: all 0.15s; }
+    .quiz-btn:hover { border-color: var(--vert); }
+    .quiz-btn.sel-oui { background: var(--coral); border-color: var(--coral); color: white; }
+    .quiz-btn.sel-non { background: var(--vert); border-color: var(--vert); color: white; }
+    .quiz-submit { margin-top: 1.5rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .quiz-progress { font-size: 13px; color: var(--texte-ter); }
+    .quiz-result { margin-top: 1.5rem; padding: 1.5rem; border-radius: var(--rayon); display: none; }
+    .quiz-result.show { display: block; animation: fadeUp 0.4s ease; }
+    .quiz-result h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .quiz-result p { font-size: 14px; line-height: 1.7; margin-bottom: 0.5rem; }
+    .quiz-result ul { list-style: none; margin: 0.75rem 0; }
+    .quiz-result li { font-size: 14px; line-height: 1.6; padding: 4px 0 4px 22px; position: relative; }
+    .quiz-result li::before { content: '→'; position: absolute; left: 0; font-weight: 600; }
+    .quiz-result.vert { background: var(--vert-clair); border: 1px solid var(--vert); }
+    .quiz-result.vert h3, .quiz-result.vert li::before { color: var(--vert-tres-fonce); }
+    .quiz-result.orange { background: #FDF3E2; border: 1px solid #F5C87A; }
+    .quiz-result.orange h3, .quiz-result.orange li::before { color: #9a6a14; }
+    .quiz-result.rouge { background: #FAECE7; border: 1px solid #F0997B; }
+    .quiz-result.rouge h3, .quiz-result.rouge li::before { color: #7a2e14; }
+    .quiz-disclaimer { font-size: 12px; color: var(--texte-ter); font-style: italic; margin-top: 1rem; }
+  </style>
 </head>
 <body>
 
@@ -26,8 +55,8 @@
   <section class="rubrique-hero">
     <div class="container">
       <div class="rubrique-tag">🧠 Rubrique · Santé mentale</div>
-      <h1>Alimentation<br>et santé mentale</h1>
-      <p>Ce que l'on mange influence notre énergie, notre humeur et notre sommeil. Sans être une solution miracle, une alimentation équilibrée est un véritable allié du bien-être mental.</p>
+      <h1>Alimentation, humeur<br>et santé mentale</h1>
+      <p>Ce que l'on mange agit sur notre moral, notre énergie et notre stress — un lien encore plus fort quand le budget est serré. Comprendre ce mécanisme, c'est déjà reprendre un peu de pouvoir sur son bien-être.</p>
     </div>
   </section>
 
@@ -36,72 +65,160 @@
 
       <main class="main-content">
 
-        <h2>🦠 Le ventre, notre « deuxième cerveau »</h2>
-        <p>Une grande partie des signaux qui influencent l'humeur transite par l'intestin et son microbiote. Une alimentation riche en fibres (légumes, légumineuses, céréales complètes) entretient un microbiote diversifié, associé à un meilleur équilibre émotionnel.</p>
-        <p>À l'inverse, une alimentation très transformée et beaucoup d'alcool sont associés à plus de fatigue et de symptômes anxieux ou dépressifs.</p>
-        <p><strong>À privilégier</strong></p>
-        <div class="aliment-grid">
-          <div class="aliment-pill"><strong>Légumes & fruits</strong>fibres, vitamines</div>
-          <div class="aliment-pill"><strong>Poissons gras</strong>oméga-3</div>
-          <div class="aliment-pill"><strong>Légumineuses</strong>fibres + énergie</div>
-          <div class="aliment-pill"><strong>Aliments fermentés</strong>yaourt, kéfir</div>
-          <div class="aliment-pill"><strong>Fruits à coque</strong>magnésium</div>
-          <div class="aliment-pill"><strong>Eau</strong>hydratation</div>
+        <div class="warning-box">
+          <p><strong>Important :</strong> l'alimentation est un soutien du bien-être mental, pas un traitement. Si vous traversez une période difficile, parlez-en à un médecin ou un psychologue. En cas de détresse, le <strong>3114</strong> (prévention du suicide) est gratuit, 24h/24.</p>
         </div>
+
+        <!-- 1 -->
+        <h2>🥫 La « malnutrition cachée »</h2>
+        <p>Les aliments les moins chers sont souvent <strong>ultra-transformés</strong>, riches en sucres raffinés et pauvres en nutriments essentiels. Résultat : on peut manger à sa faim en calories, tout en manquant de ce dont le cerveau a besoin pour bien fonctionner.</p>
+        <p>C'est ce qu'on appelle la <strong>malnutrition cachée</strong> — et elle touche particulièrement les personnes en situation de précarité. La qualité des calories compte autant que leur quantité.</p>
+
         <div class="section-divider"></div>
-        <h2>⏰ Le rythme compte autant que le contenu</h2>
+
+        <!-- 2 -->
+        <h2>🦠 Le microbiote : notre « deuxième cerveau »</h2>
+        <p>Le microbiote intestinal, ce sont les milliards de bactéries de notre intestin. La science montre qu'il <strong>communique directement avec le cerveau</strong> : c'est l'axe intestin-cerveau. <span class="source-tag">INSERM</span></p>
         <ul class="conseil-list">
-          <li>Des repas <strong>réguliers</strong> évitent les chutes d'énergie et l'irritabilité</li>
-          <li>Un petit-déjeuner avec des sucres lents (avoine, pain complet) stabilise la matinée</li>
-          <li>Limiter le café en fin de journée pour protéger le sommeil</li>
-          <li>L'alcool dégrade le sommeil et l'humeur, même s'il « détend » sur le moment</li>
+          <li>Environ <strong>90 % de la sérotonine</strong> (l'« hormone du bien-être ») est produite dans l'intestin</li>
+          <li>Une alimentation pauvre en fibres et en nutriments déséquilibre ce microbiote</li>
+          <li>Ce déséquilibre peut favoriser l'<strong>anxiété</strong> et la <strong>dépression</strong></li>
         </ul>
+        <p>Nourrir son microbiote (fibres, légumes, légumineuses, aliments fermentés), c'est donc aussi prendre soin de son moral.</p>
+
         <div class="section-divider"></div>
-        <h2>💛 Garder de la douceur</h2>
-        <p>Manger n'est pas qu'une affaire de nutriments : le plaisir, le partage et la régularité comptent aussi pour le moral. Inutile de viser la perfection. Si le moral est durablement bas, parlez-en à un professionnel — voir aussi notre page dédiée.</p>
+
+        <!-- 3 -->
+        <h2>🧩 Les carences qui pèsent sur l'humeur</h2>
+        <p>Certaines carences, fréquentes en cas de précarité alimentaire, ont un impact direct sur le moral et l'énergie : <span class="source-tag">ANSES</span></p>
+        <div class="aliment-grid">
+          <div class="aliment-pill"><strong>Oméga-3</strong>fonctionnement du cerveau</div>
+          <div class="aliment-pill"><strong>Magnésium</strong>régulation du stress</div>
+          <div class="aliment-pill"><strong>Fer</strong>fatigue, énergie</div>
+          <div class="aliment-pill"><strong>Vitamines B (B9)</strong>production de sérotonine</div>
+          <div class="aliment-pill"><strong>Vitamine D</strong>humeur, surtout l'hiver</div>
+        </div>
+        <p>En France, une grande partie de la population présente un statut <strong>insuffisant en vitamine D</strong> et des apports en <strong>oméga-3</strong> en dessous des recommandations. <span class="source-tag">Santé publique France · ANSES</span></p>
+
         <div class="section-divider"></div>
+
+        <!-- 4 -->
+        <h2>😣 Stress, précarité et alimentation</h2>
+        <p>L'inégalité alimentaire n'est pas qu'une question de nutrition : c'est aussi un <strong>poids psychologique</strong>. Devoir choisir entre manger et payer ses factures, vivre dans l'incertitude, crée un stress chronique.</p>
+        <p>Le corps produit alors du <strong>cortisol</strong> (l'hormone du stress), qui perturbe l'intestin et fragilise la santé mentale. Chercher les promotions, gérer un budget serré, anticiper chaque repas : tout cela <strong>épuise les ressources mentales</strong> et rend plus difficiles la gestion des émotions et la prise de décision.</p>
+
+        <div class="section-divider"></div>
+
+        <!-- 5 -->
+        <h2>🫂 Isolement et estime de soi</h2>
+        <p>L'alimentation est aussi un fait <strong>social</strong>. Quand elle devient difficile, peuvent apparaître un sentiment de honte, la peur du regard des autres, et un isolement (moins de repas partagés).</p>
+        <p>Or la <strong>solitude est un facteur majeur de dépression</strong>. Reprendre des repas partagés, même simples, fait partie du soin.</p>
+
+        <div class="section-divider"></div>
+
+        <!-- 6 -->
+        <h2>🍬 Sucre, fatigue et faux réconfort</h2>
+        <p>En cas de difficulté ou de souffrance psychique, on consomme souvent plus de sucre et d'aliments gras. Le sucre agit comme un <strong>stimulant rapide</strong> : il donne un « coup de boost »… suivi d'une chute d'énergie.</p>
+        <p>Ce yo-yo peut créer un <strong>cercle vicieux</strong>, voire une forme de dépendance. Privilégier des sucres lents (avoine, légumineuses, pain complet) stabilise l'énergie — et l'humeur.</p>
+
+        <div class="section-divider"></div>
+
+        <!-- 7 -->
+        <h2>✅ Ce que la science recommande</h2>
+        <p>Deux modèles alimentaires sont associés à une <strong>réduction du risque de dépression</strong> : <span class="source-tag">essai SMILES · 2017</span></p>
+        <p><strong>Le régime méditerranéen</strong></p>
+        <div class="aliment-grid">
+          <div class="aliment-pill"><strong>Légumes</strong>à chaque repas</div>
+          <div class="aliment-pill"><strong>Légumineuses</strong>lentilles, pois chiches</div>
+          <div class="aliment-pill"><strong>Huile d'olive</strong>matière grasse</div>
+          <div class="aliment-pill"><strong>Peu de viande</strong>poisson privilégié</div>
+        </div>
+        <p><strong>L'alimentation anti-inflammatoire</strong></p>
+        <div class="aliment-grid">
+          <div class="aliment-pill"><strong>Peu transformé</strong>fait maison</div>
+          <div class="aliment-pill"><strong>Épices</strong>curcuma, gingembre, ail</div>
+          <div class="aliment-pill"><strong>Fibres</strong>fruits, légumes, complets</div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- 8 -->
+        <h2>⚠️ Attention aux fausses solutions</h2>
+        <p>Certaines pratiques circulent beaucoup, mais sont à manier avec prudence — il n'existe <strong>pas de solution universelle</strong> :</p>
+        <ul class="conseil-list">
+          <li><strong>Le jeûne</strong> — peut améliorer certains états, mais <strong>déconseillé en cas de trouble du comportement alimentaire (TCA)</strong></li>
+          <li><strong>Le régime cétogène</strong> — utile dans des cas médicaux précis (ex. épilepsie), mais pas adapté à tout le monde</li>
+          <li><strong>Le sans gluten</strong> — utile uniquement en cas de sensibilité réelle, inutile sinon</li>
+        </ul>
+
+        <div class="section-divider"></div>
+
+        <!-- TEST INTERACTIF -->
+        <h2>🧪 Test : ton alimentation influence-t-elle ton humeur ?</h2>
+        <div class="quiz">
+          <p class="quiz-intro">Réponds honnêtement par <strong>Oui</strong> ou <strong>Non</strong> aux 13 questions. Ce test n'est pas un diagnostic : c'est un outil pour mieux te connaître.</p>
+          <div id="quiz-questions"></div>
+          <div class="quiz-submit">
+            <button class="btn-primary" id="quiz-go">Voir mon résultat</button>
+            <span class="quiz-progress" id="quiz-progress">0 / 13 réponses</span>
+          </div>
+          <div class="quiz-result" id="quiz-result"></div>
+          <p class="quiz-disclaimer">⚠️ Si tu te sens mal, un accompagnement médical ou psychologique peut t'aider. Ce test ne remplace aucun avis professionnel.</p>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- SOURCES -->
         <h2>📚 Sources</h2>
         <div class="sources-list">
-          <p>• INSERM — Microbiote et santé mentale</p>
-          <p>• INRAE — Nutrition et cerveau</p>
-          <p>• Santé publique France — Bien-être et modes de vie</p>
+          <p>• <a href="https://www.inserm.fr/c-est-quoi/une-info-a-digerer-cest-quoi-le-systeme-nerveux-enterique/" target="_blank">INSERM — C'est quoi le système nerveux entérique ? (axe intestin-cerveau)</a></p>
+          <p>• <a href="https://www.inserm.fr/actualite/sante-mentale-le-nerf-vague-lie-microbiote-et-depression/" target="_blank">INSERM — Santé mentale : le nerf vague lie microbiote et dépression</a></p>
+          <p>• ANSES — Repères de consommation du PNNS ; apports en oméga-3 et statut en vitamine D de la population française</p>
+          <p>• Santé publique France — Étude Esteban (statut en vitamine D des adultes en France)</p>
+          <p>• Jacka F. et al. — Essai « SMILES » : amélioration alimentaire et dépression majeure, <em>BMC Medicine</em>, 2017</p>
         </div>
 
       </main>
 
+      <!-- SIDEBAR -->
       <aside class="sidebar">
         <div class="sidebar-card" style="background:var(--vert-clair); border-color:var(--vert)">
           <div class="sidebar-title" style="color:var(--vert-tres-fonce); border-color:var(--vert)">⚡ L'essentiel</div>
-          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6; margin-bottom:8px">1. L'intestin et le cerveau communiquent en permanence</p>
-          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6; margin-bottom:8px">2. Régularité des repas = énergie et humeur plus stables</p>
-          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6; margin-bottom:8px">3. Oméga-3, fibres, vitamines B : des alliés du moral</p>
-          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6; ">4. L'alimentation complète, mais ne remplace pas, un suivi psy</p>
+          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6; margin-bottom:8px">1. La <strong>qualité</strong> des calories compte autant que la quantité</p>
+          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6; margin-bottom:8px">2. Le <strong>microbiote</strong> dialogue avec le cerveau (90 % de la sérotonine vient de l'intestin)</p>
+          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6; margin-bottom:8px">3. Fibres, légumineuses, oméga-3 et repas réguliers <strong>soutiennent l'humeur</strong></p>
+          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6">4. L'alimentation aide, mais <strong>ne remplace pas</strong> un suivi médical</p>
+        </div>
+
+        <div class="sidebar-card" style="background:#FAECE7; border-color:#F0997B">
+          <div class="sidebar-title" style="color:#7a2e14; border-color:#F0997B">💙 Besoin de parler ?</div>
+          <p style="font-size:12px; color:#5a2010; line-height:1.6"><strong>3114</strong> — Prévention du suicide (gratuit, 24h/24)<br><strong>15</strong> — Urgences médicales<br>Ton médecin traitant peut t'orienter.</p>
         </div>
 
         <div class="sidebar-card">
           <div class="sidebar-title">Rubriques liées</div>
           <a href="depression-anxiete.html" class="lien-rubrique">
             <span class="lien-rubrique-icon">🧠</span>
-            <span>Dépression & anxiété</span>
-          </a>
-          <a href="bases-essentielles.html" class="lien-rubrique">
-            <span class="lien-rubrique-icon">🔬</span>
-            <span>Fibres et microbiote</span>
+            <span>Dépression et anxiété</span>
           </a>
           <a href="budget.html" class="lien-rubrique">
             <span class="lien-rubrique-icon">💶</span>
             <span>Bien manger petit budget</span>
           </a>
-          <a href="rubriques.html" class="lien-rubrique">
-            <span class="lien-rubrique-icon">📚</span>
-            <span>Toutes les rubriques</span>
+          <a href="bases-essentielles.html" class="lien-rubrique">
+            <span class="lien-rubrique-icon">🔬</span>
+            <span>Fibres et microbiote</span>
+          </a>
+          <a href="tca.html" class="lien-rubrique">
+            <span class="lien-rubrique-icon">💙</span>
+            <span>Troubles alimentaires (TCA)</span>
           </a>
         </div>
 
         <div class="sidebar-card" style="background:var(--fond-sec); border:none">
           <div class="sidebar-title">Autres rubriques</div>
           <a href="budget.html" class="sidebar-link">💶 Petit budget</a>
-          <a href="pesticides.html" class="sidebar-link">🌱 Pesticides & additifs</a>
+          <a href="pesticides.html" class="sidebar-link">🌱 Pesticides &amp; additifs</a>
           <a href="fake-news.html" class="sidebar-link">🚫 Idées reçues</a>
           <a href="rubriques.html" class="sidebar-link">→ Toutes les rubriques</a>
         </div>
@@ -110,6 +227,7 @@
     </div>
   </div>
 
+  <!-- CTA -->
   <section style="background:var(--fond-sec); padding:3rem 0; margin-top:2rem; border-top:1px solid var(--bordure)">
     <div class="container-sm" style="text-align:center">
       <h2 style="font-size:1.75rem; margin-bottom:0.75rem">Des recommandations adaptées à votre profil</h2>
@@ -127,16 +245,116 @@
         </div>
         <div class="footer-links">
           <a href="dashboard.html">Accueil</a>
-          <a href="pathologies.html">Pathologies</a>
+          <a href="rubriques.html">Rubriques</a>
           <a href="questionnaire.html">Mon profil</a>
         </div>
       </div>
       <div class="footer-bottom">
         <span>© 2025 EquiTable</span>
-        <span>Sources : HAS · ANSES · INSERM · NutriNet-Santé</span>
+        <span>Sources : INSERM · ANSES · Santé publique France</span>
       </div>
     </div>
   </footer>
+
+  <script>
+    // ─── Test d'auto-évaluation ───────────────────────────────
+    const QUIZ = [
+      { g: 'Humeur et énergie', q: [
+        'Te sens-tu souvent fatigué(e) sans raison claire ?',
+        "As-tu des variations d'humeur dans la journée ?",
+        'Te sens-tu anxieux(se) ou irritable régulièrement ?',
+      ]},
+      { g: 'Habitudes alimentaires', q: [
+        'Manges-tu souvent des produits ultra-transformés ?',
+        'Consommes-tu peu de fruits, légumes ou légumineuses ?',
+        'Sautes-tu régulièrement des repas ?',
+        'Manges-tu beaucoup de sucre (grignotage, boissons sucrées) ?',
+      ]},
+      { g: 'Signaux du corps', q: [
+        'As-tu souvent des troubles digestifs (ballonnements, douleurs) ?',
+        'Te sens-tu "lourd(e)" ou fatigué(e) après avoir mangé ?',
+      ]},
+      { g: "Relation à l'alimentation", q: [
+        'Manges-tu davantage quand tu es stressé(e) ou triste ?',
+        'Ressens-tu de la culpabilité après avoir mangé ?',
+      ]},
+      { g: 'Indicateurs clés', q: [
+        'As-tu souvent des fringales soudaines, surtout pour du sucré ou du gras ?',
+        'As-tu l’impression que ton énergie "s’effondre" quelques heures après avoir mangé ?',
+      ]},
+    ];
+
+    const RESULTS = {
+      vert:   { cls:'vert',   titre:'🟢 Profil 1 — Équilibre global',
+        intro:'Ton alimentation soutient globalement ta santé mentale.',
+        points:['Des habitudes plutôt stables','Une énergie assez régulière','Un microbiote probablement équilibré'],
+        conseil:'Continue comme ça ! Pense à varier ton alimentation pour maintenir cet équilibre.' },
+      orange: { cls:'orange', titre:'🟠 Profil 2 — Équilibre fragile',
+        intro:'Ton alimentation influence déjà ton humeur. Tu peux ressentir fatigue, irritabilité ou variations d’énergie. Ton corps t’envoie des signaux.',
+        points:['Réduire progressivement le sucre','Ajouter des aliments simples : lentilles, légumes, fruits','Éviter de sauter des repas'],
+        conseil:'De petits changements réguliers peuvent déjà faire une vraie différence.' },
+      rouge:  { cls:'rouge',  titre:'🔴 Profil 3 — Déséquilibre alimentaire',
+        intro:'Ton alimentation impacte fortement ta santé mentale : fatigue chronique, anxiété ou moral bas, troubles digestifs sont possibles. Ton microbiote et tes apports sont probablement déséquilibrés.',
+        points:['Réintroduire des repas réguliers','Ajouter des sources d’oméga-3 (graines, huiles)','Réduire progressivement les produits ultra-transformés'],
+        conseil:'Si tu te sens mal, un accompagnement médical ou psychologique peut beaucoup aider.' },
+    };
+
+    const answers = {};
+    let idx = 0;
+    const container = document.getElementById('quiz-questions');
+    QUIZ.forEach(group => {
+      const t = document.createElement('div');
+      t.className = 'quiz-group-title';
+      t.textContent = group.g;
+      container.appendChild(t);
+      group.q.forEach(text => {
+        const i = idx++;
+        const row = document.createElement('div');
+        row.className = 'quiz-q';
+        row.innerHTML = `<span class="quiz-q-text">${i+1}. ${text}</span>
+          <span class="quiz-opts">
+            <button class="quiz-btn" data-i="${i}" data-v="oui">Oui</button>
+            <button class="quiz-btn" data-i="${i}" data-v="non">Non</button>
+          </span>`;
+        container.appendChild(row);
+      });
+    });
+    const TOTAL = idx;
+
+    container.addEventListener('click', e => {
+      const btn = e.target.closest('.quiz-btn');
+      if (!btn) return;
+      const i = btn.dataset.i, v = btn.dataset.v;
+      answers[i] = v;
+      btn.parentElement.querySelectorAll('.quiz-btn').forEach(b => b.classList.remove('sel-oui','sel-non'));
+      btn.classList.add(v === 'oui' ? 'sel-oui' : 'sel-non');
+      document.getElementById('quiz-progress').textContent =
+        `${Object.keys(answers).length} / ${TOTAL} réponses`;
+    });
+
+    document.getElementById('quiz-go').addEventListener('click', () => {
+      const repondu = Object.keys(answers).length;
+      const progress = document.getElementById('quiz-progress');
+      if (repondu < TOTAL) {
+        progress.textContent = `Réponds aux ${TOTAL} questions (${repondu}/${TOTAL})`;
+        progress.style.color = 'var(--coral)';
+        return;
+      }
+      progress.style.color = '';
+      const oui = Object.values(answers).filter(v => v === 'oui').length;
+      let r;
+      if (oui <= 4) r = RESULTS.vert;
+      else if (oui <= 8) r = RESULTS.orange;
+      else r = RESULTS.rouge;
+      const box = document.getElementById('quiz-result');
+      box.className = `quiz-result show ${r.cls}`;
+      box.innerHTML = `<h3>${r.titre}</h3>
+        <p><strong>${oui} "oui" sur ${TOTAL}.</strong> ${r.intro}</p>
+        <ul>${r.points.map(p => `<li>${p}</li>`).join('')}</ul>
+        <p>${r.conseil}</p>`;
+      box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  </script>
 
 </body>
 </html>
