@@ -6,6 +6,8 @@
   <title>Carte EquiTable — Ressources alimentaires locales</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
   <style>
     .carte-layout { display: grid; grid-template-columns: 320px 1fr; height: calc(100vh - 65px); }
@@ -73,6 +75,8 @@
           <div class="filter-chip" onclick="filtrerType('epicerie_asiatique', this)">🥢 Asie</div>
           <div class="filter-chip" onclick="filtrerType('epicerie_africaine', this)">🌍 Afrique</div>
           <div class="filter-chip" onclick="filtrerType('epicerie_sociale', this)">❤️ Social</div>
+          <div class="filter-chip" onclick="filtrerType('aide_alimentaire', this)">🤝 Aide alim.</div>
+          <div class="filter-chip" onclick="filtrerType('anti_gaspi', this)">♻️ Anti-gaspi</div>
           <div class="filter-chip" onclick="filtrerType('amap', this)">🌱 AMAP</div>
           <div class="filter-chip" onclick="filtrerType('bio', this)">🍃 Bio</div>
         </div>
@@ -88,9 +92,11 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script>
     let locations = [];
     let markers = {};
+    let clusterGroup;
     let filtreType = 'tous';
     let filtreRegion = '';
     let map;
@@ -103,6 +109,8 @@
       epicerie_africaine: '🌍 Épicerie africaine',
       epicerie_antillaise: '🌴 Épicerie antillaise',
       epicerie_sociale: '❤️ Épicerie sociale',
+      aide_alimentaire: '🤝 Aide alimentaire',
+      anti_gaspi: '♻️ Anti-gaspi',
       amap: '🌱 AMAP',
       bio: '🍃 Magasin bio',
       too_good_to_go: '🟢 Too Good To Go'
@@ -114,6 +122,8 @@
       epicerie_asiatique: '#378ADD',
       epicerie_africaine: '#BA7517',
       epicerie_sociale: '#D4537E',
+      aide_alimentaire: '#E0902B',
+      anti_gaspi: '#6B8E23',
       amap: '#3B6D11',
       bio: '#1D9E75',
       too_good_to_go: '#1D9E75'
@@ -132,6 +142,10 @@
         maxZoom: 19
       }).addTo(map);
 
+      // Groupe de regroupement (clustering) — les marqueurs proches se regroupent
+      clusterGroup = L.markerClusterGroup({ maxClusterRadius: 50, showCoverageOnHover: false, spiderfyOnMaxZoom: true });
+      map.addLayer(clusterGroup);
+
       // Si profil avec région, centrer dessus
       if (profil?.region) {
         document.getElementById('region-select').value = profil.region;
@@ -149,7 +163,6 @@
       });
 
       const marker = L.marker([loc.lat, loc.lng], { icon })
-        .addTo(map)
         .bindPopup(`
           <div style="min-width:200px">
             <div style="font-weight:500;font-size:14px;margin-bottom:4px">${loc.nom}</div>
@@ -171,13 +184,13 @@
     }
 
     function getEmoji(type) {
-      const emojis = { marche:'🛒', epicerie_maghrebine:'🫕', epicerie_asiatique:'🥢', epicerie_africaine:'🌍', epicerie_sociale:'❤️', amap:'🌱', bio:'🍃', too_good_to_go:'🟢' };
+      const emojis = { marche:'🛒', epicerie_maghrebine:'🫕', epicerie_asiatique:'🥢', epicerie_africaine:'🌍', epicerie_sociale:'❤️', aide_alimentaire:'🤝', anti_gaspi:'♻️', amap:'🌱', bio:'🍃', too_good_to_go:'🟢' };
       return emojis[type] || '📍';
     }
 
     function afficherLocations() {
-      // Supprimer les anciens marqueurs
-      Object.values(markers).forEach(m => map.removeLayer(m));
+      // Vider le groupe de regroupement
+      clusterGroup.clearLayers();
       markers = {};
 
       const filtrees = locations.filter(loc => {
@@ -188,6 +201,7 @@
 
       filtrees.forEach(loc => {
         markers[loc.id] = creerMarker(loc);
+        clusterGroup.addLayer(markers[loc.id]);
       });
 
       // Liste
@@ -223,8 +237,7 @@
       surlignerItem(id);
       const loc = locations.find(l => l.id === id);
       if (loc && markers[id]) {
-        map.setView([loc.lat, loc.lng], 15);
-        markers[id].openPopup();
+        clusterGroup.zoomToShowLayer(markers[id], () => markers[id].openPopup());
       }
     }
 

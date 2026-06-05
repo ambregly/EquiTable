@@ -1173,5 +1173,152 @@
     ],
     "gratuit": true,
     "verifie": true
+  },
+  {
+    "id": "loc_060",
+    "nom": "AMAP Arnaud Bernard",
+    "type": "amap",
+    "adresse": "36 rue Gatien Arnoult, 31000 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.61005,
+    "lng": 1.44051,
+    "horaires": "Distribution le jeudi soir",
+    "description": "Panier de produits bio en direct du producteur (légumes, fruits, fromage, œufs, pain), sur adhésion.",
+    "cultures": [],
+    "tags": [
+      "amap",
+      "producteurs_locaux",
+      "bio",
+      "frais"
+    ],
+    "gratuit": false,
+    "verifie": true
+  },
+  {
+    "id": "loc_061",
+    "nom": "AMAP Patte d'Oie",
+    "type": "amap",
+    "adresse": "Place de la Patte d'Oie, 31300 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.59664,
+    "lng": 1.42309,
+    "horaires": "Distribution le jeudi 19h30-20h30",
+    "description": "AMAP de quartier : paniers de saison en circuit court, sur adhésion à l'année.",
+    "cultures": [],
+    "tags": [
+      "amap",
+      "producteurs_locaux",
+      "frais"
+    ],
+    "gratuit": false,
+    "verifie": true
+  },
+  {
+    "id": "loc_062",
+    "nom": "AMAP Ponts Jumeaux",
+    "type": "amap",
+    "adresse": "45 rue de Chaussas, 31200 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.6171,
+    "lng": 1.43084,
+    "horaires": "Distribution en soirée",
+    "description": "AMAP en lien direct avec les paysan·ne·s : légumes de saison et produits fermiers, sur adhésion.",
+    "cultures": [],
+    "tags": [
+      "amap",
+      "producteurs_locaux",
+      "frais"
+    ],
+    "gratuit": false,
+    "verifie": true
+  },
+  {
+    "id": "loc_063",
+    "nom": "Banque Alimentaire de Toulouse",
+    "type": "aide_alimentaire",
+    "adresse": "197 avenue de Fronton, 31200 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.64385,
+    "lng": 1.43337,
+    "horaires": "Via une association partenaire",
+    "description": "Collecte et redistribue des denrées via un réseau d'associations et d'épiceries solidaires de Haute-Garonne.",
+    "telephone": "05 61 47 33 01",
+    "public": "Orientation par une association partenaire",
+    "cultures": [],
+    "tags": [
+      "aide_alimentaire",
+      "solidarite",
+      "gratuit"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_064",
+    "nom": "Restos du Cœur — Toulouse (Séminaire)",
+    "type": "aide_alimentaire",
+    "adresse": "27 chemin du Séminaire, 31200 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.63924,
+    "lng": 1.43571,
+    "horaires": "Distributions, accueil et ateliers",
+    "description": "Centre des Restos du Cœur : aide alimentaire gratuite, accompagnement et ateliers, sur inscription.",
+    "telephone": "05 34 40 12 12",
+    "public": "Sur inscription (conditions de ressources)",
+    "cultures": [],
+    "tags": [
+      "aide_alimentaire",
+      "solidarite",
+      "gratuit"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_065",
+    "nom": "Secours Populaire — Haute-Garonne",
+    "type": "aide_alimentaire",
+    "adresse": "147 avenue des États-Unis, 31200 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.63554,
+    "lng": 1.43059,
+    "horaires": "Voir contact",
+    "description": "Aide alimentaire et solidarité du Secours Populaire 31, selon la situation des personnes accueillies.",
+    "public": "Selon situation",
+    "cultures": [],
+    "tags": [
+      "aide_alimentaire",
+      "solidarite",
+      "gratuit"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_066",
+    "nom": "Le Drive Tout Nu (Balma-Gramont)",
+    "type": "anti_gaspi",
+    "adresse": "4 rue Théron de Montaugé, 31200 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.63439,
+    "lng": 1.4831,
+    "horaires": "Lun-Ven 11h-19h30, Sam 9h-19h30",
+    "description": "Supermarché zéro déchet et anti-gaspi : produits locaux et de saison, en vrac, à prix maîtrisés.",
+    "telephone": "05 34 52 13 39",
+    "cultures": [],
+    "tags": [
+      "anti_gaspi",
+      "local",
+      "frais"
+    ],
+    "gratuit": false,
+    "verifie": true
   }
 ]
