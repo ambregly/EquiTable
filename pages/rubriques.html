@@ -303,6 +303,16 @@
     ];
 
     const RUBRIQUES = [
+      // — Pages publiées (ajoutées) —
+      { id: 'sante-mentale-general', icon: '🧠', iconBg: '#E6F1FB', title: 'Alimentation et santé mentale', desc: 'Microbiote, carences, stress et précarité — avec un test d\u2019auto-évaluation de ton humeur.', themes: ['sante-mentale'], source: 'INSERM · ANSES', href: 'sante-mentale.html', dispo: true, profil: ['obj_sante_mentale'] },
+      { id: 'tca', icon: '💙', iconBg: '#E6F1FB', title: 'Troubles du comportement alimentaire', desc: 'Une approche bienveillante, sans jugement, et des ressources pour être accompagné·e.', themes: ['sante-mentale', 'pathologies'], source: 'HAS', href: 'tca.html', dispo: true, profil: [] },
+      { id: 'epilepsie', icon: '⚡', iconBg: '#FAECE7', title: 'Épilepsie', desc: 'Régime cétogène encadré, interactions médicaments–aliments — les spécificités de l\u2019épilepsie.', themes: ['pathologies'], source: 'HAS · SFNEP', href: 'epilepsie.html', dispo: true, profil: [] },
+      { id: 'hypothyroidie', icon: '🦋', iconBg: '#FAECE7', title: 'Hypothyroïdie', desc: 'Iode, soja, prise de la lévothyroxine — les points nutritionnels essentiels pour la thyroïde.', themes: ['pathologies'], source: 'HAS · ANSES', href: 'hypothyroidie.html', dispo: true, profil: [] },
+      { id: 'endometriose', icon: '🌸', iconBg: '#FBEAF0', title: 'Endométriose', desc: 'Alimentation anti-inflammatoire, oméga-3, perturbateurs endocriniens — les pistes disponibles.', themes: ['pathologies'], source: 'HAS · recherches', href: 'endometriose.html', dispo: true, profil: [] },
+      { id: 'budget-general', icon: '💶', iconBg: '#FAEEDA', title: 'Bien manger avec un petit budget', desc: 'Légumineuses, surgelés, batch cooking, aides alimentaires — manger sain sans se ruiner.', themes: ['budget'], source: 'ANSES · PNNS', href: 'budget.html', dispo: true, profil: ['budget_serre', 'logement_etudiant'] },
+      { id: 'pesticides-general', icon: '🌱', iconBg: '#EAF3DE', title: 'Pesticides et additifs', desc: 'Bien laver, bio, additifs et ultra-transformation — garder le sens des proportions.', themes: ['pesticides'], source: 'ANSES · EFSA', href: 'pesticides.html', dispo: true, profil: ['obj_pesticides'] },
+      { id: 'fake-news-general', icon: '🚫', iconBg: '#FBEAF0', title: 'Idées reçues & désinformation', desc: 'Détox, superaliments, régimes miracle — repérer l\u2019arnaque et reconnaître une source fiable.', themes: ['fake-news'], source: 'ANSES · INSERM', href: 'fake-news.html', dispo: true, profil: ['obj_fake_news'] },
+
       // LES BASES
       {
         id: 'bases-essentielles',
@@ -341,7 +351,7 @@
         desc: 'Lien microbiote–cerveau, oméga-3, carences en fer et vitamine D — l’alimentation au service de la santé mentale.',
         themes: ['sante-mentale', 'pathologies'],
         source: 'INSERM · INRAE',
-        href: '#', dispo: false, profil: ['patho_depression', 'obj_sante_mentale'],
+        href: 'depression-anxiete.html', dispo: true, profil: ['patho_depression', 'obj_sante_mentale'],
       },
       {
         id: 'stress',
@@ -380,7 +390,7 @@
         desc: 'Réduction du sel, alimentation DASH, potassium — comment l’alimentation agit directement sur la pression artérielle.',
         themes: ['pathologies'],
         source: 'HAS · ANSES',
-        href: '#', dispo: false, profil: ['patho_hypertension'],
+        href: 'hypertension.html', dispo: true, profil: ['patho_hypertension'],
       },
       {
         id: 'cholesterol',
@@ -389,7 +399,7 @@
         desc: 'Graisses saturées vs insaturées, oméga-3, fibres solubles — comprendre et agir sur son bilan lipidique.',
         themes: ['pathologies'],
         source: 'HAS · ANSES',
-        href: '#', dispo: false, profil: [],
+        href: 'cholesterol.html', dispo: true, profil: [],
       },
       {
         id: 'cancer',
@@ -398,7 +408,7 @@
         desc: 'Prévenir la dénutrition, maintenir l’énergie, gérer les effets secondaires alimentaires.',
         themes: ['pathologies', 'traitements'],
         source: 'INCA · SFNEP · HAS',
-        href: '#', dispo: false, profil: [],
+        href: 'cancer-chimio.html', dispo: true, profil: [],
       },
       {
         id: 'maladies-renales',
@@ -407,7 +417,7 @@
         desc: 'Protéines, sel, potassium, phosphore — les ajustements alimentaires selon le stade de la maladie.',
         themes: ['pathologies', 'traitements'],
         source: 'HAS · SFNEP',
-        href: '#', dispo: false, profil: [],
+        href: 'maladie-renale.html', dispo: true, profil: [],
       },
       // PETIT BUDGET
       {
