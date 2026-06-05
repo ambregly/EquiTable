@@ -10,8 +10,17 @@
     "lng": 1.4402,
     "horaires": "Mardi au dimanche, 6h-13h",
     "description": "Grand marché couvert avec producteurs locaux et épiceries du monde",
-    "cultures": ["maghrebine", "africaine", "asiatique"],
-    "tags": ["marche", "producteurs_locaux", "bio", "frais"],
+    "cultures": [
+      "maghrebine",
+      "africaine",
+      "asiatique"
+    ],
+    "tags": [
+      "marche",
+      "producteurs_locaux",
+      "bio",
+      "frais"
+    ],
     "gratuit": true,
     "verifie": true
   },
@@ -23,11 +32,18 @@
     "region": "Occitanie",
     "departement": "31",
     "lat": 43.6047,
-    "lng": 1.4440,
+    "lng": 1.444,
     "horaires": "Lun-Sam 9h-20h",
     "description": "Épicerie maghrébine avec produits frais, légumineuses, épices",
-    "cultures": ["maghrebine"],
-    "tags": ["epicerie_maghrebine", "legumineuses", "epices", "frais"],
+    "cultures": [
+      "maghrebine"
+    ],
+    "tags": [
+      "epicerie_maghrebine",
+      "legumineuses",
+      "epices",
+      "frais"
+    ],
     "gratuit": false,
     "verifie": true
   },
@@ -43,7 +59,11 @@
     "horaires": "Lun-Ven 9h-12h, 14h-17h",
     "description": "Épicerie sociale — accès sous conditions de ressources, produits à prix réduits",
     "cultures": [],
-    "tags": ["epicerie_sociale", "budget", "solidarite"],
+    "tags": [
+      "epicerie_sociale",
+      "budget",
+      "solidarite"
+    ],
     "gratuit": false,
     "verifie": true
   },
@@ -59,7 +79,12 @@
     "horaires": "Distribution le jeudi 18h30",
     "description": "Panier de légumes de saison direct producteur, abonnement hebdomadaire",
     "cultures": [],
-    "tags": ["amap", "producteurs_locaux", "bio", "legumes"],
+    "tags": [
+      "amap",
+      "producteurs_locaux",
+      "bio",
+      "legumes"
+    ],
     "gratuit": false,
     "verifie": true
   },
@@ -74,8 +99,251 @@
     "lng": 1.4536,
     "horaires": "Lun-Dim 9h-19h30",
     "description": "Grande épicerie asiatique — produits chinois, vietnamiens, japonais, coréens",
-    "cultures": ["asiatique"],
-    "tags": ["epicerie_asiatique", "legumineuses", "tofu", "epices"],
+    "cultures": [
+      "asiatique"
+    ],
+    "tags": [
+      "epicerie_asiatique",
+      "legumineuses",
+      "tofu",
+      "epices"
+    ],
+    "gratuit": false,
+    "verifie": true
+  },
+  {
+    "id": "loc_006",
+    "nom": "TEKO & CO",
+    "type": "epicerie_sociale",
+    "adresse": "5 avenue Didier Daurat, 31400 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.56373,
+    "lng": 1.49137,
+    "horaires": "Lun-Ven 13h-16h (sans RDV), 18h-19h (sur RDV)",
+    "description": "Épicerie solidaire en libre-service : produits frais, secs et d'hygiène, pour étudiant·e·s et familles en difficulté.",
+    "telephone": "07 45 14 07 58",
+    "public": "Étudiant·e·s et familles en difficulté",
+    "participation": "10 à 30 % du prix",
+    "cultures": [],
+    "tags": [
+      "epicerie_sociale",
+      "solidarite",
+      "etudiants",
+      "budget",
+      "frais"
+    ],
+    "gratuit": false,
+    "verifie": true
+  },
+  {
+    "id": "loc_007",
+    "nom": "Épicerie sociale UT1-ESOPE",
+    "type": "epicerie_sociale",
+    "adresse": "1 rue des puits creusés, 31000 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.60727,
+    "lng": 1.43779,
+    "horaires": "Mercredi et jeudi 14h-19h",
+    "description": "Épicerie sociale étudiante en libre-service : produits frais, secs, surgelés et d'hygiène.",
+    "telephone": "06 44 93 31 25",
+    "public": "Étudiant·e·s en difficulté",
+    "participation": "10 à 30 % du prix",
+    "cultures": [],
+    "tags": [
+      "epicerie_sociale",
+      "solidarite",
+      "etudiants",
+      "budget"
+    ],
+    "gratuit": false,
+    "verifie": true
+  },
+  {
+    "id": "loc_008",
+    "nom": "Épicerie sociale Université Jean Jaurès (Croix-Rouge)",
+    "type": "epicerie_sociale",
+    "adresse": "Université Jean Jaurès, 5 allée Antonio Machado, 31000 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.57838,
+    "lng": 1.401,
+    "horaires": "Trois demi-journées par semaine",
+    "description": "Épicerie sociale Croix-Rouge pour les étudiants et le personnel de l'université. Orientation par les assistantes sociales.",
+    "public": "Étudiants et personnel de l'UT2J",
+    "participation": "10 % de la valeur",
+    "cultures": [],
+    "tags": [
+      "epicerie_sociale",
+      "solidarite",
+      "etudiants",
+      "croix-rouge"
+    ],
+    "gratuit": false,
+    "verifie": true
+  },
+  {
+    "id": "loc_009",
+    "nom": "Entr'act étudiants",
+    "type": "epicerie_sociale",
+    "adresse": "5 allée Antonio Machado, 31000 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.57888,
+    "lng": 1.40165,
+    "horaires": "Voir contact",
+    "description": "Épicerie solidaire pour les étudiant·e·s de la Fac Jean Jaurès et de l'IFRASS.",
+    "telephone": "06 24 29 12 68",
+    "public": "Étudiant·e·s Jean Jaurès & IFRASS",
+    "cultures": [],
+    "tags": [
+      "epicerie_sociale",
+      "solidarite",
+      "etudiants"
+    ],
+    "gratuit": false,
+    "verifie": true
+  },
+  {
+    "id": "loc_010",
+    "nom": "Le petit Sab'lé",
+    "type": "epicerie_sociale",
+    "adresse": "132 allée Huguette Delavault, campus Rangueil, 31400 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.56176,
+    "lng": 1.46694,
+    "horaires": "Lun, mer, ven 11h-14h · mar, jeu 11h-18h30",
+    "description": "Épicerie et espace de convivialité pour les étudiant·e·s du campus Toulouse Rangueil (Paul Sabatier). Dossier via le SIMPPS.",
+    "telephone": "05 61 55 73 67",
+    "public": "Étudiant·e·s du campus Rangueil",
+    "participation": "20 % du prix",
+    "cultures": [],
+    "tags": [
+      "epicerie_sociale",
+      "solidarite",
+      "etudiants",
+      "frais"
+    ],
+    "gratuit": false,
+    "verifie": true
+  },
+  {
+    "id": "loc_011",
+    "nom": "CAP Centre",
+    "type": "epicerie_sociale",
+    "adresse": "95 Grande rue Saint Michel, 31400 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.58894,
+    "lng": 1.44595,
+    "horaires": "Lun-Ven 9h-11h et 14h-16h (sauf lun. matin et mer. après-midi)",
+    "description": "Épicerie sociale et solidaire : paniers alimentaires avec liberté de choix, pour les résident·e·s des 31000 et 31400.",
+    "telephone": "09 66 91 64 11",
+    "public": "Résident·e·s 31000 / 31400",
+    "participation": "15 % de la valeur du panier",
+    "cultures": [],
+    "tags": [
+      "epicerie_sociale",
+      "solidarite",
+      "budget",
+      "frais"
+    ],
+    "gratuit": false,
+    "verifie": true
+  },
+  {
+    "id": "loc_012",
+    "nom": "Épicerie Soliciale (Vivre Mieux)",
+    "type": "epicerie_sociale",
+    "adresse": "9 bis rue de Vestrepain, 31100 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.5852,
+    "lng": 1.4108,
+    "horaires": "Lun, mar, jeu, ven 14h-17h",
+    "description": "Épicerie solidaire en libre-service avec ateliers (alimentation santé, créatifs, esthétique). Quartiers Bagatelle, La Faourette, Papus, Tabar, Bordelongue.",
+    "telephone": "09 80 79 36 71",
+    "public": "Résident·e·s Bagatelle / Faourette / Papus…",
+    "participation": "10 à 30 % du prix",
+    "cultures": [],
+    "tags": [
+      "epicerie_sociale",
+      "solidarite",
+      "ateliers",
+      "budget"
+    ],
+    "gratuit": false,
+    "verifie": true
+  },
+  {
+    "id": "loc_013",
+    "nom": "Entract' Alternative",
+    "type": "epicerie_sociale",
+    "adresse": "148 avenue de Fronton, 31200 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.63763,
+    "lng": 1.43343,
+    "horaires": "Lun, mar, jeu, ven 13h30-18h30 · sam 13h30-17h30",
+    "description": "Épicerie solidaire en libre-service pour travailleurs à revenus modestes et chômeurs indemnisés du 31200. Inscription sur rendez-vous.",
+    "telephone": "05 61 55 59 26",
+    "public": "Revenus modestes / chômeurs (31200)",
+    "participation": "30 à 50 % du prix",
+    "cultures": [],
+    "tags": [
+      "epicerie_sociale",
+      "solidarite",
+      "budget"
+    ],
+    "gratuit": false,
+    "verifie": true
+  },
+  {
+    "id": "loc_014",
+    "nom": "Inservices",
+    "type": "epicerie_sociale",
+    "adresse": "47-49 avenue de Grande Bretagne, 31300 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.59818,
+    "lng": 1.4189,
+    "horaires": "Lundi et mardi 13h30-18h",
+    "description": "Épicerie solidaire en libre-service pour les résident·e·s du 31300.",
+    "telephone": "06 63 39 68 47",
+    "public": "Résident·e·s 31300",
+    "participation": "10 à 30 % du prix",
+    "cultures": [],
+    "tags": [
+      "epicerie_sociale",
+      "solidarite",
+      "budget"
+    ],
+    "gratuit": false,
+    "verifie": true
+  },
+  {
+    "id": "loc_015",
+    "nom": "La Main à la Pâte (Rangueil)",
+    "type": "epicerie_sociale",
+    "adresse": "62 rue de Nîmes, 31400 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.57528,
+    "lng": 1.46524,
+    "horaires": "Inscriptions lun & jeu 10h-12h et 14h-17h · Distributions mar 14h-18h, mer 10h-12h et 14h-18h",
+    "description": "Épicerie sociale et solidaire du secteur Rangueil avec de nombreux ateliers (cuisine, bien-être, gym, coiffure) pour recréer du lien.",
+    "telephone": "05 61 62 66 51",
+    "public": "Habitant·e·s secteur Rangueil (31400)",
+    "participation": "10 à 30 % de la valeur",
+    "cultures": [],
+    "tags": [
+      "epicerie_sociale",
+      "solidarite",
+      "ateliers",
+      "budget"
+    ],
     "gratuit": false,
     "verifie": true
   }

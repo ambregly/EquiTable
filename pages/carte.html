@@ -155,8 +155,11 @@
             <div style="font-weight:500;font-size:14px;margin-bottom:4px">${loc.nom}</div>
             <div style="font-size:12px;color:#666;margin-bottom:4px">${TYPE_LABELS[loc.type] || loc.type}</div>
             <div style="font-size:12px;margin-bottom:4px">${loc.adresse}</div>
-            ${loc.horaires ? `<div style="font-size:11px;color:#888">${loc.horaires}</div>` : ''}
+            ${loc.horaires ? `<div style="font-size:11px;color:#888">⏰ ${loc.horaires}</div>` : ''}
             ${loc.description ? `<div style="font-size:12px;margin-top:6px;color:#555">${loc.description}</div>` : ''}
+            ${loc.public ? `<div style="font-size:11px;margin-top:6px;color:#555">👥 ${loc.public}</div>` : ''}
+            ${loc.participation ? `<div style="font-size:11px;color:#555">💸 Participation : ${loc.participation}</div>` : ''}
+            ${loc.telephone ? `<div style="font-size:11px;color:#555">📞 ${loc.telephone}</div>` : ''}
           </div>
         `, { maxWidth: 280 });
 
@@ -200,6 +203,8 @@
           <div class="lieu-type">${TYPE_LABELS[loc.type] || loc.type}</div>
           <div class="lieu-adresse">📍 ${loc.adresse}</div>
           ${loc.horaires ? `<div class="lieu-adresse">⏰ ${loc.horaires}</div>` : ''}
+          ${loc.public ? `<div class="lieu-adresse">👥 ${loc.public}</div>` : ''}
+          ${loc.participation ? `<div class="lieu-adresse">💸 ${loc.participation}</div>` : ''}
           <div class="lieu-tags">
             ${(loc.cultures||[]).map(c => `<span class="lieu-tag lieu-culture">${c}</span>`).join('')}
             ${(loc.tags||[]).filter(t => !loc.cultures?.includes(t)).slice(0,3).map(t => `<span class="lieu-tag">${t.replace(/_/g,' ')}</span>`).join('')}
