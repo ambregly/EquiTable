@@ -3,10 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pesticides et additifs — EquiTable</title>
+  <title>Pesticides et additifs : comment les éviter ? — EquiTable</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/rubrique.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥦</text></svg>">
+  <style>
+    /* Spécifique à cette page */
+    .info-box { background:#E6F1FB; border:1px solid #93C5E8; border-radius:var(--rayon); padding:1.25rem; margin:1.5rem 0; }
+    .info-box p { font-size:14px; color:#185FA5; line-height:1.6; margin:0; }
+    .info-box strong { color:#0d4a85; }
+    .pills-label { font-size:13px; font-weight:500; margin:0.5rem 0; }
+    .pills-label.rouge { color:#7a2e14; }
+    .pills-label.verte { color:var(--vert-fonce); }
+    .recette { background:white; border:1px solid var(--bordure); border-radius:var(--rayon); padding:1.25rem 1.5rem; margin:1rem 0; }
+    .recette-h { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:0.5rem; }
+    .recette-h h3 { font-size:1.05rem; margin:0; }
+    .recette-vs { font-size:12px; color:var(--coral); font-weight:500; }
+    .recette .ingr { font-size:13.5px; color:var(--texte-sec); line-height:1.6; margin:4px 0; }
+    .recette .tip { font-size:13px; background:var(--vert-clair); color:var(--vert-tres-fonce); padding:8px 12px; border-radius:var(--rayon-sm); margin-top:10px; line-height:1.5; }
+  </style>
 </head>
 <body>
 
@@ -26,8 +41,8 @@
   <section class="rubrique-hero">
     <div class="container">
       <div class="rubrique-tag">🌱 Rubrique · Pesticides & additifs</div>
-      <h1>Pesticides<br>et additifs</h1>
-      <p>Faut-il s'inquiéter des pesticides et des additifs ? Faisons le tri entre vraies précautions utiles et peurs exagérées — sans oublier que manger des fruits et légumes reste, dans tous les cas, bénéfique.</p>
+      <h1>Pesticides et additifs :<br>comment les éviter ?</h1>
+      <p>Pas besoin de tout acheter bio ni de se ruiner. L'idée : cibler là où ça compte vraiment, apprendre à lire les étiquettes, et cuisiner simple. Des gestes accessibles à tous les budgets.</p>
     </div>
   </section>
 
@@ -36,64 +51,155 @@
 
       <main class="main-content">
 
-        <h2>🍎 Pesticides : garder le sens des proportions</h2>
-        <p>Oui, des résidus de pesticides existent sur certains fruits et légumes. Mais arrêter d'en manger serait une <strong>très mauvaise affaire</strong> pour la santé : les bénéfices des végétaux (fibres, vitamines, protection cardiovasculaire) sont massifs et bien démontrés.</p>
-        <p>L'idée n'est donc pas d'avoir peur, mais de réduire simplement l'exposition.</p>
+        <!-- 1 -->
+        <h2>🎯 Comprendre l'enjeu</h2>
+        <p>Les pesticides (en agriculture) et les additifs (dans l'industrie) ne sont généralement <strong>pas « toxiques » à une seule dose</strong>. Ce qui préoccupe les chercheurs, c'est l'<strong>effet cocktail</strong> (le mélange de plusieurs substances) et la <strong>répétition</strong> dans le temps.</p>
+        <p>Pour les personnes en situation de précarité, le risque est plus élevé : les aliments les moins chers sont souvent les plus traités ou les plus transformés. <strong>Réduire son exposition est donc aussi un enjeu d'égalité.</strong></p>
+
+        <div class="section-divider"></div>
+
+        <!-- 2 -->
+        <h2>🍓 Pesticides : prioriser sans se ruiner</h2>
+        <p>Impossible de manger 100 % bio avec un petit budget ? Pas grave. La solution : cibler les fruits et légumes pour lesquels le bio est <strong>vraiment utile</strong>, et lâcher du lest sur les autres. <span class="source-tag">EWG · « Dirty Dozen »</span></p>
+
+        <p class="pills-label rouge"><strong>🔴 Bio prioritaire</strong> — peau fine, on mange tout (« Dirty Dozen »)</p>
+        <div class="aliment-grid">
+          <div class="aliment-pill eviter"><strong>Fraises</strong></div>
+          <div class="aliment-pill eviter"><strong>Épinards</strong></div>
+          <div class="aliment-pill eviter"><strong>Chou frisé</strong></div>
+          <div class="aliment-pill eviter"><strong>Nectarines</strong></div>
+          <div class="aliment-pill eviter"><strong>Pommes</strong></div>
+          <div class="aliment-pill eviter"><strong>Raisin</strong></div>
+          <div class="aliment-pill eviter"><strong>Pêches</strong></div>
+          <div class="aliment-pill eviter"><strong>Cerises</strong></div>
+          <div class="aliment-pill eviter"><strong>Poires</strong></div>
+          <div class="aliment-pill eviter"><strong>Tomates</strong></div>
+          <div class="aliment-pill eviter"><strong>Céleri</strong></div>
+          <div class="aliment-pill eviter"><strong>Pommes de terre</strong></div>
+        </div>
+
+        <p class="pills-label verte"><strong>🟢 Bio moins urgent</strong> — peau épaisse qui protège la chair (« Clean Fifteen »)</p>
+        <div class="aliment-grid">
+          <div class="aliment-pill"><strong>Avocats</strong></div>
+          <div class="aliment-pill"><strong>Maïs</strong></div>
+          <div class="aliment-pill"><strong>Ananas</strong></div>
+          <div class="aliment-pill"><strong>Oignons</strong></div>
+          <div class="aliment-pill"><strong>Papaye</strong></div>
+          <div class="aliment-pill"><strong>Pastèque</strong></div>
+          <div class="aliment-pill"><strong>Petits pois</strong></div>
+          <div class="aliment-pill"><strong>Aubergines</strong></div>
+          <div class="aliment-pill"><strong>Asperges</strong></div>
+          <div class="aliment-pill"><strong>Chou-fleur</strong></div>
+          <div class="aliment-pill"><strong>Melon</strong></div>
+          <div class="aliment-pill"><strong>Kiwis</strong></div>
+          <div class="aliment-pill"><strong>Brocoli</strong></div>
+          <div class="aliment-pill"><strong>Champignons</strong></div>
+        </div>
+
+        <p><strong>💧 L'astuce nettoyage :</strong> tremper les fruits et légumes non-bio dans de l'eau avec du <strong>bicarbonate de soude</strong> (1 cuillère à café par litre) pendant 10 minutes réduit nettement les résidus de surface. <span class="source-tag">étude J. Agric. Food Chem. · 2017</span></p>
+
+        <div class="info-box">
+          <p>🍎 <strong>Le plus important :</strong> ne jamais arrêter de manger des fruits et légumes par peur des pesticides. Leurs bénéfices pour la santé sont énormes et largement démontrés. Le « Dirty Dozen » est un outil pratique pour <strong>prioriser un budget bio</strong> — il est d'ailleurs discuté par les scientifiques, car les résidus mesurés restent le plus souvent sous les seuils de sécurité. L'objectif est de réduire l'exposition, pas de se faire peur.</p>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- 3 -->
+        <h2>🏷️ Additifs : décrypter les étiquettes</h2>
+        <p>Tous les additifs ne sont pas dangereux (certains sont naturels, comme le sel ou le citron). Mais quelques familles méritent qu'on les surveille.</p>
+        <p><strong>La règle d'or :</strong> plus la liste d'ingrédients est longue, plus le risque d'additifs « techniques » est élevé. Une liste courte, c'est bon signe.</p>
+
+        <p><strong>3 familles à limiter en priorité</strong> <span class="source-tag">ANSES · EFSA</span></p>
         <ul class="conseil-list">
-          <li>Laver soigneusement les fruits et légumes à l'eau</li>
-          <li>Éplucher quand c'est pertinent (réduit les résidus de surface)</li>
-          <li>Varier les origines et les aliments (limite l'exposition à un même résidu)</li>
-          <li>Privilégier le bio pour les produits les plus concernés, selon votre budget</li>
+          <li><strong>Les nitrites (E249 à E252)</strong> — dans la charcuterie premier prix. L'exposition est associée à un risque accru de cancer colorectal (la charcuterie est classée cancérogène par le CIRC)</li>
+          <li><strong>Les colorants azoïques (E102, E110, E122…)</strong> — suspectés de favoriser l'hyperactivité chez l'enfant ; en Europe, ils portent d'ailleurs une mention d'avertissement obligatoire</li>
+          <li><strong>Les édulcorants de synthèse (aspartame E951…)</strong> — certaines études suggèrent qu'ils perturbent le métabolisme et le microbiote ; à consommer avec modération</li>
         </ul>
+        <p><strong>📱 L'outil malin :</strong> des applis comme <strong>Yuka</strong> ou <strong>Open Food Facts</strong> permettent de scanner un produit en magasin et de voir, en un clin d'œil, ses additifs et sa qualité nutritionnelle.</p>
+
         <div class="section-divider"></div>
-        <h2>🌿 Bio : ce que ça change (et pas)</h2>
-        <p>Le label bio (AB / Eurofeuille) interdit la plupart des pesticides et engrais de synthèse : il réduit donc l'exposition aux résidus. En revanche, « bio » ne veut pas dire « 0 calorie » ou « bon pour la santé » : un biscuit bio ultra-transformé reste un produit gras et sucré. Le bio est un plus sur l'origine, pas un feu vert nutritionnel.</p>
-        <div class="section-divider"></div>
-        <h2>🧪 Additifs et ultra-transformation</h2>
-        <p>La plupart des additifs autorisés sont évalués par l'EFSA et l'ANSES. Le vrai signal d'alerte d'une longue liste d'additifs, c'est surtout qu'on a affaire à un produit <strong>ultra-transformé</strong> — catégorie associée, en excès, à un risque accru de maladies chroniques (classification NOVA, études NutriNet-Santé).</p>
+
+        <!-- 4 -->
+        <h2>💶 Éviter… sans dépenser plus</h2>
         <ul class="conseil-list">
-          <li>Regarder la liste d'ingrédients : courte = bon signe</li>
-          <li>Se méfier des produits avec de nombreux additifs (E…) et ingrédients « techniques »</li>
-          <li>Cuisiner soi-même reste le meilleur moyen d'éviter additifs superflus</li>
-          <li>Outils utiles : Nutri-Score (qualité nutritionnelle) et logique NOVA (degré de transformation)</li>
+          <li><strong>Le retour au « brut »</strong> — un sac de 5 kg de carottes non lavées coûte moins cher qu'une barquette de carottes râpées assaisonnées (pleine d'additifs)</li>
+          <li><strong>Le vrac</strong> — acheter céréales et légumineuses au poids évite les emballages plastiques, dont certains bisphénols (perturbateurs endocriniens) peuvent migrer dans les aliments</li>
+          <li><strong>La cuisine maison simplifiée</strong> — quelques minutes suffisent pour battre l'industrie sur le plan nutritionnel (voir ci-dessous)</li>
         </ul>
+
         <div class="section-divider"></div>
+
+        <!-- 5 -->
+        <h2>👩‍🍳 3 recettes « flash » qui battent l'industrie</h2>
+
+        <div class="recette">
+          <div class="recette-h"><h3>🍅 Sauce tomate express</h3><span class="recette-vs">vs ketchup / sauce en pot</span></div>
+          <p class="ingr"><strong>Ingrédients :</strong> 1 boîte de tomates concassées (ou coulis nature), 1 c. à soupe d'huile d'olive, herbes de Provence, une pincée de sel.</p>
+          <p class="ingr"><strong>Prépa (3 min) :</strong> tout mélanger dans une casserole à feu vif.</p>
+          <div class="tip">🧠 L'astuce santé mentale : l'huile d'olive apporte des graisses saines pour le cerveau, contrairement aux huiles de palme des plats préparés.</div>
+        </div>
+
+        <div class="recette">
+          <div class="recette-h"><h3>🥣 Bowl de légumineuses</h3><span class="recette-vs">vs plat de pâtes tout prêt</span></div>
+          <p class="ingr"><strong>Ingrédients :</strong> 1 conserve de pois chiches ou lentilles (rincée), du thon en boîte ou un œuf dur, une poignée d'épinards frais ou surgelés.</p>
+          <p class="ingr"><strong>Prépa (4 min) :</strong> mélanger les légumineuses froides ou tièdes avec le thon. Assaisonner au vinaigre de cidre.</p>
+          <div class="tip">💪 Les légumineuses sont les alliées n°1 du budget et des neurotransmetteurs (magnésium). Le vinaigre de cidre est intéressant pour la glycémie.</div>
+        </div>
+
+        <div class="recette">
+          <div class="recette-h"><h3>🥛 Yaourt-énergie</h3><span class="recette-vs">vs crème dessert sucrée</span></div>
+          <p class="ingr"><strong>Ingrédients :</strong> 1 yaourt nature, une poignée de flocons d'avoine, un fruit de saison coupé ou quelques noix.</p>
+          <p class="ingr"><strong>Prépa (2 min) :</strong> verser le yaourt, saupoudrer l'avoine, ajouter le fruit.</p>
+          <div class="tip">🦠 Les fibres de l'avoine nourrissent le microbiote, ce qui aide à stabiliser l'humeur. Les desserts lactés industriels, eux, sont saturés d'épaississants (E407, E412) et de colorants.</div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- SOURCES -->
         <h2>📚 Sources</h2>
         <div class="sources-list">
-          <p>• ANSES — Évaluation des résidus de pesticides et des additifs</p>
-          <p>• EFSA — Autorité européenne de sécurité des aliments</p>
-          <p>• NutriNet-Santé (INSERM/INRAE) — Aliments ultra-transformés et santé</p>
-          <p>• Classification NOVA (degré de transformation)</p>
+          <p>• <a href="https://www.efsa.europa.eu/fr" target="_blank">EFSA — Autorité européenne de sécurité des aliments (additifs, résidus de pesticides)</a></p>
+          <p>• EWG (Environmental Working Group) — listes « Dirty Dozen » / « Clean Fifteen » (ewg.org/foodnews) — outil de priorisation, à interpréter avec nuance</p>
+          <p>• ANSES — Nitrites/nitrates et additifs alimentaires ; perturbateurs endocriniens</p>
+          <p>• CIRC (OMS) — Classification de la charcuterie (viandes transformées)</p>
+          <p>• Yang T. et al. — Élimination des résidus de pesticides par le bicarbonate, <em>J. Agric. Food Chem.</em>, 2017</p>
+          <p>• Santé publique France / Manger Bouger — Repères du PNNS (bien manger sans se ruiner)</p>
         </div>
 
       </main>
 
+      <!-- SIDEBAR -->
       <aside class="sidebar">
         <div class="sidebar-card" style="background:var(--vert-clair); border-color:var(--vert)">
           <div class="sidebar-title" style="color:var(--vert-tres-fonce); border-color:var(--vert)">⚡ L'essentiel</div>
-          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6; margin-bottom:8px">1. Les bénéfices des fruits & légumes <strong>l'emportent largement</strong> sur le risque pesticides</p>
-          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6; margin-bottom:8px">2. Bien laver (et éplucher si besoin) réduit les résidus</p>
-          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6; margin-bottom:8px">3. Le <strong>bio</strong> limite l'exposition aux pesticides de synthèse</p>
-          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6; ">4. Les additifs : surtout un marqueur d'<strong>ultra-transformation</strong></p>
+          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6; margin-bottom:8px">1. Ce qui inquiète, c'est l'<strong>effet cocktail</strong>, pas une dose isolée</p>
+          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6; margin-bottom:8px">2. Bio en priorité sur les aliments à <strong>peau fine</strong></p>
+          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6; margin-bottom:8px">3. Liste d'ingrédients <strong>courte</strong> = bon signe</p>
+          <p style="font-size:13px; color:var(--vert-tres-fonce); line-height:1.6">4. Le « brut » et le <strong>fait maison</strong> coûtent souvent moins cher</p>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-title">À éviter en priorité</div>
+          <p style="font-size:12.5px; color:var(--texte-sec); line-height:1.7; margin:0">🥓 Nitrites <strong>E249–E252</strong><br>🎨 Colorants azoïques <strong>E102, E110, E122</strong><br>🧪 Aspartame <strong>E951</strong></p>
         </div>
 
         <div class="sidebar-card">
           <div class="sidebar-title">Rubriques liées</div>
+          <a href="budget.html" class="lien-rubrique">
+            <span class="lien-rubrique-icon">💶</span>
+            <span>Bien manger petit budget</span>
+          </a>
           <a href="fake-news.html" class="lien-rubrique">
             <span class="lien-rubrique-icon">🚫</span>
             <span>Idées reçues nutrition</span>
           </a>
-          <a href="budget.html" class="lien-rubrique">
-            <span class="lien-rubrique-icon">💶</span>
-            <span>Manger sain pas cher</span>
+          <a href="sante-mentale.html" class="lien-rubrique">
+            <span class="lien-rubrique-icon">🧠</span>
+            <span>Alimentation & humeur</span>
           </a>
           <a href="bases-essentielles.html" class="lien-rubrique">
             <span class="lien-rubrique-icon">🔬</span>
             <span>Les bases de la nutrition</span>
-          </a>
-          <a href="rubriques.html" class="lien-rubrique">
-            <span class="lien-rubrique-icon">📚</span>
-            <span>Toutes les rubriques</span>
           </a>
         </div>
 
@@ -109,6 +215,7 @@
     </div>
   </div>
 
+  <!-- CTA -->
   <section style="background:var(--fond-sec); padding:3rem 0; margin-top:2rem; border-top:1px solid var(--bordure)">
     <div class="container-sm" style="text-align:center">
       <h2 style="font-size:1.75rem; margin-bottom:0.75rem">Des recommandations adaptées à votre profil</h2>
@@ -126,13 +233,13 @@
         </div>
         <div class="footer-links">
           <a href="dashboard.html">Accueil</a>
-          <a href="pathologies.html">Pathologies</a>
+          <a href="rubriques.html">Rubriques</a>
           <a href="questionnaire.html">Mon profil</a>
         </div>
       </div>
       <div class="footer-bottom">
         <span>© 2025 EquiTable</span>
-        <span>Sources : HAS · ANSES · INSERM · NutriNet-Santé</span>
+        <span>Sources : EFSA · ANSES · EWG · Santé publique France</span>
       </div>
     </div>
   </footer>
