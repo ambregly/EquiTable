@@ -94,6 +94,9 @@ nav {
 
 .nav-links a:hover { color: var(--texte); }
 
+/* Onglet de la page courante */
+.nav-links a.active { color: var(--texte); font-weight: 500; }
+
 .btn-nav {
   font-size: 14px;
   font-weight: 500;
@@ -546,7 +549,18 @@ footer {
 
 /* RESPONSIVE */
 @media (max-width: 640px) {
-  .nav-links { display: none; }
+  /* Nav toujours visible : défilement horizontal au lieu d'être cachée */
+  .nav-inner { gap: 0.6rem; }
+  .nav-links {
+    gap: 0.85rem;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { font-size: 13px; white-space: nowrap; flex-shrink: 0; }
+  .btn-nav { padding: 7px 12px; white-space: nowrap; flex-shrink: 0; }
   .hero { padding: 3rem 0 2rem; }
   .hero h1 { font-size: 2rem; }
   .cta-block h2 { font-size: 1.75rem; }
