@@ -1,0 +1,37 @@
+name: Déploiement Vercel (production)
+
+# Se déclenche à chaque push sur la branche main
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # permet aussi de lancer le déploiement à la main depuis l'onglet Actions
+
+# Identifiants du projet Vercel (NON sensibles — peuvent rester en clair).
+# Le seul secret est VERCEL_TOKEN, à définir dans les réglages GitHub du dépôt.
+env:
+  VERCEL_ORG_ID: team_xgsWLhl1N9PXllEEehRYDHwx
+  VERCEL_PROJECT_ID: prj_B5bFEZIfINI8Rz7cgWNajQByOyf1
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Installer Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Récupérer la configuration Vercel
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Construire le site
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Déployer en production
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
