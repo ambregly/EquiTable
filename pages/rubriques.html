@@ -690,6 +690,8 @@
       // Jump nav
       const jumpNav = document.getElementById('jump-nav');
       THEMES.forEach(t => {
+        // n'afficher la pastille que pour les thèmes ayant au moins une rubrique prête
+        if (!RUBRIQUES.some(r => r.themes.includes(t.id) && r.dispo)) return;
         const recommande = themesRecommandesIds.has(t.id);
         const a = document.createElement('a');
         a.href = `#theme-${t.id}`;
@@ -701,10 +703,10 @@
       // Sections par thème
       const container = document.getElementById('themes-sections');
       THEMES.forEach(t => {
-        const rubriques = RUBRIQUES.filter(r => r.themes.includes(t.id));
-        // Tri : disponibles en premier, puis recommandées, puis à venir
+        const rubriques = RUBRIQUES.filter(r => r.themes.includes(t.id) && r.dispo);
+        if (rubriques.length === 0) return; // thème sans rubrique prête : masqué
+        // Tri : recommandées (pour le profil) en premier
         rubriques.sort((a, b) => {
-          if (a.dispo !== b.dispo) return a.dispo ? -1 : 1;
           const aRec = rubriquesRecommandeesIds.has(a.id) ? 0 : 1;
           const bRec = rubriquesRecommandeesIds.has(b.id) ? 0 : 1;
           return aRec - bRec;
