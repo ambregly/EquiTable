@@ -548,5 +548,630 @@
     ],
     "gratuit": true,
     "verifie": true
+  },
+  {
+    "id": "loc_026",
+    "nom": "Marché Arnaud Bernard",
+    "type": "marche",
+    "adresse": "Place Arnaud-Bernard, 31000.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.61086851044361,
+    "lng": 1.4390095895185506,
+    "horaires": "Mercredi & samedi, le matin",
+    "description": "Marché de producteurs en vente directe — frais et local.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable",
+      "producteurs_locaux"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_027",
+    "nom": "Marché Oustalous",
+    "type": "marche",
+    "adresse": "51-53 Route d'Espagne, 31100.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.576786000134106,
+    "lng": 1.4242629973582315,
+    "horaires": "Le samedi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_028",
+    "nom": "Marché Lafourguette",
+    "type": "marche",
+    "adresse": "Place des Glières, 31100.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.56480944684932,
+    "lng": 1.4107391996950505,
+    "horaires": "Le samedi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_029",
+    "nom": "Marché Ponts Jumeaux",
+    "type": "marche",
+    "adresse": "Rue R.C. Brunschvicg, 31200.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.61469085539911,
+    "lng": 1.4213591223901232,
+    "horaires": "Le vendredi, le matin",
+    "description": "Marché de producteurs en vente directe — frais et local.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable",
+      "producteurs_locaux"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_031",
+    "nom": "Marché Pradettes",
+    "type": "marche",
+    "adresse": "Place des Pradettes, 31100.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.5815404124495,
+    "lng": 1.3881350680837865,
+    "horaires": "Le samedi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_032",
+    "nom": "Marché Salin",
+    "type": "marche",
+    "adresse": "Place du Salin, 31000.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.594693586775946,
+    "lng": 1.4441731506075528,
+    "horaires": "Le mardi , vendredi et samedi, le matin",
+    "description": "Marché de producteurs en vente directe — frais et local.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable",
+      "producteurs_locaux"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_033",
+    "nom": "Marché Ormeau",
+    "type": "marche",
+    "adresse": "Place de l'Ormeau, 31400.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.579147999789726,
+    "lng": 1.4834940029071035,
+    "horaires": "Les mardis et samedis, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_034",
+    "nom": "Marché Trois Cocus",
+    "type": "marche",
+    "adresse": "Place Micoulaud, 31200.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.63822000464121,
+    "lng": 1.4439579987041757,
+    "horaires": "Le mercredi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_035",
+    "nom": "Marché Ancely",
+    "type": "marche",
+    "adresse": "264 avenue de Casselardit, 31300.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.61872299797143,
+    "lng": 1.3974859975388478,
+    "horaires": "Le vendredi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_036",
+    "nom": "Marché Jules Guesde",
+    "type": "marche",
+    "adresse": "Allées Jules Guesde, 31400.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.593622822985736,
+    "lng": 1.4465722162699326,
+    "horaires": "Le dimanche, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_037",
+    "nom": "Marché de l'URSS",
+    "type": "marche",
+    "adresse": "19-39 Avenue de l'URSS, 31400.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.582137915574826,
+    "lng": 1.4487747806946736,
+    "horaires": "Le vendredi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_038",
+    "nom": "Marché Produit en Occitanie",
+    "type": "marche",
+    "adresse": "Place St Pierre, -9999.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.603421542308304,
+    "lng": 1.4360186438425282,
+    "horaires": "Samedi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_039",
+    "nom": "Marché Béteille",
+    "type": "marche",
+    "adresse": "Place Béteille, 31500.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.619309339811025,
+    "lng": 1.4549130561710022,
+    "horaires": "Le mardi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_040",
+    "nom": "Marché Belfort",
+    "type": "marche",
+    "adresse": "Place de Belfort, 31000.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.60873336369457,
+    "lng": 1.450021524769816,
+    "horaires": "Le jeudi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_041",
+    "nom": "Marché Ravelin",
+    "type": "marche",
+    "adresse": "Place du Ravelin, 31300.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.59902147211217,
+    "lng": 1.4285877030696896,
+    "horaires": "Le vendredi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_042",
+    "nom": "Marché Croix Daurade",
+    "type": "marche",
+    "adresse": "Route d'Albi, 31200.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.636576462694094,
+    "lng": 1.4640707672374311,
+    "horaires": "Mercredi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_043",
+    "nom": "Marché Montaudran",
+    "type": "marche",
+    "adresse": "Place Bouilloux-Lafont, 31400.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.571699717249146,
+    "lng": 1.478969730972611,
+    "horaires": "Dimanche, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_044",
+    "nom": "Marché Bellefontaine",
+    "type": "marche",
+    "adresse": "Passage de Jérusalem, 31100.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.56493300034069,
+    "lng": 1.398235995998116,
+    "horaires": "Le mercredi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_045",
+    "nom": "Marché bio Esparcette",
+    "type": "marche",
+    "adresse": "Square Charles de Gaulle, 31000.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.60457175689784,
+    "lng": 1.4450979968027657,
+    "horaires": "Le mardi et le samedi, le matin",
+    "description": "Marché bio de quartier — produits frais issus de l'agriculture biologique.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable",
+      "bio"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_046",
+    "nom": "Marché Soupetard",
+    "type": "marche",
+    "adresse": "58-66 Rue Louis-Plana, 31500.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.612408563149344,
+    "lng": 1.4775908117648284,
+    "horaires": "Le samedi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_047",
+    "nom": "Marché Faourette",
+    "type": "marche",
+    "adresse": "Place Paul-Lambert, 31100.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.57892093957239,
+    "lng": 1.412583985293554,
+    "horaires": "Le mardi et le vendredi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_048",
+    "nom": "Marché Reynerie",
+    "type": "marche",
+    "adresse": "Place Abbal, 31100.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.57085099883597,
+    "lng": 1.4024709974677938,
+    "horaires": "Le jeudi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_049",
+    "nom": "Marché Saint Michel",
+    "type": "marche",
+    "adresse": "18 bis Grande-Rue Saint Michel, 31400.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.586198878516534,
+    "lng": 1.4472676736766577,
+    "horaires": "Le samedi, le matin",
+    "description": "Marché de producteurs en vente directe — frais et local.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable",
+      "producteurs_locaux"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_050",
+    "nom": "Marché Arènes",
+    "type": "marche",
+    "adresse": "Place E. Male, -9999.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.59134972237478,
+    "lng": 1.4186505156517333,
+    "horaires": "Vendredi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_053",
+    "nom": "Marché Saint Martin du Touch",
+    "type": "marche",
+    "adresse": "Place Grimaud, 31300.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.60161309908644,
+    "lng": 1.3701468870416658,
+    "horaires": "Le jeudi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_054",
+    "nom": "Marché Sept Deniers",
+    "type": "marche",
+    "adresse": "105 Route de Blagnac, 31200.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.61658293726167,
+    "lng": 1.4082157812493983,
+    "horaires": "Le dimanche, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_055",
+    "nom": "Marché Cartoucherie",
+    "type": "marche",
+    "adresse": "Pl. Charte des Libertés Communales, 31555.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.60256818208117,
+    "lng": 1.4079796021171018,
+    "horaires": "Mercredi & Dimanche, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_056",
+    "nom": "Marché Saint Simon",
+    "type": "marche",
+    "adresse": "Place de l'Eglise Saint-Simon, 31100.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.557014527198625,
+    "lng": 1.380516057090952,
+    "horaires": "Le mercredi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_057",
+    "nom": "Marché Dupuy",
+    "type": "marche",
+    "adresse": "Place Dupuy, 31000.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.599984078788225,
+    "lng": 1.4540571128834712,
+    "horaires": "Le jeudi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_058",
+    "nom": "Marché de l'Hers",
+    "type": "marche",
+    "adresse": "Avenue de Castres, 31500.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.596787379180135,
+    "lng": 1.4834968550591086,
+    "horaires": "Mercredi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_059",
+    "nom": "Marché Pouvourville",
+    "type": "marche",
+    "adresse": "Rue de Fondeville, 31400.0 Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.54853419341587,
+    "lng": 1.4535242804021524,
+    "horaires": "Vendredi, le matin",
+    "description": "Marché de quartier — produits frais à prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais",
+      "abordable"
+    ],
+    "gratuit": true,
+    "verifie": true
   }
 ]
