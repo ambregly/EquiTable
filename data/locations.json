@@ -346,5 +346,207 @@
     ],
     "gratuit": false,
     "verifie": true
+  },
+  {
+    "id": "loc_016",
+    "nom": "Marché couvert Saint-Cyprien",
+    "type": "marche",
+    "adresse": "Place Roguet (Saint-Cyprien), Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.59753,
+    "lng": 1.43009,
+    "horaires": "Mardi au dimanche, 6h-13h",
+    "description": "Grand marché couvert de la rive gauche, réputé plus abordable que Victor Hugo : fruits, légumes, viandes, poissons.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "couvert",
+      "abordable",
+      "frais"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_017",
+    "nom": "Marché des Carmes",
+    "type": "marche",
+    "adresse": "Place des Carmes, Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.59757,
+    "lng": 1.44533,
+    "horaires": "Mardi au dimanche, 7h-13h",
+    "description": "Marché couvert central et convivial : primeurs, fromagers, bouchers, traiteurs.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "couvert",
+      "frais"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_018",
+    "nom": "Marché Saint-Aubin",
+    "type": "marche",
+    "adresse": "Boulevard Michelet (Saint-Aubin), Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.60356,
+    "lng": 1.45516,
+    "horaires": "Dimanche matin, 7h-14h",
+    "description": "Marché de plein vent emblématique du dimanche : producteurs, ambiance festive et prix doux.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "abordable",
+      "producteurs_locaux",
+      "frais"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_019",
+    "nom": "Marché des Minimes",
+    "type": "marche",
+    "adresse": "Place du Marché aux Cochons, Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.62033,
+    "lng": 1.43506,
+    "horaires": "Jeudi matin, 7h-13h30",
+    "description": "Marché de quartier au nord de Toulouse, apprécié pour ses producteurs et sa volaille.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "abordable",
+      "producteurs_locaux",
+      "frais"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_020",
+    "nom": "Marché du Cristal",
+    "type": "marche",
+    "adresse": "Boulevards de Strasbourg et d'Arcole, Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.60998,
+    "lng": 1.44445,
+    "horaires": "Mardi au dimanche, le matin",
+    "description": "Marché de fruits et légumes en plein cœur de ville — parmi les moins chers de Toulouse.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "abordable",
+      "frais"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_021",
+    "nom": "Marché Croix de Pierre",
+    "type": "marche",
+    "adresse": "Place de la Croix-de-Pierre, Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.5848,
+    "lng": 1.42838,
+    "horaires": "Mercredi & vendredi, le matin",
+    "description": "Marché de plein vent populaire de la rive gauche, aux prix abordables.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "abordable",
+      "frais"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_022",
+    "nom": "Marché d'Empalot",
+    "type": "marche",
+    "adresse": "Place Achille Viadieu (Empalot), Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.57851,
+    "lng": 1.44096,
+    "horaires": "Mercredi matin",
+    "description": "Marché de quartier animé et bon marché : fruits, légumes et étals divers.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "abordable",
+      "frais"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_023",
+    "nom": "Marché de Rangueil",
+    "type": "marche",
+    "adresse": "64-70 avenue Albert-Bedouce, Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.57896,
+    "lng": 1.45918,
+    "horaires": "Mercredi & dimanche, le matin",
+    "description": "Marché de quartier au sud, près des facultés — pratique et abordable.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "abordable",
+      "frais"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_024",
+    "nom": "Marché Saint-Georges",
+    "type": "marche",
+    "adresse": "Place Saint-Georges, Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.60206,
+    "lng": 1.44778,
+    "horaires": "Mardi au samedi, le matin",
+    "description": "Petit marché central de produits frais, ouvert en semaine.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "frais"
+    ],
+    "gratuit": true,
+    "verifie": true
+  },
+  {
+    "id": "loc_025",
+    "nom": "Marché de Borderouge",
+    "type": "marche",
+    "adresse": "Place du Carré-de-la-Maourine, Toulouse",
+    "region": "Occitanie",
+    "departement": "31",
+    "lat": 43.64032,
+    "lng": 1.45251,
+    "horaires": "Samedi matin",
+    "description": "Marché du samedi au nord de Toulouse, autour de la Maourine.",
+    "cultures": [],
+    "tags": [
+      "marche",
+      "abordable",
+      "frais"
+    ],
+    "gratuit": true,
+    "verifie": true
   }
 ]
